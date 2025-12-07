@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}错误日志管理 - Gemini Balance{%
+﻿{% extends "base.html" %} {% block title %}閿欒鏃ュ織绠＄悊 - Gemini Balance{%
 endblock %} {% block head_extra_styles %}
 <style>
   /* error_logs.html specific styles */
@@ -46,7 +46,7 @@ endblock %} {% block head_extra_styles %}
       grid-template-columns: 1fr;
     }
     
-    /* 移动端主容器布局 */
+    /* 绉诲姩绔富瀹瑰櫒甯冨眬 */
     .mobile-buttons-container {
       display: flex !important;
       flex-direction: column !important;
@@ -57,7 +57,7 @@ endblock %} {% block head_extra_styles %}
       margin: 0 !important;
     }
     
-    /* 移动端搜索控件布局优化 */
+    /* 绉诲姩绔悳绱㈡帶浠跺竷灞€浼樺寲 */
     .mobile-search-controls {
       grid-template-columns: 1fr !important;
       gap: 0.75rem !important;
@@ -65,7 +65,7 @@ endblock %} {% block head_extra_styles %}
       margin-bottom: 0.5rem !important;
     }
     
-    /* 按钮容器在移动端的布局 */
+    /* 鎸夐挳瀹瑰櫒鍦ㄧЩ鍔ㄧ鐨勫竷灞€ */
     .buttons-container-responsive {
       display: flex !important;
       flex-direction: column !important;
@@ -75,7 +75,7 @@ endblock %} {% block head_extra_styles %}
       justify-content: stretch !important;
     }
     
-    /* 移动端所有按钮样式 */
+    /* 绉诲姩绔墍鏈夋寜閽牱寮?*/
     .buttons-container-responsive button {
       width: 100% !important;
       max-width: 100% !important;
@@ -92,7 +92,7 @@ endblock %} {% block head_extra_styles %}
     }
   }
   
-  /* 中等屏幕优化 */
+  /* 涓瓑灞忓箷浼樺寲 */
   @media (max-width: 1024px) and (min-width: 769px) {
     .buttons-container-responsive {
       flex-wrap: wrap !important;
@@ -107,9 +107,9 @@ endblock %} {% block head_extra_styles %}
     }
   }
   
-  /* 小屏幕(手机)特殊优化 - 确保按钮在边框内 */
+  /* 灏忓睆骞?鎵嬫満)鐗规畩浼樺寲 - 纭繚鎸夐挳鍦ㄨ竟妗嗗唴 */
   @media (max-width: 640px) {
-    /* 强制重写主容器布局 */
+    /* 寮哄埗閲嶅啓涓诲鍣ㄥ竷灞€ */
     .mobile-buttons-container {
       display: flex !important;
       flex-direction: column !important;
@@ -120,13 +120,13 @@ endblock %} {% block head_extra_styles %}
       overflow: visible !important;
     }
     
-    /* 搜索区域在移动端占满宽度 */
+    /* 鎼滅储鍖哄煙鍦ㄧЩ鍔ㄧ鍗犳弧瀹藉害 */
     .mobile-search-controls {
       width: 100% !important;
       box-sizing: border-box !important;
     }
     
-    /* 按钮区域完全重新布局 */
+    /* 鎸夐挳鍖哄煙瀹屽叏閲嶆柊甯冨眬 */
     .buttons-container-responsive {
       display: flex !important;
       flex-direction: column !important;
@@ -139,7 +139,7 @@ endblock %} {% block head_extra_styles %}
       overflow: visible !important;
     }
     
-    /* 所有按钮统一样式 */
+    /* 鎵€鏈夋寜閽粺涓€鏍峰紡 */
     .buttons-container-responsive button {
       display: flex !important;
       align-items: center !important;
@@ -158,7 +158,7 @@ endblock %} {% block head_extra_styles %}
       flex-shrink: 0 !important;
     }
     
-    /* 特别针对清空全部按钮 */
+    /* 鐗瑰埆閽堝娓呯┖鍏ㄩ儴鎸夐挳 */
     #deleteAllLogsBtn {
       background-color: #f87171 !important;
       border: 1px solid #f87171 !important;
@@ -169,7 +169,7 @@ endblock %} {% block head_extra_styles %}
       border: 1px solid #ef4444 !important;
     }
     
-    /* 确保容器不会溢出父级 */
+    /* 纭繚瀹瑰櫒涓嶄細婧㈠嚭鐖剁骇 */
     .mobile-buttons-container,
     .mobile-buttons-container > *,
     .buttons-container-responsive,
@@ -178,7 +178,7 @@ endblock %} {% block head_extra_styles %}
       box-sizing: border-box !important;
     }
     
-    /* 额外的安全边距控制 */
+    /* 棰濆鐨勫畨鍏ㄨ竟璺濇帶鍒?*/
     .mobile-buttons-container .grid {
       padding-left: 0 !important;
       padding-right: 0 !important;
@@ -186,14 +186,14 @@ endblock %} {% block head_extra_styles %}
       margin-right: 0 !important;
     }
     
-    /* 确保主内容区域有适当的内边距 */
+    /* 纭繚涓诲唴瀹瑰尯鍩熸湁閫傚綋鐨勫唴杈硅窛 */
     .rounded-xl.p-6 {
       padding-left: 1rem !important;
       padding-right: 1rem !important;
     }
   }
   
-  /* 超小屏幕额外优化 */
+  /* 瓒呭皬灞忓箷棰濆浼樺寲 */
   @media (max-width: 480px) {
     .mobile-buttons-container {
       gap: 0.75rem !important;
@@ -208,13 +208,13 @@ endblock %} {% block head_extra_styles %}
       font-size: 0.8rem !important;
     }
     
-    /* 主容器内边距进一步缩小 */
+    /* 涓诲鍣ㄥ唴杈硅窛杩涗竴姝ョ缉灏?*/
     .rounded-xl.p-6 {
       padding-left: 0.75rem !important;
       padding-right: 0.75rem !important;
     }
     
-    /* 确保清空全部按钮文字不会太挤 */
+    /* 纭繚娓呯┖鍏ㄩ儴鎸夐挳鏂囧瓧涓嶄細澶尋 */
     #deleteAllLogsBtn i {
       margin-right: 0.25rem !important;
     }
@@ -250,7 +250,7 @@ endblock %} {% block head_extra_styles %}
   input[type="datetime-local"]:focus,
   select#pageSize:focus {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 移除focus阴影 */
+    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
     outline: none !important;
   }
   select#pageSize {
@@ -272,13 +272,13 @@ endblock %} {% block head_extra_styles %}
     display: inline-flex !important;
     align-items: center !important;
     vertical-align: middle !important;
-    box-shadow: none !important; /* 移除默认阴影 */
+    box-shadow: none !important; /* 绉婚櫎榛樿闃村奖 */
     cursor: pointer !important;
   }
 
   select#pageSize:focus {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 移除focus阴影 */
+    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
     outline: none !important;
   }
 
@@ -306,7 +306,7 @@ endblock %} {% block head_extra_styles %}
     font-weight: 500;
   }
 
-  /* 导航链接悬停样式 (从 config_editor.html 复制) */
+  /* 瀵艰埅閾炬帴鎮仠鏍峰紡 (浠?config_editor.html 澶嶅埗) */
   .nav-link {
     transition: all 0.2s ease-in-out;
   }
@@ -330,25 +330,25 @@ endblock %} {% block head_extra_styles %}
     color: #374151 !important; /* gray-700 */
     transition: all 0.2s ease-in-out;
     position: relative;
-    z-index: 1; /* 确保不会遮挡重要内容 */
+    z-index: 1; /* 纭繚涓嶄細閬尅閲嶈鍐呭 */
   }
 
   .nav-link:hover {
     background-color: rgba(59, 130, 246, 0.1) !important; /* blue-500 light */
-    transform: scale(1.02); /* 使用缩放代替向上移动 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
+    transform: scale(1.02); /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 澧炲己闃村奖鏁堟灉 */
   }
 
-  /* 导航按钮容器样式 - 为悬停效果预留空间 */
+  /* 瀵艰埅鎸夐挳瀹瑰櫒鏍峰紡 - 涓烘偓鍋滄晥鏋滈鐣欑┖闂?*/
   .nav-buttons-container {
-    padding-top: 0.5rem; /* 为悬停效果预留上方空间 */
-    padding-bottom: 0.75rem; /* 为悬停效果预留下方空间 */
+    padding-top: 0.5rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笂鏂圭┖闂?*/
+    padding-bottom: 0.75rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笅鏂圭┖闂?*/
   }
 
-  /* 主导航按钮的优化悬停效果 */
+  /* 涓诲鑸寜閽殑浼樺寲鎮仠鏁堟灉 */
   .main-nav-btn:hover {
-    transform: scale(1.02) !important; /* 使用缩放代替向上移动 */
-    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 蓝色阴影 */
+    transform: scale(1.02) !important; /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 钃濊壊闃村奖 */
   }
 
   .bg-violet-600 {
@@ -570,7 +570,7 @@ endblock %} {% block head_extra_styles %}
     transform: translateY(-1px) !important;
   }
 
-  /* 表格内容文字颜色修复 */
+  /* 琛ㄦ牸鍐呭鏂囧瓧棰滆壊淇 */
   .styled-table tbody td {
     color: #374151 !important; /* gray-700 for light theme */
   }
@@ -579,12 +579,12 @@ endblock %} {% block head_extra_styles %}
     color: #1f2937 !important; /* gray-800 for better contrast on hover */
   }
 
-  /* 表格头部文字颜色 */
+  /* 琛ㄦ牸澶撮儴鏂囧瓧棰滆壊 */
   .styled-table thead th {
     color: #374151 !important; /* gray-700 for light theme */
   }
 
-  /* 状态指示器文字颜色 */
+  /* 鐘舵€佹寚绀哄櫒鏂囧瓧棰滆壊 */
   .text-gray-300 {
     color: #6b7280 !important; /* gray-500 for light theme */
   }
@@ -593,7 +593,7 @@ endblock %} {% block head_extra_styles %}
     color: #9ca3af !important; /* gray-400 for light theme */
   }
 
-  /* 分页文字颜色和对齐 */
+  /* 鍒嗛〉鏂囧瓧棰滆壊鍜屽榻?*/
   .pagination-text {
     color: #374151 !important; /* gray-700 for light theme */
     display: inline-flex !important;
@@ -602,7 +602,7 @@ endblock %} {% block head_extra_styles %}
     vertical-align: middle !important;
   }
 
-  /* 分页容器对齐优化 */
+  /* 鍒嗛〉瀹瑰櫒瀵归綈浼樺寲 */
   .pagination-container {
     display: flex !important;
     align-items: center !important;
@@ -763,7 +763,7 @@ endblock %} {% block head_extra_styles %}
         alt="Gemini Balance Logo"
         class="h-9 inline-block align-middle mr-2"
       />
-      Gemini Balance - 错误日志
+      Gemini Balance - 閿欒鏃ュ織
     </h1>
 
     <!-- Navigation Tabs -->
@@ -773,25 +773,46 @@ endblock %} {% block head_extra_styles %}
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-cog"></i> 配置编辑
+        <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
       </a>
       <a
         href="/keys"
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-tachometer-alt"></i> 监控面板
+        <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+      </a>
+      <a
+        href="/gemini-assets"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-key"></i> Gemini Key Assets
+      </a>
+      <a
+        href="/gemini-assets#delete-anchor"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
+      </a>
+      <a
+        href="/scanner-automation"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-clock"></i> 鑷姩浠诲姟
       </a>
       <a
         href="/logs"
         class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
         style="background-color: #3b82f6 !important; color: #ffffff !important;"
       >
-        <i class="fas fa-exclamation-triangle"></i> 错误日志
+        <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
       </a>
     </div>
 
-    <!-- 主内容区域 -->
+    <!-- 涓诲唴瀹瑰尯鍩?-->
     <div
       class="rounded-xl p-6 shadow-lg animate-fade-in"
       style="
@@ -804,10 +825,10 @@ endblock %} {% block head_extra_styles %}
       <h2
         class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-100 border-violet-300 border-opacity-30"
       >
-        <i class="fas fa-bug text-violet-400"></i> 错误日志列表
+        <i class="fas fa-bug text-violet-400"></i> 閿欒鏃ュ織鍒楄〃
       </h2>
 
-      <!-- 搜索与操作控件 -->
+      <!-- 鎼滅储涓庢搷浣滄帶浠?-->
       <div
         class="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-center gap-4 mb-6 mobile-buttons-container"
       >
@@ -817,19 +838,19 @@ endblock %} {% block head_extra_styles %}
           <input
             type="text"
             id="keySearch"
-            placeholder="搜索密钥 (部分)"
+            placeholder="鎼滅储瀵嗛挜 (閮ㄥ垎)"
             class="px-3 py-1 rounded-lg form-input-themed"
           />
           <input
             type="text"
             id="errorSearch"
-            placeholder="搜索错误类型/日志"
+            placeholder="鎼滅储閿欒绫诲瀷/鏃ュ織"
             class="px-3 py-1 rounded-lg form-input-themed"
           />
           <input
             type="text"
             id="errorCodeSearch"
-            placeholder="搜索错误码"
+            placeholder="鎼滅储閿欒鐮?
             class="px-3 py-1 rounded-lg form-input-themed"
           />
           <div
@@ -837,7 +858,7 @@ endblock %} {% block head_extra_styles %}
           >
             <div class="flex items-center gap-2">
               <label class="text-sm text-gray-300 whitespace-nowrap"
-                >开始时间:</label
+                >寮€濮嬫椂闂?</label
               >
               <input
                 type="datetime-local"
@@ -847,7 +868,7 @@ endblock %} {% block head_extra_styles %}
             </div>
             <div class="flex items-center gap-2">
               <label class="text-sm text-gray-300 whitespace-nowrap"
-                >结束时间:</label
+                >缁撴潫鏃堕棿:</label
               >
               <input
                 type="datetime-local"
@@ -862,33 +883,33 @@ endblock %} {% block head_extra_styles %}
             id="searchBtn"
             class="flex items-center justify-center px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
           >
-            <i class="fas fa-search mr-1.5"></i>搜索
+            <i class="fas fa-search mr-1.5"></i>鎼滅储
           </button>
           <button
             id="copySelectedKeysBtn"
             class="flex items-center justify-center px-4 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md whitespace-nowrap"
             disabled
           >
-            <i class="far fa-copy mr-1.5"></i>复制
+            <i class="far fa-copy mr-1.5"></i>澶嶅埗
           </button>
           <button
             id="deleteSelectedBtn"
             class="flex items-center justify-center px-4 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md whitespace-nowrap"
             disabled
           >
-            <i class="fas fa-trash-alt mr-1.5"></i>删除
+            <i class="fas fa-trash-alt mr-1.5"></i>鍒犻櫎
           </button>
           <button
             id="deleteAllLogsBtn"
             class="flex items-center justify-center px-4 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
-            title="清空所有错误日志"
+            title="娓呯┖鎵€鏈夐敊璇棩蹇?
           >
-            <i class="fas fa-dumpster-fire mr-1.5"></i>清空全部
+            <i class="fas fa-dumpster-fire mr-1.5"></i>娓呯┖鍏ㄩ儴
           </button>
         </div>
       </div>
 
-      <!-- 表格容器 -->
+      <!-- 琛ㄦ牸瀹瑰櫒 -->
       <div
         class="overflow-x-auto rounded-lg border mb-6"
         style="border-color: rgba(0, 0, 0, 0.12)"
@@ -911,15 +932,15 @@ endblock %} {% block head_extra_styles %}
               >
                 ID <i class="fas fa-sort ml-1"></i>
               </th>
-              <th class="px-5 py-3 font-semibold text-gray-700">Gemini密钥</th>
-              <th class="px-5 py-3 font-semibold text-gray-700">错误类型</th>
-              <th class="px-5 py-3 font-semibold text-gray-700">错误码</th>
-              <th class="px-5 py-3 font-semibold text-gray-700">模型名称</th>
-              <th class="px-5 py-3 font-semibold text-gray-700">请求时间</th>
+              <th class="px-5 py-3 font-semibold text-gray-700">Gemini瀵嗛挜</th>
+              <th class="px-5 py-3 font-semibold text-gray-700">閿欒绫诲瀷</th>
+              <th class="px-5 py-3 font-semibold text-gray-700">閿欒鐮?/th>
+              <th class="px-5 py-3 font-semibold text-gray-700">妯″瀷鍚嶇О</th>
+              <th class="px-5 py-3 font-semibold text-gray-700">璇锋眰鏃堕棿</th>
               <th
                 class="px-5 py-3 font-semibold text-gray-700 rounded-tr-lg text-center"
               >
-                操作
+                鎿嶄綔
               </th>
             </tr>
           </thead>
@@ -928,12 +949,12 @@ endblock %} {% block head_extra_styles %}
             class="divide-y"
             style="border-color: rgba(0, 0, 0, 0.08)"
           >
-            <!-- 错误日志数据将通过JavaScript动态加载 -->
+            <!-- 閿欒鏃ュ織鏁版嵁灏嗛€氳繃JavaScript鍔ㄦ€佸姞杞?-->
           </tbody>
         </table>
       </div>
 
-      <!-- 状态指示器 -->
+      <!-- 鐘舵€佹寚绀哄櫒 -->
       <div
         id="loadingIndicator"
         class="flex items-center justify-center p-8 hidden"
@@ -941,12 +962,12 @@ endblock %} {% block head_extra_styles %}
         <div
           class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"
         ></div>
-        <p class="ml-4 text-lg text-gray-600 font-medium">加载中，请稍候...</p>
+        <p class="ml-4 text-lg text-gray-600 font-medium">鍔犺浇涓紝璇风◢鍊?..</p>
       </div>
 
       <div id="noDataMessage" class="text-center py-12 text-gray-600 hidden">
         <i class="fas fa-inbox text-5xl mb-3"></i>
-        <p class="text-lg">暂无错误日志数据</p>
+        <p class="text-lg">鏆傛棤閿欒鏃ュ織鏁版嵁</p>
       </div>
 
       <div
@@ -955,16 +976,16 @@ endblock %} {% block head_extra_styles %}
         style="background-color: rgba(220, 38, 38, 0.2); color: #fca5a5"
       >
         <i class="fas fa-exclamation-circle mr-2"></i>
-        加载错误日志失败，请稍后重试。
+        鍔犺浇閿欒鏃ュ織澶辫触锛岃绋嶅悗閲嶈瘯銆?
       </div>
 
-      <!-- 分页与每页显示控件 -->
+      <!-- 鍒嗛〉涓庢瘡椤垫樉绀烘帶浠?-->
       <div
         class="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4"
       >
         <div class="pagination-container text-sm text-gray-700">
           <label for="pageSize" class="font-medium pagination-text"
-            >每页显示:</label
+            >姣忛〉鏄剧ず:</label
           >
           <select
             id="pageSize"
@@ -975,11 +996,11 @@ endblock %} {% block head_extra_styles %}
             <option value="50">50</option>
             <option value="100">100</option>
           </select>
-          <span class="pagination-text">条</span>
+          <span class="pagination-text">鏉?/span>
         </div>
         <div class="flex items-center gap-4">
           <ul class="pagination flex items-center gap-1" id="pagination">
-            <!-- 分页控件将通过JavaScript动态加载 -->
+            <!-- 鍒嗛〉鎺т欢灏嗛€氳繃JavaScript鍔ㄦ€佸姞杞?-->
           </ul>
           <div class="flex items-center gap-1">
             <input
@@ -987,13 +1008,13 @@ endblock %} {% block head_extra_styles %}
               id="pageInput"
               min="1"
               class="w-16 px-2 py-1 rounded-md text-sm form-input-themed"
-              placeholder="页码"
+              placeholder="椤电爜"
             />
             <button
               id="goToPageBtn"
               class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md transition"
             >
-              跳转
+              璺宠浆
             </button>
           </div>
         </div>
@@ -1004,10 +1025,10 @@ endblock %} {% block head_extra_styles %}
 
 <!-- Scroll buttons are now in base.html -->
 <div class="scroll-buttons">
-  <button class="scroll-button" onclick="scrollToTop()" title="回到顶部">
+  <button class="scroll-button" onclick="scrollToTop()" title="鍥炲埌椤堕儴">
     <i class="fas fa-chevron-up"></i>
   </button>
-  <button class="scroll-button" onclick="scrollToBottom()" title="滚动到底部">
+  <button class="scroll-button" onclick="scrollToBottom()" title="婊氬姩鍒板簳閮?>
     <i class="fas fa-chevron-down"></i>
   </button>
 </div>
@@ -1016,7 +1037,7 @@ endblock %} {% block head_extra_styles %}
 <div id="notification" class="notification"></div>
 <!-- Footer is now in base.html -->
 
-<!-- 日志详情模态框 -->
+<!-- 鏃ュ織璇︽儏妯℃€佹 -->
 <div id="logDetailModal" class="modal">
   <div
     class="w-full max-w-6xl mx-auto rounded-2xl shadow-2xl overflow-hidden animate-fade-in"
@@ -1031,7 +1052,7 @@ endblock %} {% block head_extra_styles %}
         class="flex justify-between items-center pb-4 mb-4"
         style="border-bottom: 1px solid #e5e7eb"
       >
-        <h2 class="text-xl font-bold text-gray-800">错误日志详情</h2>
+        <h2 class="text-xl font-bold text-gray-800">閿欒鏃ュ織璇︽儏</h2>
         <button
           id="closeLogDetailModalBtn"
           class="text-gray-600 hover:text-gray-800 text-xl"
@@ -1046,7 +1067,7 @@ endblock %} {% block head_extra_styles %}
           style="background-color: #f8fafc"
         >
           <h6 class="text-sm font-semibold text-blue-600 mb-1">
-            Gemini密钥:
+            Gemini瀵嗛挜:
           </h6>
           <pre
             id="modalGeminiKey"
@@ -1057,7 +1078,7 @@ endblock %} {% block head_extra_styles %}
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalGeminiKey"
-            title="复制密钥"
+            title="澶嶅埗瀵嗛挜"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1067,13 +1088,13 @@ endblock %} {% block head_extra_styles %}
           class="p-4 rounded-lg relative group"
           style="background-color: #f8fafc"
         >
-          <h6 class="text-sm font-semibold text-blue-600 mb-1">错误类型:</h6>
+          <h6 class="text-sm font-semibold text-blue-600 mb-1">閿欒绫诲瀷:</h6>
           <p id="modalErrorType" class="text-red-600 font-medium pr-8"></p>
           <button
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalErrorType"
-            title="复制错误类型"
+            title="澶嶅埗閿欒绫诲瀷"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1083,7 +1104,7 @@ endblock %} {% block head_extra_styles %}
           class="p-4 rounded-lg relative group"
           style="background-color: #f8fafc"
         >
-          <h6 class="text-sm font-semibold text-blue-600 mb-1">错误日志:</h6>
+          <h6 class="text-sm font-semibold text-blue-600 mb-1">閿欒鏃ュ織:</h6>
           <pre
             id="modalErrorLog"
             class="font-mono text-sm p-3 rounded overflow-x-auto whitespace-pre-wrap"
@@ -1093,7 +1114,7 @@ endblock %} {% block head_extra_styles %}
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalErrorLog"
-            title="复制错误日志"
+            title="澶嶅埗閿欒鏃ュ織"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1103,7 +1124,7 @@ endblock %} {% block head_extra_styles %}
           class="p-4 rounded-lg relative group"
           style="background-color: #f8fafc"
         >
-          <h6 class="text-sm font-semibold text-blue-600 mb-1">请求消息:</h6>
+          <h6 class="text-sm font-semibold text-blue-600 mb-1">璇锋眰娑堟伅:</h6>
           <pre
             id="modalRequestMsg"
             class="font-mono text-sm p-3 rounded overflow-x-auto whitespace-pre-wrap"
@@ -1113,7 +1134,7 @@ endblock %} {% block head_extra_styles %}
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalRequestMsg"
-            title="复制请求消息"
+            title="澶嶅埗璇锋眰娑堟伅"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1123,13 +1144,13 @@ endblock %} {% block head_extra_styles %}
           class="p-4 rounded-lg relative group"
           style="background-color: #f8fafc"
         >
-          <h6 class="text-sm font-semibold text-blue-600 mb-1">模型名称:</h6>
+          <h6 class="text-sm font-semibold text-blue-600 mb-1">妯″瀷鍚嶇О:</h6>
           <p id="modalModelName" class="font-medium pr-8 text-gray-700"></p>
           <button
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalModelName"
-            title="复制模型名称"
+            title="澶嶅埗妯″瀷鍚嶇О"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1139,13 +1160,13 @@ endblock %} {% block head_extra_styles %}
           class="p-4 rounded-lg relative group"
           style="background-color: #f8fafc"
         >
-          <h6 class="text-sm font-semibold text-blue-600 mb-1">请求时间:</h6>
+          <h6 class="text-sm font-semibold text-blue-600 mb-1">璇锋眰鏃堕棿:</h6>
           <p id="modalRequestTime" class="font-medium pr-8 text-gray-700"></p>
           <button
             class="copy-btn absolute top-2 right-2 hover:bg-gray-200 text-gray-600 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity"
             style="background-color: #e2e8f0"
             data-target="modalRequestTime"
-            title="复制请求时间"
+            title="澶嶅埗璇锋眰鏃堕棿"
           >
             <i class="far fa-copy"></i>
           </button>
@@ -1161,14 +1182,14 @@ endblock %} {% block head_extra_styles %}
           id="closeModalFooterBtn"
           class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          关闭
+          鍏抽棴
         </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 删除确认模态框 -->
+<!-- 鍒犻櫎纭妯℃€佹 -->
 <div id="deleteConfirmModal" class="modal">
   <div
     class="w-full max-w-md mx-auto rounded-xl shadow-xl overflow-hidden animate-fade-in"
@@ -1183,7 +1204,7 @@ endblock %} {% block head_extra_styles %}
         class="flex justify-between items-center pb-3 mb-4"
         style="border-bottom: 1px solid #e5e7eb"
       >
-        <h2 class="text-lg font-semibold text-gray-800">确认删除</h2>
+        <h2 class="text-lg font-semibold text-gray-800">纭鍒犻櫎</h2>
         <button
           id="closeDeleteConfirmModalBtn"
           class="text-gray-600 hover:text-gray-800 text-xl"
@@ -1192,7 +1213,7 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p id="deleteConfirmMessage" class="text-gray-700 mb-6">
-        你确定要删除选中的项目吗？此操作不可恢复！
+        浣犵‘瀹氳鍒犻櫎閫変腑鐨勯」鐩悧锛熸鎿嶄綔涓嶅彲鎭㈠锛?
       </p>
       <div class="flex justify-end gap-3">
         <button
@@ -1200,14 +1221,14 @@ endblock %} {% block head_extra_styles %}
           type="button"
           class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg font-medium transition"
         >
-          取消
+          鍙栨秷
         </button>
         <button
           id="confirmDeleteBtn"
           type="button"
           class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg font-medium transition"
         >
-          确认删除
+          纭鍒犻櫎
         </button>
       </div>
     </div>
@@ -1221,3 +1242,4 @@ endblock %} {% block head_extra_styles %}
   // The main logic is in error_logs.js
 </script>
 {% endblock %}
+

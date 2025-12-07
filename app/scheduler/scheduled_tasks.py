@@ -8,9 +8,123 @@ from app.service.error_log.error_log_service import delete_old_error_logs
 from app.service.files.files_service import get_files_service
 from app.service.key.key_manager import get_key_manager_instance
 from app.service.request_log.request_log_service import delete_old_request_logs_task
+from app.service.scanner.scanner_service import (
+    get_scanner_service,
+    sync_keys_from_scanner,
+    ScannerService,
+)
 from app.utils.helpers import redact_key_for_logging
 
 logger = Logger.setup_logger("scheduler")
+
+def _parse_daily_time(raw: str, fallback_hour: int, fallback_minute: int) -> tuple[int, int]:
+    try:
+        hour_str, minute_str = (raw or "").split(":")
+        hour = max(0, min(23, int(hour_str)))
+        minute = max(0, min(59, int(minute_str)))
+        return hour, minute
+    except Exception:
+        return fallback_hour, fallback_minute
+
+
+def _remove_job_if_exists(scheduler: AsyncIOScheduler, job_id: str) -> None:
+    try:
+        scheduler.remove_job(job_id)
+    except Exception:
+        return
+
+
+def _register_scanner_jobs(scheduler: AsyncIOScheduler) -> None:
+    if getattr(settings, "SCANNER_SYNC_ENABLED", False):
+        hour, minute = _parse_daily_time(settings.SCANNER_SYNC_DAILY_TIME, 3, 0)
+        scheduler.add_job(
+            sync_scanner_keys,
+            "cron",
+            hour=hour,
+            minute=minute,
+            id="scanner_sync_job",
+            name="Sync Scanner Keys",
+            replace_existing=True,
+        )
+        logger.info(f"Scanner sync job scheduled daily at {hour:02d}:{minute:02d}.")
+    else:
+        _remove_job_if_exists(scheduler, "scanner_sync_job")
+
+    if getattr(settings, "SCANNER_REVERIFY_ENABLED", False):
+        hour, minute = _parse_daily_time(settings.SCANNER_REVERIFY_DAILY_TIME, 2, 30)
+        scheduler.add_job(
+            reverify_scanner_keys_job,
+            "cron",
+            hour=hour,
+            minute=minute,
+            id="scanner_reverify_job",
+            name="Reverify Scanner Keys",
+            replace_existing=True,
+        )
+        logger.info(
+            f"Scanner reverify job scheduled daily at {hour:02d}:{minute:02d}."
+        )
+    else:
+        _remove_job_if_exists(scheduler, "scanner_reverify_job")
+
+    if getattr(settings, "SCANNER_DELETE_ENABLED", False):
+        hour, minute = _parse_daily_time(settings.SCANNER_DELETE_DAILY_TIME, 4, 0)
+        scheduler.add_job(
+            delete_invalid_keys_job,
+            "cron",
+            hour=hour,
+            minute=minute,
+            id="scanner_delete_job",
+            name="Delete Invalid Scanner Keys",
+            replace_existing=True,
+        )
+        logger.info(f"Scanner delete-invalid job scheduled daily at {hour:02d}:{minute:02d}.")
+    else:
+        _remove_job_if_exists(scheduler, "scanner_delete_job")
+
+
+async def sync_scanner_keys():
+    """按计划从 scanner 拉取最新 key 并应用到本地配置。"""
+    try:
+        service = get_scanner_service()
+        result = await sync_keys_from_scanner(
+            service,
+            limit=settings.SCANNER_SYNC_LIMIT,
+            key_type=settings.SCANNER_SYNC_TYPE,
+        )
+        logger.info(f"Scanner sync job finished: {result}")
+        return result
+    except Exception as e:
+        logger.error(f"Scanner sync job failed: {e}", exc_info=True)
+        return None
+
+
+async def reverify_scanner_keys_job():
+    """按计划触发 scanner 复验接口，刷新 last_verified_at。"""
+    try:
+        service = get_scanner_service()
+        statuses = settings.SCANNER_REVERIFY_STATUSES or None
+        result = await service.trigger_reverify(
+            count=settings.SCANNER_REVERIFY_COUNT,
+            statuses=statuses,
+        )
+        logger.info(f"Scanner reverify job finished: {result}")
+        return result
+    except Exception as e:
+        logger.error(f"Scanner reverify job failed: {e}", exc_info=True)
+        return None
+
+
+async def delete_invalid_keys_job():
+    """按计划清理 scanner 中的 invalid key。"""
+    try:
+        service: ScannerService = get_scanner_service()
+        result = await service.delete_invalid(limit=settings.SCANNER_DELETE_LIMIT)
+        logger.info(f"Scanner delete-invalid job finished: {result}")
+        return result
+    except Exception as e:
+        logger.error(f"Scanner delete-invalid job failed: {e}", exc_info=True)
+        return None
 
 
 async def check_failed_keys():
@@ -172,6 +286,8 @@ def setup_scheduler():
             f"File cleanup job scheduled to run every {cleanup_interval} hour(s)."
         )
 
+    _register_scanner_jobs(scheduler)
+
     scheduler.start()
     logger.info("Scheduler started with all jobs.")
     return scheduler
@@ -187,6 +303,14 @@ def start_scheduler():
         logger.info("Starting scheduler...")
         scheduler_instance = setup_scheduler()
     logger.info("Scheduler is already running.")
+
+
+def reload_scanner_jobs():
+    """根据最新配置重载 scanner 相关的定时任务。"""
+    global scheduler_instance
+    if scheduler_instance and scheduler_instance.running:
+        _register_scanner_jobs(scheduler_instance)
+        logger.info("Scanner jobs reloaded with latest configuration.")
 
 
 def stop_scheduler():

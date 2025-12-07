@@ -91,6 +91,23 @@ class Settings(BaseSettings):
     THINKING_MODELS: List[str] = []
     THINKING_BUDGET_MAP: Dict[str, float] = {}
 
+    # Scanner 数据源配置
+    SCANNER_API_BASE_URL: str = "http://localhost:8000"
+    SCANNER_API_KEY: str = ""
+    SCANNER_API_TIMEOUT: int = 15
+    SCANNER_DEFAULT_LIMIT: int = 50
+    SCANNER_SYNC_ENABLED: bool = False
+    SCANNER_SYNC_DAILY_TIME: str = "03:00"
+    SCANNER_SYNC_LIMIT: int = 100
+    SCANNER_SYNC_TYPE: str = "valid"
+    SCANNER_REVERIFY_ENABLED: bool = False
+    SCANNER_REVERIFY_DAILY_TIME: str = "02:30"
+    SCANNER_REVERIFY_COUNT: int = 50
+    SCANNER_REVERIFY_STATUSES: List[str] = []
+    SCANNER_DELETE_ENABLED: bool = False
+    SCANNER_DELETE_DAILY_TIME: str = "04:00"
+    SCANNER_DELETE_LIMIT: int = 50
+
     # TTS相关配置
     TTS_MODEL: str = "gemini-2.5-flash-preview-tts"
     TTS_VOICE_NAME: str = "Zephyr"

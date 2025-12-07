@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}API密钥状态 - Gemini Balance{%
+﻿{% extends "base.html" %} {% block title %}API瀵嗛挜鐘舵€?- Gemini Balance{%
 endblock %} {% block head_extra_styles %}
 <style>
   /* keys_status.html specific styles */
@@ -22,7 +22,7 @@ endblock %} {% block head_extra_styles %}
   }
   /* Copy status styling is handled by base.html's notification */
 
-  /* 现代数据统计样式 */
+  /* 鐜颁唬鏁版嵁缁熻鏍峰紡 */
   .stats-dashboard {
     display: grid;
     grid-template-columns: 1fr;
@@ -38,11 +38,11 @@ endblock %} {% block head_extra_styles %}
     }
   }
 
-  /* 让图表卡片在网格中占满整行 */
+  /* 璁╁浘琛ㄥ崱鐗囧湪缃戞牸涓崰婊℃暣琛?*/
   .stats-card.chart-wide {
     grid-column: 1 / -1;
   }
-  /* 图表容器固定高度，配合 Chart.js maintainAspectRatio:false */
+  /* 鍥捐〃瀹瑰櫒鍥哄畾楂樺害锛岄厤鍚?Chart.js maintainAspectRatio:false */
   .chart-container {
     height: 300px;
   }
@@ -50,7 +50,7 @@ endblock %} {% block head_extra_styles %}
     .chart-container { height: 220px; }
   }
 
-  /* 统计卡片样式 */
+  /* 缁熻鍗＄墖鏍峰紡 */
   .stats-card {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(8px);
@@ -105,7 +105,7 @@ endblock %} {% block head_extra_styles %}
     padding: 0.75rem;
   }
 
-  /* 统计项样式 */
+  /* 缁熻椤规牱寮?*/
   .stat-item {
     padding: 0.75rem;
     border-radius: 0.5rem;
@@ -173,7 +173,7 @@ endblock %} {% block head_extra_styles %}
     transform: scale(1.1) rotate(0deg);
   }
 
-  /* 统计类型样式 */
+  /* 缁熻绫诲瀷鏍峰紡 */
   .stat-primary {
     color: #3b82f6; /* blue-500 */
     background-color: rgba(59, 130, 246, 0.1);
@@ -195,7 +195,7 @@ endblock %} {% block head_extra_styles %}
     background-color: rgba(6, 182, 212, 0.1);
   }
 
-  /* 新增：调整API调用统计项的悬停背景色，使其更亮更融合主题 */
+  /* 鏂板锛氳皟鏁碅PI璋冪敤缁熻椤圭殑鎮仠鑳屾櫙鑹诧紝浣垮叾鏇翠寒鏇磋瀺鍚堜富棰?*/
   .stat-item.stat-warning:hover {
     background-color: rgba(
       245,
@@ -221,7 +221,7 @@ endblock %} {% block head_extra_styles %}
     ) !important; /* blue-500 with higher opacity */
   }
 
-  /* 响应式调整 */
+  /* 鍝嶅簲寮忚皟鏁?*/
   @media (max-width: 640px) {
     .stats-dashboard {
       gap: 1rem;
@@ -293,7 +293,7 @@ endblock %} {% block head_extra_styles %}
     }
   }
 
-  /* 修改密钥列表背景和卡片样式 */
+  /* 淇敼瀵嗛挜鍒楄〃鑳屾櫙鍜屽崱鐗囨牱寮?*/
   .key-content {
     background-color: rgba(249, 250, 251, 0.8) !important;
   }
@@ -305,7 +305,7 @@ endblock %} {% block head_extra_styles %}
     transition: all 0.3s ease;
     cursor: pointer;
     position: relative;
-    padding-left: 2.5rem; /* 为自定义复选框留出空间 */
+    padding-left: 2.5rem; /* 涓鸿嚜瀹氫箟澶嶉€夋鐣欏嚭绌洪棿 */
   }
 
   #validKeys li:hover,
@@ -322,13 +322,13 @@ endblock %} {% block head_extra_styles %}
     border-color: rgba(59, 130, 246, 0.3);
   }
 
-  /* 隐藏原生复选框（仅隐藏有效/无效列表中的复选框，保留值得注意的Key列表中的复选框可见） */
+  /* 闅愯棌鍘熺敓澶嶉€夋锛堜粎闅愯棌鏈夋晥/鏃犳晥鍒楄〃涓殑澶嶉€夋锛屼繚鐣欏€煎緱娉ㄦ剰鐨凨ey鍒楄〃涓殑澶嶉€夋鍙锛?*/
   #validKeys .key-checkbox,
   #invalidKeys .key-checkbox {
     display: none;
   }
 
-  /* 自定义复选框样式（仅针对有效/无效列表） */
+  /* 鑷畾涔夊閫夋鏍峰紡锛堜粎閽堝鏈夋晥/鏃犳晥鍒楄〃锛?*/
   #validKeys li::before,
   #invalidKeys li::before {
     content: "";
@@ -350,21 +350,21 @@ endblock %} {% block head_extra_styles %}
     border-color: #2563eb; /* blue-600 */
   }
 
-  /* 自定义复选框对勾样式 */
+  /* 鑷畾涔夊閫夋瀵瑰嬀鏍峰紡 */
   #validKeys li.selected::after,
   #invalidKeys li.selected::after {
     content: "\f00c"; /* Font Awesome check icon */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     position: absolute;
-    left: calc(0.75rem + 0.3rem); /* 调整对勾位置 */
+    left: calc(0.75rem + 0.3rem); /* 璋冩暣瀵瑰嬀浣嶇疆 */
     top: 50%;
     transform: translateY(-50%) scale(0.9);
     color: white;
     font-size: 0.8rem;
   }
 
-  /* 值得注意的Key列表样式与选中态（保留原生复选框可见） */
+  /* 鍊煎緱娉ㄦ剰鐨凨ey鍒楄〃鏍峰紡涓庨€変腑鎬侊紙淇濈暀鍘熺敓澶嶉€夋鍙锛?*/
   #attentionKeysList li {
     display: flex;
     align-items: center;
@@ -395,7 +395,7 @@ endblock %} {% block head_extra_styles %}
     font-weight: 500;
   }
 
-  /* 模态框背景色调整 - comprehensive modal styling */
+  /* 妯℃€佹鑳屾櫙鑹茶皟鏁?- comprehensive modal styling */
   #apiCallDetailsModal .bg-white,
   #keyUsageDetailsModal .bg-white,
   #resultModal .bg-white,
@@ -408,7 +408,7 @@ endblock %} {% block head_extra_styles %}
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
   }
 
-  /* 模态框标题颜色 */
+  /* 妯℃€佹鏍囬棰滆壊 */
   #apiCallDetailsModalTitle,
   #keyUsageDetailsModalTitle,
   #resultModalTitle,
@@ -419,13 +419,13 @@ endblock %} {% block head_extra_styles %}
     font-weight: 600;
   }
 
-  /* 密钥使用详情模态框头部特定样式 */
+  /* 瀵嗛挜浣跨敤璇︽儏妯℃€佹澶撮儴鐗瑰畾鏍峰紡 */
   #keyUsageDetailsModal .bg-white > div.border-b {
-    /* 针对头部区域的下边框 */
+    /* 閽堝澶撮儴鍖哄煙鐨勪笅杈规 */
     border-bottom-color: rgba(0, 0, 0, 0.12) !important;
   }
 
-  /* 模态框消息文本颜色 */
+  /* 妯℃€佹娑堟伅鏂囨湰棰滆壊 */
   #apiCallDetailsContent,
   #keyUsageDetailsContent,
   #resultModalMessage,
@@ -434,80 +434,80 @@ endblock %} {% block head_extra_styles %}
     color: #374151 !important; /* gray-700 */
   }
 
-  /* 特定调整操作结果模态框的消息区域样式 */
+  /* 鐗瑰畾璋冩暣鎿嶄綔缁撴灉妯℃€佹鐨勬秷鎭尯鍩熸牱寮?*/
   #resultModalMessage {
-    background-color: rgba(255, 255, 255, 0.95) !important; /* 浅色背景 */
-    border-color: rgba(0, 0, 0, 0.08) !important; /* 浅色边框 */
-    color: #374151 !important; /* 深色文本 */
+    background-color: rgba(255, 255, 255, 0.95) !important; /* 娴呰壊鑳屾櫙 */
+    border-color: rgba(0, 0, 0, 0.08) !important; /* 娴呰壊杈规 */
+    color: #374151 !important; /* 娣辫壊鏂囨湰 */
   }
 
-  /* 批量验证结果中普通信息列表 (如成功密钥列表) 的浅色主题样式 */
+  /* 鎵归噺楠岃瘉缁撴灉涓櫘閫氫俊鎭垪琛?(濡傛垚鍔熷瘑閽ュ垪琛? 鐨勬祬鑹蹭富棰樻牱寮?*/
   #resultModalMessage ul[class*="bg-gray-50"] {
-    /* 针对特定灰色背景色的ul */
-    background-color: rgba(249, 250, 251, 0.95) !important; /* 浅灰色背景 */
-    border-color: rgba(0, 0, 0, 0.08) !important; /* 浅色边框 */
+    /* 閽堝鐗瑰畾鐏拌壊鑳屾櫙鑹茬殑ul */
+    background-color: rgba(249, 250, 251, 0.95) !important; /* 娴呯伆鑹茶儗鏅?*/
+    border-color: rgba(0, 0, 0, 0.08) !important; /* 娴呰壊杈规 */
   }
 
   #resultModalMessage ul[class*="bg-gray-50"] li {
-    color: #374151 !important; /* 深色文本 */
+    color: #374151 !important; /* 娣辫壊鏂囨湰 */
   }
 
-  /* 批量验证结果中失败列表的浅色主题样式 */
+  /* 鎵归噺楠岃瘉缁撴灉涓け璐ュ垪琛ㄧ殑娴呰壊涓婚鏍峰紡 */
   #resultModalMessage ul[class*="bg-red-50"] {
-    /* 针对特定背景色的ul */
-    background-color: rgba(254, 242, 242, 0.95) !important; /* 浅红色背景 */
-    border-color: rgba(239, 68, 68, 0.2) !important; /* 浅红色边框 */
+    /* 閽堝鐗瑰畾鑳屾櫙鑹茬殑ul */
+    background-color: rgba(254, 242, 242, 0.95) !important; /* 娴呯孩鑹茶儗鏅?*/
+    border-color: rgba(239, 68, 68, 0.2) !important; /* 娴呯孩鑹茶竟妗?*/
   }
 
-  /* 失败列表中的密钥文本 (如 AIza...lJ6E) */
+  /* 澶辫触鍒楄〃涓殑瀵嗛挜鏂囨湰 (濡?AIza...lJ6E) */
   #resultModalMessage ul[class*="bg-red-50"] li span.font-mono {
-    color: #dc2626 !important; /* 深红色文本 */
+    color: #dc2626 !important; /* 娣辩孩鑹叉枃鏈?*/
   }
 
-  /* 失败列表中的 "收起/展开" 按钮 - 协调的红色主题设计 */
+  /* 澶辫触鍒楄〃涓殑 "鏀惰捣/灞曞紑" 鎸夐挳 - 鍗忚皟鐨勭孩鑹蹭富棰樿璁?*/
   #resultModalMessage ul[class*="bg-red-50"] li button[class*="bg-red-200"] {
-    background-color: #dc2626 !important; /* 深红色按钮背景，与外框协调 */
-    color: #ffffff !important; /* 白色按钮文本 */
-    border: 1px solid #b91c1c !important; /* 更深的红色边框 */
+    background-color: #dc2626 !important; /* 娣辩孩鑹叉寜閽儗鏅紝涓庡妗嗗崗璋?*/
+    color: #ffffff !important; /* 鐧借壊鎸夐挳鏂囨湰 */
+    border: 1px solid #b91c1c !important; /* 鏇存繁鐨勭孩鑹茶竟妗?*/
     box-shadow: none !important;
-    font-weight: 500 !important; /* 增强文字粗细以提高可读性 */
+    font-weight: 500 !important; /* 澧炲己鏂囧瓧绮楃粏浠ユ彁楂樺彲璇绘€?*/
   }
   #resultModalMessage
     ul[class*="bg-red-50"]
     li
     button[class*="bg-red-200"]:hover {
-    background-color: #b91c1c !important; /* 悬停时更深的红色背景 */
-    color: #ffffff !important; /* 悬停时白色按钮文本 */
-    transform: translateY(-1px) !important; /* 轻微上移效果 */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* 悬停阴影效果 */
+    background-color: #b91c1c !important; /* 鎮仠鏃舵洿娣辩殑绾㈣壊鑳屾櫙 */
+    color: #ffffff !important; /* 鎮仠鏃剁櫧鑹叉寜閽枃鏈?*/
+    transform: translateY(-1px) !important; /* 杞诲井涓婄Щ鏁堟灉 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important; /* 鎮仠闃村奖鏁堟灉 */
   }
 
-  /* 失败列表中的错误详情框 - 与红色主题协调的样式 */
+  /* 澶辫触鍒楄〃涓殑閿欒璇︽儏妗?- 涓庣孩鑹蹭富棰樺崗璋冪殑鏍峰紡 */
   #resultModalMessage ul[class*="bg-red-50"] li div[id^="error-details-"] {
-    background-color: rgba(254, 242, 242, 0.8) !important; /* 更浅的红色背景，与外框协调 */
-    border-color: rgba(248, 113, 113, 0.3) !important; /* 浅红色边框 */
-    color: #7f1d1d !important; /* 深红色文本，确保良好对比度 */
-    font-weight: 500 !important; /* 增强文字粗细以提高可读性 */
-    line-height: 1.5 !important; /* 改善行高以提高可读性 */
+    background-color: rgba(254, 242, 242, 0.8) !important; /* 鏇存祬鐨勭孩鑹茶儗鏅紝涓庡妗嗗崗璋?*/
+    border-color: rgba(248, 113, 113, 0.3) !important; /* 娴呯孩鑹茶竟妗?*/
+    color: #7f1d1d !important; /* 娣辩孩鑹叉枃鏈紝纭繚鑹ソ瀵规瘮搴?*/
+    font-weight: 500 !important; /* 澧炲己鏂囧瓧绮楃粏浠ユ彁楂樺彲璇绘€?*/
+    line-height: 1.5 !important; /* 鏀瑰杽琛岄珮浠ユ彁楂樺彲璇绘€?*/
   }
 
-  /* 密钥使用详情模态框内表格表头样式 */
+  /* 瀵嗛挜浣跨敤璇︽儏妯℃€佹鍐呰〃鏍艰〃澶存牱寮?*/
   #keyUsageDetailsModal #keyUsageDetailsContent table th {
-    background-color: rgba(243, 244, 246, 0.95) !important; /* 浅灰色背景 */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; /* 浅色边框 */
-    color: #374151 !important; /* 深色文字 */
-    text-shadow: none; /* 移除文本阴影 */
+    background-color: rgba(243, 244, 246, 0.95) !important; /* 娴呯伆鑹茶儗鏅?*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important; /* 娴呰壊杈规 */
+    color: #374151 !important; /* 娣辫壊鏂囧瓧 */
+    text-shadow: none; /* 绉婚櫎鏂囨湰闃村奖 */
   }
 
-  /* 密钥使用详情模态框表格单元格样式已移除，使用默认颜色与API调用详情保持一致 */
+  /* 瀵嗛挜浣跨敤璇︽儏妯℃€佹琛ㄦ牸鍗曞厓鏍兼牱寮忓凡绉婚櫎锛屼娇鐢ㄩ粯璁ら鑹蹭笌API璋冪敤璇︽儏淇濇寔涓€鑷?*/
 
-  /* 按钮文本颜色 */
+  /* 鎸夐挳鏂囨湰棰滆壊 */
   .stats-card button {
     color: #ffffff;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  /* 表单控件背景 */
+  /* 琛ㄥ崟鎺т欢鑳屾櫙 */
   .form-input,
   .form-select {
     background-color: rgba(255, 255, 255, 0.95) !important;
@@ -515,7 +515,7 @@ endblock %} {% block head_extra_styles %}
     border-color: rgba(0, 0, 0, 0.12) !important;
   }
 
-  /* 标签文字颜色 */
+  /* 鏍囩鏂囧瓧棰滆壊 */
   .text-gray-500,
   .text-gray-600,
   .text-gray-700 {
@@ -523,7 +523,7 @@ endblock %} {% block head_extra_styles %}
     text-shadow: none;
   }
 
-  /* 调整全局背景色，使之与白色背景更加协调 */
+  /* 璋冩暣鍏ㄥ眬鑳屾櫙鑹诧紝浣夸箣涓庣櫧鑹茶儗鏅洿鍔犲崗璋?*/
   .glass-card {
     background-color: rgba(255, 255, 255, 0.95) !important;
     backdrop-filter: blur(10px);
@@ -532,7 +532,7 @@ endblock %} {% block head_extra_styles %}
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
-  /* 分页控件样式增强 */
+  /* 鍒嗛〉鎺т欢鏍峰紡澧炲己 */
   .pagination-button {
     background-color: rgba(255, 255, 255, 0.9);
     color: #374151; /* gray-700 */
@@ -546,12 +546,12 @@ endblock %} {% block head_extra_styles %}
     border-color: #2563eb; /* blue-600 */
   }
 
-  /* 状态标签增强 */
+  /* 鐘舵€佹爣绛惧寮?*/
   .inline-flex.items-center.px-2\.5.py-0\.5.rounded-full {
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  /* 按钮颜色增强 */
+  /* 鎸夐挳棰滆壊澧炲己 */
   button.bg-success-600,
   button.bg-blue-600,
   button.bg-slate-500,
@@ -561,46 +561,46 @@ endblock %} {% block head_extra_styles %}
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  /* 复选框文本样式 */
+  /* 澶嶉€夋鏂囨湰鏍峰紡 */
   input[type="checkbox"] + label {
     color: #f1f5f9 !important;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   }
 
-  /* 底部版权栏文本颜色修正 */
+  /* 搴曢儴鐗堟潈鏍忔枃鏈鑹蹭慨姝?*/
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-200,
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-300,
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-400,
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-500,
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-600,
   .fixed.bottom-0.left-0.w-full.py-3.bg-white .text-gray-700 {
-    color: #1f2937 !important; /* 使用更深的灰色提高对比度 */
+    color: #1f2937 !important; /* 浣跨敤鏇存繁鐨勭伆鑹叉彁楂樺姣斿害 */
     text-shadow: none !important;
   }
 
-  /* 导航链接悬停样式 - 优化以避免遮挡内容 */
+  /* 瀵艰埅閾炬帴鎮仠鏍峰紡 - 浼樺寲浠ラ伩鍏嶉伄鎸″唴瀹?*/
   .nav-link {
     transition: all 0.2s ease-in-out;
     position: relative;
-    z-index: 1; /* 确保不会遮挡重要内容 */
+    z-index: 1; /* 纭繚涓嶄細閬尅閲嶈鍐呭 */
   }
 
   .nav-link:hover {
     background-color: rgba(59, 130, 246, 0.1) !important; /* blue-500 light */
-    transform: scale(1.02); /* 使用缩放代替向上移动 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
+    transform: scale(1.02); /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 澧炲己闃村奖鏁堟灉 */
   }
 
-  /* 导航按钮容器样式 - 为悬停效果预留空间 */
+  /* 瀵艰埅鎸夐挳瀹瑰櫒鏍峰紡 - 涓烘偓鍋滄晥鏋滈鐣欑┖闂?*/
   .nav-buttons-container {
-    padding-top: 0.5rem; /* 为悬停效果预留上方空间 */
-    padding-bottom: 0.75rem; /* 为悬停效果预留下方空间 */
+    padding-top: 0.5rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笂鏂圭┖闂?*/
+    padding-bottom: 0.75rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笅鏂圭┖闂?*/
   }
 
-  /* 主导航按钮的优化悬停效果 */
+  /* 涓诲鑸寜閽殑浼樺寲鎮仠鏁堟灉 */
   .main-nav-btn:hover {
-    transform: scale(1.02) !important; /* 使用缩放代替向上移动 */
-    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 蓝色阴影 */
+    transform: scale(1.02) !important; /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 钃濊壊闃村奖 */
   }
 
   /* Active navigation tab */
@@ -669,8 +669,8 @@ endblock %} {% block head_extra_styles %}
     border-color: #3b82f6 !important;
   }
 
-  /* 新增：密钥列表内按钮背景和悬停颜色调整 */
-  /* 验证按钮 (绿色) */
+  /* 鏂板锛氬瘑閽ュ垪琛ㄥ唴鎸夐挳鑳屾櫙鍜屾偓鍋滈鑹茶皟鏁?*/
+  /* 楠岃瘉鎸夐挳 (缁胯壊) */
   #validKeys li button.bg-success-600,
   #invalidKeys li button.bg-success-600 {
     background-color: rgba(22, 163, 74, 0.65) !important;
@@ -682,35 +682,35 @@ endblock %} {% block head_extra_styles %}
     border-color: rgba(21, 128, 61, 0.95);
   }
 
-  /* 重置按钮 (加深灰色底，白色文字) */
+  /* 閲嶇疆鎸夐挳 (鍔犳繁鐏拌壊搴曪紝鐧借壊鏂囧瓧) */
   #validKeys li button.bg-gray-500,
   #invalidKeys li button.bg-gray-500 {
-    background-color: #6b7280 !important; /* gray-500 - 加深的灰色底 */
+    background-color: #6b7280 !important; /* gray-500 - 鍔犳繁鐨勭伆鑹插簳 */
     border: 1px solid #4b5563 !important; /* gray-600 */
-    color: #ffffff !important; /* white - 白色文字 */
+    color: #ffffff !important; /* white - 鐧借壊鏂囧瓧 */
   }
   #validKeys li button.bg-gray-500:hover,
   #invalidKeys li button.bg-gray-500:hover {
-    background-color: #4b5563 !important; /* gray-600 - 更深的灰色 */
+    background-color: #4b5563 !important; /* gray-600 - 鏇存繁鐨勭伆鑹?*/
     border-color: #374151 !important; /* gray-700 */
-    color: #ffffff !important; /* white - 白色文字 */
+    color: #ffffff !important; /* white - 鐧借壊鏂囧瓧 */
   }
 
-  /* 复制按钮 (蓝色底色，白色文字) */
+  /* 澶嶅埗鎸夐挳 (钃濊壊搴曡壊锛岀櫧鑹叉枃瀛? */
   #validKeys li button.bg-blue-500,
   #invalidKeys li button.bg-blue-500 {
-    background-color: #3b82f6 !important; /* blue-500 - 蓝色底 */
+    background-color: #3b82f6 !important; /* blue-500 - 钃濊壊搴?*/
     border: 1px solid #2563eb !important; /* blue-600 */
     color: #ffffff !important; /* Keep white text as specified in HTML */
   }
   #validKeys li button.bg-blue-500:hover,
   #invalidKeys li button.bg-blue-500:hover {
-    background-color: #2563eb !important; /* blue-600 - 深蓝色hover */
+    background-color: #2563eb !important; /* blue-600 - 娣辫摑鑹瞙over */
     border-color: #1d4ed8 !important; /* blue-700 */
     color: #ffffff !important; /* Keep white text on hover */
   }
 
-  /* 详情按钮 (改为蓝色) */
+  /* 璇︽儏鎸夐挳 (鏀逛负钃濊壊) */
   #validKeys li button.bg-purple-600,
   #invalidKeys li button.bg-purple-600 {
     background-color: rgba(59, 130, 246, 0.8) !important; /* blue-500 */
@@ -722,7 +722,7 @@ endblock %} {% block head_extra_styles %}
     border-color: rgba(37, 99, 235, 1);
   }
 
-  /* 删除按钮 (鲜艳浅红色) - HTML中使用 bg-red-800 */
+  /* 鍒犻櫎鎸夐挳 (椴滆壋娴呯孩鑹? - HTML涓娇鐢?bg-red-800 */
   #validKeys li button.bg-red-800,
   #invalidKeys li button.bg-red-800 {
     background-color: #f87171 !important; /* red-400 - bright light red */
@@ -1010,8 +1010,8 @@ endblock %} {% block head_extra_styles %}
     border-color: rgba(153, 27, 27, 0.95);
   }
 
-  /* 新增：密钥列表内状态标签颜色调整 */
-  /* 有效标签 (绿色) - 改为更好的对比度 */
+  /* 鏂板锛氬瘑閽ュ垪琛ㄥ唴鐘舵€佹爣绛鹃鑹茶皟鏁?*/
+  /* 鏈夋晥鏍囩 (缁胯壊) - 鏀逛负鏇村ソ鐨勫姣斿害 */
   #validKeys li span.bg-success-50.text-success-600,
   #invalidKeys li span.bg-success-50.text-success-600 {
     background-color: rgba(34, 197, 94, 0.15) !important; /* green-500 with low opacity */
@@ -1021,26 +1021,26 @@ endblock %} {% block head_extra_styles %}
     text-shadow: none !important; /* Remove any text shadow */
   }
 
-  /* 失败计数标签 (黄色) - 改为更好的对比度 */
+  /* 澶辫触璁℃暟鏍囩 (榛勮壊) - 鏀逛负鏇村ソ鐨勫姣斿害 */
   #validKeys li span.bg-amber-50.text-amber-600,
   #invalidKeys li span.bg-amber-50.text-amber-600 {
     background-color: rgba(251, 191, 36, 0.15) !important; /* amber-400 with low opacity */
     color: #d97706 !important; /* amber-600 for better contrast on light background */
     border: 1px solid rgba(217, 119, 6, 0.3) !important; /* amber-600 border */
-    position: absolute; /* 移动到右下角 */
-    bottom: 0.75rem; /* 配合li的p-3内边距 */
+    position: absolute; /* 绉诲姩鍒板彸涓嬭 */
+    bottom: 0.75rem; /* 閰嶅悎li鐨刾-3鍐呰竟璺?*/
     right: 0.75rem;
-    z-index: 5; /* 确保在其他元素之上 */
+    z-index: 5; /* 纭繚鍦ㄥ叾浠栧厓绱犱箣涓?*/
     font-weight: 600 !important; /* Make text bolder for better readability */
     text-shadow: none !important; /* Remove any text shadow */
   }
 
-  /* 无效标签 (红色) - for invalidKeys list */
+  /* 鏃犳晥鏍囩 (绾㈣壊) - for invalidKeys list */
   #invalidKeys li span.bg-danger-50.text-danger-600 {
-    background-color: rgba(239, 68, 68, 0.08) !important; /* 更浅的背景色 */
-    color: #f87171 !important; /* 更浅的红色文字 */
-    border: 1px solid rgba(239, 68, 68, 0.15); /* 更浅的边框 */
-    font-weight: 600 !important; /* 加粗字体 */
+    background-color: rgba(239, 68, 68, 0.08) !important; /* 鏇存祬鐨勮儗鏅壊 */
+    color: #f87171 !important; /* 鏇存祬鐨勭孩鑹叉枃瀛?*/
+    border: 1px solid rgba(239, 68, 68, 0.15); /* 鏇存祬鐨勮竟妗?*/
+    font-weight: 600 !important; /* 鍔犵矖瀛椾綋 */
   }
 
   /* Remove border from the last row's cells in API Call Details Modal table */
@@ -1070,7 +1070,7 @@ endblock %} {% block head_extra_styles %}
   }
   /* End of API Call Details Modal Specific Styling Adjustments */
 
-  /* 下拉菜单样式 */
+  /* 涓嬫媺鑿滃崟鏍峰紡 */
   .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -1143,33 +1143,33 @@ endblock %} {% block head_extra_styles %}
   <!-- Increased max-width -->
   <div class="glass-card rounded-2xl shadow-xl p-6 md:p-8">
     <div class="absolute top-6 right-6 flex items-center gap-3">
-      <!-- 手动刷新按钮 -->
+      <!-- 鎵嬪姩鍒锋柊鎸夐挳 -->
       <button
         class="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full w-8 h-8 flex items-center justify-center text-primary-600 transition-all duration-300"
         onclick="refreshPage(this)"
-        title="手动刷新"
+        title="鎵嬪姩鍒锋柊"
       >
         <i class="fas fa-sync-alt"></i>
       </button>
-      <!-- 下拉菜单按钮 -->
+      <!-- 涓嬫媺鑿滃崟鎸夐挳 -->
       <div class="dropdown-toggle relative">
         <button
           id="dropdownMenuButton"
           class="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full w-8 h-8 flex items-center justify-center text-primary-600 transition-all duration-300"
           onclick="toggleDropdownMenu()"
-          title="更多操作"
+          title="鏇村鎿嶄綔"
         >
           <i class="fas fa-ellipsis-v"></i>
         </button>
-        <!-- 下拉菜单 -->
+        <!-- 涓嬫媺鑿滃崟 -->
         <div id="dropdownMenu" class="dropdown-menu">
           <button class="dropdown-item" onclick="copyAllKeys()">
             <i class="fas fa-copy"></i>
-            <span>复制全部密钥</span>
+            <span>澶嶅埗鍏ㄩ儴瀵嗛挜</span>
           </button>
           <button class="dropdown-item" onclick="verifyAllKeys()">
             <i class="fas fa-check-double"></i>
-            <span>验证所有密钥</span>
+            <span>楠岃瘉鎵€鏈夊瘑閽?/span>
           </button>
         </div>
       </div>
@@ -1183,7 +1183,7 @@ endblock %} {% block head_extra_styles %}
         alt="Gemini Balance Logo"
         class="h-9 inline-block align-middle mr-2"
       />
-      Gemini Balance - 监控面板
+      Gemini Balance - 鐩戞帶闈㈡澘
     </h1>
 
     <!-- Navigation Tabs -->
@@ -1193,110 +1193,131 @@ endblock %} {% block head_extra_styles %}
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-cog"></i> 配置编辑
+        <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
       </a>
       <a
         href="/keys"
         class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
         style="background-color: #3b82f6 !important; color: #ffffff !important;"
       >
-        <i class="fas fa-tachometer-alt"></i> 监控面板
+        <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+      </a>
+      <a
+        href="/gemini-assets"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-key"></i> Gemini Key Assets
+      </a>
+      <a
+        href="/gemini-assets#delete-anchor"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
+      </a>
+      <a
+        href="/scanner-automation"
+        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
+        style="background-color: rgba(229, 231, 235, 0.8)"
+      >
+        <i class="fas fa-clock"></i> 鑷姩浠诲姟
       </a>
       <a
         href="/logs"
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-exclamation-triangle"></i> 错误日志
+        <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
       </a>
     </div>
 
-    <!-- 现代化统计面板 -->
+    <!-- 鐜颁唬鍖栫粺璁￠潰鏉?-->
     <div class="stats-dashboard animate-fade-in" style="animation-delay: 0.1s">
-      <!-- 密钥统计卡片 -->
+      <!-- 瀵嗛挜缁熻鍗＄墖 -->
       <div class="stats-card">
         <div class="stats-card-header">
           <h3 class="stats-card-title">
             <i class="fas fa-key"></i>
-            <span>密钥统计</span>
+            <span>瀵嗛挜缁熻</span>
           </h3>
-          <span class="text-xs text-gray-500">总计: {{ total_keys }}</span>
+          <span class="text-xs text-gray-500">鎬昏: {{ total_keys }}</span>
         </div>
         <div class="stats-grid">
-          <div class="stat-item stat-primary" title="总密钥数">
+          <div class="stat-item stat-primary" title="鎬诲瘑閽ユ暟">
             <div class="stat-value">{{ total_keys }}</div>
-            <div class="stat-label">总密钥数</div>
+            <div class="stat-label">鎬诲瘑閽ユ暟</div>
             <i class="stat-icon fas fa-key"></i>
           </div>
-          <div class="stat-item stat-success" title="有效密钥">
+          <div class="stat-item stat-success" title="鏈夋晥瀵嗛挜">
             <div class="stat-value">{{ valid_key_count }}</div>
-            <div class="stat-label">有效密钥</div>
+            <div class="stat-label">鏈夋晥瀵嗛挜</div>
             <i class="stat-icon fas fa-check-circle"></i>
           </div>
-          <div class="stat-item stat-danger" title="无效密钥">
+          <div class="stat-item stat-danger" title="鏃犳晥瀵嗛挜">
             <div class="stat-value">{{ invalid_key_count }}</div>
-            <div class="stat-label">无效密钥</div>
+            <div class="stat-label">鏃犳晥瀵嗛挜</div>
             <i class="stat-icon fas fa-times-circle"></i>
           </div>
         </div>
       </div>
 
-      <!-- API调用统计卡片 -->
+      <!-- API璋冪敤缁熻鍗＄墖 -->
       <div class="stats-card">
         <div class="stats-card-header">
           <h3 class="stats-card-title">
             <i class="fas fa-chart-line"></i>
-            <span>API调用统计</span>
+            <span>API璋冪敤缁熻</span>
           </h3>
           <span class="text-xs text-gray-500"
-            >本月: {{ api_stats.calls_month.total }}</span
+            >鏈湀: {{ api_stats.calls_month.total }}</span
           >
         </div>
         <div class="stats-grid">
           <div
             class="stat-item stat-warning cursor-pointer hover:bg-amber-100"
-            title="点击查看1分钟内调用详情"
+            title="鐐瑰嚮鏌ョ湅1鍒嗛挓鍐呰皟鐢ㄨ鎯?
             data-period="1m"
             onclick="showApiCallDetails('1m', '{{ api_stats.calls_1m.total }}', '{{ api_stats.calls_1m.success }}', '{{ api_stats.calls_1m.failure }}')"
           >
             <div class="stat-value">{{ api_stats.calls_1m.total }}</div>
-            <div class="stat-label">1分钟调用</div>
+            <div class="stat-label">1鍒嗛挓璋冪敤</div>
             <i class="stat-icon fas fa-stopwatch"></i>
           </div>
           <div
             class="stat-item stat-info cursor-pointer hover:bg-blue-100"
-            title="点击查看1小时内调用详情"
+            title="鐐瑰嚮鏌ョ湅1灏忔椂鍐呰皟鐢ㄨ鎯?
             data-period="1h"
             onclick="showApiCallDetails('1h', '{{ api_stats.calls_1h.total }}', '{{ api_stats.calls_1h.success }}', '{{ api_stats.calls_1h.failure }}')"
           >
             <div class="stat-value">{{ api_stats.calls_1h.total }}</div>
-            <div class="stat-label">1小时调用</div>
+            <div class="stat-label">1灏忔椂璋冪敤</div>
             <i class="stat-icon fas fa-hourglass-half"></i>
           </div>
           <div
             class="stat-item stat-primary cursor-pointer hover:bg-indigo-100"
-            title="点击查看24小时内调用详情"
+            title="鐐瑰嚮鏌ョ湅24灏忔椂鍐呰皟鐢ㄨ鎯?
             data-period="24h"
             onclick="showApiCallDetails('24h', '{{ api_stats.calls_24h.total }}', '{{ api_stats.calls_24h.success }}', '{{ api_stats.calls_24h.failure }}')"
           >
             <div class="stat-value">{{ api_stats.calls_24h.total }}</div>
-            <div class="stat-label">24小时调用</div>
+            <div class="stat-label">24灏忔椂璋冪敤</div>
             <i class="stat-icon fas fa-calendar-day"></i>
           </div>
         </div>
       </div>
 
-      <!-- 可切换时间区间的成功/失败图表卡片 -->
+      <!-- 鍙垏鎹㈡椂闂村尯闂寸殑鎴愬姛/澶辫触鍥捐〃鍗＄墖 -->
       <div class="stats-card chart-wide">
         <div class="stats-card-header">
           <h3 class="stats-card-title">
             <i class="fas fa-chart-bar"></i>
-            <span>调用趋势图</span>
+            <span>璋冪敤瓒嬪娍鍥?/span>
           </h3>
           <div class="flex items-center gap-2 text-xs">
-            <button id="chartBtn1h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">1小时</button>
-            <button id="chartBtn8h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">8小时</button>
-            <button id="chartBtn24h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">24小时</button>
+            <button id="chartBtn1h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">1灏忔椂</button>
+            <button id="chartBtn8h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">8灏忔椂</button>
+            <button id="chartBtn24h" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700">24灏忔椂</button>
           </div>
         </div>
         <div class="p-4 chart-container">
@@ -1304,25 +1325,25 @@ endblock %} {% block head_extra_styles %}
         </div>
       </div>
 
-      <!-- 值得注意的 Key 卡片（错误码统计，可切换） -->
+      <!-- 鍊煎緱娉ㄦ剰鐨?Key 鍗＄墖锛堥敊璇爜缁熻锛屽彲鍒囨崲锛?-->
       <div class="stats-card chart-wide">
         <div class="stats-card-header">
           <h3 class="stats-card-title">
             <i class="fas fa-exclamation-circle"></i>
-            <span>值得注意的Key（24h内错误码最多）</span>
+            <span>鍊煎緱娉ㄦ剰鐨凨ey锛?4h鍐呴敊璇爜鏈€澶氾級</span>
           </h3>
           <div class="flex items-center gap-2 text-xs">
             <button id="attentionErr429" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700" title="429 Too Many Requests">429</button>
             <button id="attentionErr403" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700" title="403 Forbidden">403</button>
             <button id="attentionErr400" class="px-2 py-1 rounded bg-gray-200 hover:bg-gray-300 text-gray-700" title="400 Bad Request">400</button>
             <div class="flex items-center gap-1 ml-2">
-              <input id="attentionErrCustom" type="number" min="100" max="599" placeholder="自定义" class="form-input h-7 w-20 px-2 py-1 text-xs border rounded focus:ring-primary-500 focus:border-primary-500" />
-              <button id="attentionErrGo" class="px-2 py-1 rounded bg-blue-500 hover:bg-blue-600 text-white" title="查询">查询</button>
+              <input id="attentionErrCustom" type="number" min="100" max="599" placeholder="鑷畾涔? class="form-input h-7 w-20 px-2 py-1 text-xs border rounded focus:ring-primary-500 focus:border-primary-500" />
+              <button id="attentionErrGo" class="px-2 py-1 rounded bg-blue-500 hover:bg-blue-600 text-white" title="鏌ヨ">鏌ヨ</button>
             </div>
             <div class="flex items-center gap-2 ml-3">
-              <label for="attentionLimitInput" class="text-xs text-gray-600">数量</label>
+              <label for="attentionLimitInput" class="text-xs text-gray-600">鏁伴噺</label>
               <input id="attentionLimitInput" type="number" min="1" max="1000" value="10" class="form-input h-7 w-20 px-2 py-1 text-xs border rounded focus:ring-primary-500 focus:border-primary-500" />
-              <!-- 全选移动到数量输入框右侧 -->
+              <!-- 鍏ㄩ€夌Щ鍔ㄥ埌鏁伴噺杈撳叆妗嗗彸渚?-->
               <div class="flex items-center gap-1">
                 <input
                   type="checkbox"
@@ -1330,51 +1351,51 @@ endblock %} {% block head_extra_styles %}
                   class="form-checkbox h-4 w-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                   onchange="toggleSelectAll('attention', this.checked)"
                 />
-                <label for="selectAllAttention" class="text-xs select-none whitespace-nowrap font-semibold" style="color: #1f2937 !important;">全选</label>
+                <label for="selectAllAttention" class="text-xs select-none whitespace-nowrap font-semibold" style="color: #1f2937 !important;">鍏ㄩ€?/label>
               </div>
             </div>
           </div>
         </div>
       <div class="p-4">
-        <!-- 批量操作按钮组 (仅在选中时显示) -->
+        <!-- 鎵归噺鎿嶄綔鎸夐挳缁?(浠呭湪閫変腑鏃舵樉绀? -->
         <div
           id="attentionBatchActions"
           class="p-3 border mb-3 hidden flex items-center flex-wrap gap-3"
           style="background-color: rgba(249, 250, 251, 0.95); border-color: rgba(0, 0, 0, 0.08);"
         >
           <span class="text-sm font-semibold whitespace-nowrap" style="color: #1f2937 !important;">
-            已选择 <span id="attentionSelectedCount">0</span> 项
+            宸查€夋嫨 <span id="attentionSelectedCount">0</span> 椤?
           </span>
           <button
             class="flex items-center gap-1 bg-success-600 hover:bg-success-700 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
             onclick="event.stopPropagation(); showVerifyModal('attention', event)"
             disabled
           >
-            <i class="fas fa-check-double"></i> 批量验证
+            <i class="fas fa-check-double"></i> 鎵归噺楠岃瘉
           </button>
           <button
             class="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
             onclick="event.stopPropagation(); copySelectedKeys('attention')"
             disabled
           >
-            <i class="fas fa-copy"></i> 批量复制
+            <i class="fas fa-copy"></i> 鎵归噺澶嶅埗
           </button>
           <button
             class="flex items-center gap-1 bg-red-800 hover:bg-red-900 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
             onclick="event.stopPropagation(); showDeleteConfirmationModal('attention', event)"
             disabled
           >
-            <i class="fas fa-trash-alt"></i> 批量删除
+            <i class="fas fa-trash-alt"></i> 鎵归噺鍒犻櫎
           </button>
         </div>
         <ul id="attentionKeysList" class="space-y-2">
-          <li class="text-center text-gray-500 py-2">加载中...</li>
+          <li class="text-center text-gray-500 py-2">鍔犺浇涓?..</li>
         </ul>
       </div>
     </div>
   </div>
 
-    <!-- 有效密钥区域 -->
+    <!-- 鏈夋晥瀵嗛挜鍖哄煙 -->
     <div class="stats-card mb-6 animate-fade-in" style="animation-delay: 0.2s">
       <div
         class="stats-card-header cursor-pointer"
@@ -1386,7 +1407,7 @@ endblock %} {% block head_extra_styles %}
           <i class="fas fa-chevron-down toggle-icon text-primary-600"></i>
           <i class="fas fa-check-circle text-success-500"></i>
           <h2 class="text-lg font-semibold whitespace-nowrap">
-            有效密钥列表 ({{ valid_key_count }})
+            鏈夋晥瀵嗛挜鍒楄〃 ({{ valid_key_count }})
           </h2>
         </div>
         <!-- Middle: Filters and Search (Allow wrapping) -->
@@ -1394,13 +1415,13 @@ endblock %} {% block head_extra_styles %}
           class="flex items-center gap-x-4 gap-y-2 flex-grow flex-wrap justify-start md:justify-center"
         >
           <!-- Allow wrapping, center on medium+ -->
-          <!-- 失败次数筛选 -->
+          <!-- 澶辫触娆℃暟绛涢€?-->
           <div class="flex items-center gap-1">
             <label
               for="failCountThreshold"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              >失败次数≥</label
+              >澶辫触娆℃暟鈮?/label
             >
             <input
               type="number"
@@ -1411,29 +1432,29 @@ endblock %} {% block head_extra_styles %}
               onclick="event.stopPropagation();"
             />
           </div>
-          <!-- 密钥搜索 -->
+          <!-- 瀵嗛挜鎼滅储 -->
           <div class="flex items-center gap-1">
             <label
               for="keySearchInput"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              ><i class="fas fa-search mr-1"></i>搜索</label
+              ><i class="fas fa-search mr-1"></i>鎼滅储</label
             >
             <input
               type="search"
               id="keySearchInput"
-              placeholder="输入密钥..."
+              placeholder="杈撳叆瀵嗛挜..."
               class="form-input h-7 w-32 px-2 py-1 text-sm border rounded focus:ring-primary-500 focus:border-primary-500"
               onclick="event.stopPropagation();"
             />
           </div>
-          <!-- 每页显示数量 -->
+          <!-- 姣忛〉鏄剧ず鏁伴噺 -->
           <div class="flex items-center gap-1">
             <label
               for="itemsPerPageSelect"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              >每页</label
+              >姣忛〉</label
             >
             <select
               id="itemsPerPageSelect"
@@ -1446,7 +1467,7 @@ endblock %} {% block head_extra_styles %}
               <option value="100">100</option>
               <option value="500">500</option>
             </select>
-            <span class="text-sm select-none font-semibold" style="color: #1f2937 !important;">项</span>
+            <span class="text-sm select-none font-semibold" style="color: #1f2937 !important;">椤?/span>
           </div>
         </div>
         <!-- Right side: Select All -->
@@ -1465,12 +1486,12 @@ endblock %} {% block head_extra_styles %}
             for="selectAllValid"
             class="text-sm select-none whitespace-nowrap font-semibold"
             style="color: #1f2937 !important;"
-            >全选</label
+            >鍏ㄩ€?/label
           >
         </div>
       </div>
 
-      <!-- 批量操作按钮组 (仅在选中时显示) -->
+      <!-- 鎵归噺鎿嶄綔鎸夐挳缁?(浠呭湪閫変腑鏃舵樉绀? -->
       <div
         id="validBatchActions"
         class="p-3 border-t hidden flex items-center flex-wrap gap-3"
@@ -1481,14 +1502,14 @@ endblock %} {% block head_extra_styles %}
       >
         <!-- Added flex-wrap -->
         <span class="text-sm font-semibold whitespace-nowrap" style="color: #1f2937 !important;"
-          >已选择 <span id="validSelectedCount">0</span> 项</span
+          >宸查€夋嫨 <span id="validSelectedCount">0</span> 椤?/span
         >
         <button
           class="flex items-center gap-1 bg-success-600 hover:bg-success-700 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); showVerifyModal('valid', event)"
           disabled
         >
-          <i class="fas fa-check-double"></i> 批量验证
+          <i class="fas fa-check-double"></i> 鎵归噺楠岃瘉
         </button>
         <button
           class="flex items-center gap-1 bg-gray-500 hover:bg-gray-600 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
@@ -1497,21 +1518,21 @@ endblock %} {% block head_extra_styles %}
           data-reset-type="valid"
           disabled
         >
-          <i class="fas fa-redo-alt"></i> 批量重置
+          <i class="fas fa-redo-alt"></i> 鎵归噺閲嶇疆
         </button>
         <button
           class="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); copySelectedKeys('valid')"
           disabled
         >
-          <i class="fas fa-copy"></i> 批量复制
+          <i class="fas fa-copy"></i> 鎵归噺澶嶅埗
         </button>
         <button
           class="flex items-center gap-1 bg-red-800 hover:bg-red-900 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); showDeleteConfirmationModal('valid', event)"
           disabled
         >
-          <i class="fas fa-trash-alt"></i> 批量删除
+          <i class="fas fa-trash-alt"></i> 鎵归噺鍒犻櫎
         </button>
       </div>
 
@@ -1523,7 +1544,7 @@ endblock %} {% block head_extra_styles %}
              <i class="fas fa-spinner fa-spin"></i> Loading keys...
           </li>
         </ul>
-        <!-- 有效密钥分页控件容器 -->
+        <!-- 鏈夋晥瀵嗛挜鍒嗛〉鎺т欢瀹瑰櫒 -->
         <div
           id="validPaginationControls"
           class="flex justify-center items-center mt-4 space-x-2"
@@ -1533,7 +1554,7 @@ endblock %} {% block head_extra_styles %}
       </div>
     </div>
 
-    <!-- 无效密钥区域 -->
+    <!-- 鏃犳晥瀵嗛挜鍖哄煙 -->
     <div class="stats-card mb-6 animate-fade-in" style="animation-delay: 0.4s">
       <div
         class="stats-card-header cursor-pointer"
@@ -1545,7 +1566,7 @@ endblock %} {% block head_extra_styles %}
           <i class="fas fa-chevron-down toggle-icon text-primary-600"></i>
           <i class="fas fa-times-circle text-danger-500"></i>
           <h2 class="text-lg font-semibold whitespace-nowrap">
-            无效密钥列表 ({{ invalid_key_count }})
+            鏃犳晥瀵嗛挜鍒楄〃 ({{ invalid_key_count }})
           </h2>
         </div>
         <!-- Middle: Filters and Search (Allow wrapping) -->
@@ -1553,13 +1574,13 @@ endblock %} {% block head_extra_styles %}
           class="flex items-center gap-x-4 gap-y-2 flex-grow flex-wrap justify-start md:justify-center"
         >
           <!-- Allow wrapping, center on medium+ -->
-          <!-- 失败次数筛选 -->
+          <!-- 澶辫触娆℃暟绛涢€?-->
           <div class="flex items-center gap-1">
             <label
               for="invalidFailCountThreshold"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              >失败次数≥</label
+              >澶辫触娆℃暟鈮?/label
             >
             <input
               type="number"
@@ -1570,29 +1591,29 @@ endblock %} {% block head_extra_styles %}
               onclick="event.stopPropagation();"
             />
           </div>
-          <!-- 密钥搜索 -->
+          <!-- 瀵嗛挜鎼滅储 -->
           <div class="flex items-center gap-1">
             <label
               for="invalidKeySearchInput"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              ><i class="fas fa-search mr-1"></i>搜索</label
+              ><i class="fas fa-search mr-1"></i>鎼滅储</label
             >
             <input
               type="search"
               id="invalidKeySearchInput"
-              placeholder="输入密钥..."
+              placeholder="杈撳叆瀵嗛挜..."
               class="form-input h-7 w-32 px-2 py-1 text-sm border rounded focus:ring-primary-500 focus:border-primary-500"
               onclick="event.stopPropagation();"
             />
           </div>
-          <!-- 每页显示数量 -->
+          <!-- 姣忛〉鏄剧ず鏁伴噺 -->
           <div class="flex items-center gap-1">
             <label
               for="invalidItemsPerPageSelect"
               class="text-sm select-none whitespace-nowrap font-semibold"
               style="color: #1f2937 !important;"
-              >每页</label
+              >姣忛〉</label
             >
             <select
               id="invalidItemsPerPageSelect"
@@ -1605,7 +1626,7 @@ endblock %} {% block head_extra_styles %}
               <option value="100">100</option>
               <option value="500">500</option>
             </select>
-            <span class="text-sm select-none font-semibold" style="color: #1f2937 !important;">项</span>
+            <span class="text-sm select-none font-semibold" style="color: #1f2937 !important;">椤?/span>
           </div>
         </div>
         <!-- Right side: Select All -->
@@ -1624,12 +1645,12 @@ endblock %} {% block head_extra_styles %}
             for="selectAllInvalid"
             class="text-sm select-none whitespace-nowrap font-semibold"
             style="color: #1f2937 !important;"
-            >全选</label
+            >鍏ㄩ€?/label
           >
         </div>
       </div>
 
-      <!-- 批量操作按钮组 (仅在选中时显示) -->
+      <!-- 鎵归噺鎿嶄綔鎸夐挳缁?(浠呭湪閫変腑鏃舵樉绀? -->
       <div
         id="invalidBatchActions"
         class="p-3 border-t hidden flex items-center flex-wrap gap-3"
@@ -1640,14 +1661,14 @@ endblock %} {% block head_extra_styles %}
       >
         <!-- Added flex-wrap -->
         <span class="text-sm font-semibold whitespace-nowrap" style="color: #1f2937 !important;"
-          >已选择 <span id="invalidSelectedCount">0</span> 项</span
+          >宸查€夋嫨 <span id="invalidSelectedCount">0</span> 椤?/span
         >
         <button
           class="flex items-center gap-1 bg-success-600 hover:bg-success-700 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); showVerifyModal('invalid', event)"
           disabled
         >
-          <i class="fas fa-check-double"></i> 批量验证
+          <i class="fas fa-check-double"></i> 鎵归噺楠岃瘉
         </button>
         <button
           class="flex items-center gap-1 bg-gray-500 hover:bg-gray-600 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
@@ -1656,21 +1677,21 @@ endblock %} {% block head_extra_styles %}
           data-reset-type="invalid"
           disabled
         >
-          <i class="fas fa-redo-alt"></i> 批量重置
+          <i class="fas fa-redo-alt"></i> 鎵归噺閲嶇疆
         </button>
         <button
           class="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); copySelectedKeys('invalid')"
           disabled
         >
-          <i class="fas fa-copy"></i> 批量复制
+          <i class="fas fa-copy"></i> 鎵归噺澶嶅埗
         </button>
         <button
           class="flex items-center gap-1 bg-red-800 hover:bg-red-900 text-white px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 disabled:cursor-not-allowed"
           onclick="event.stopPropagation(); showDeleteConfirmationModal('invalid', event)"
           disabled
         >
-          <i class="fas fa-trash-alt"></i> 批量删除
+          <i class="fas fa-trash-alt"></i> 鎵归噺鍒犻櫎
         </button>
       </div>
 
@@ -1682,7 +1703,7 @@ endblock %} {% block head_extra_styles %}
              <i class="fas fa-spinner fa-spin"></i> Loading keys...
           </li>
         </ul>
-        <!-- 无效密钥分页控件容器 -->
+        <!-- 鏃犳晥瀵嗛挜鍒嗛〉鎺т欢瀹瑰櫒 -->
         <div
           id="invalidPaginationControls"
           class="flex justify-center items-center mt-4 space-x-2"
@@ -1698,17 +1719,17 @@ endblock %} {% block head_extra_styles %}
 
 <!-- Scroll buttons are now in base.html -->
 <div class="scroll-buttons">
-  <button class="scroll-button" onclick="scrollToTop()" title="回到顶部">
+  <button class="scroll-button" onclick="scrollToTop()" title="鍥炲埌椤堕儴">
     <i class="fas fa-chevron-up"></i>
   </button>
-  <button class="scroll-button" onclick="scrollToBottom()" title="滚动到底部">
+  <button class="scroll-button" onclick="scrollToBottom()" title="婊氬姩鍒板簳閮?>
     <i class="fas fa-chevron-down"></i>
   </button>
 </div>
 
 <!-- Notification component is now in base.html (use id="notification") -->
 <div id="notification" class="notification"></div>
-<!-- 重置确认模态框 -->
+<!-- 閲嶇疆纭妯℃€佹 -->
 <div
   id="resetModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -1718,7 +1739,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="flex items-center justify-between mb-4">
       <h3 class="text-lg font-semibold text-gray-800" id="resetModalTitle">
-        批量重置失败次数
+        鎵归噺閲嶇疆澶辫触娆℃暟
       </h3>
       <button
         onclick="closeResetModal()"
@@ -1736,18 +1757,18 @@ endblock %} {% block head_extra_styles %}
         class="px-3 py-1.5 text-xs font-medium bg-slate-500 hover:bg-slate-600 text-white rounded-lg transition-colors"
         style="color: #ffffff !important;"
       >
-        取消
+        鍙栨秷
       </button>
       <button
         id="confirmResetBtn"
         class="px-3 py-1.5 text-xs font-medium bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors"
       >
-        确认
+        纭
       </button>
     </div>
   </div>
 </div>
-<!-- 验证确认模态框 -->
+<!-- 楠岃瘉纭妯℃€佹 -->
 <div
   id="verifyModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -1769,7 +1790,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 600;
         "
       >
-        批量验证密钥
+        鎵归噺楠岃瘉瀵嗛挜
       </h3>
       <button
         onclick="closeVerifyModal()"
@@ -1781,7 +1802,7 @@ endblock %} {% block head_extra_styles %}
     <div class="mb-6">
       <p style="color: #374151" id="verifyModalMessage" class="mb-4"></p>
       <div class="flex items-center gap-2">
-        <label for="batchSize" class="text-sm font-medium" style="color: #374151;">每批次验证数量:</label>
+        <label for="batchSize" class="text-sm font-medium" style="color: #374151;">姣忔壒娆￠獙璇佹暟閲?</label>
         <input type="number" id="batchSize" value="10" min="1" class="form-input h-8 w-20 px-2 py-1 text-sm border rounded focus:ring-primary-500 focus:border-primary-500">
       </div>
     </div>
@@ -1791,19 +1812,19 @@ endblock %} {% block head_extra_styles %}
         class="px-3 py-1.5 text-xs font-medium bg-slate-600 hover:bg-slate-700 text-white rounded-lg transition-colors"
         style="color: #ffffff !important;"
       >
-        取消
+        鍙栨秷
       </button>
       <button
         id="confirmVerifyBtn"
         class="px-3 py-1.5 text-xs font-medium bg-success-600 hover:bg-success-700 text-white rounded-lg transition-colors"
       >
-        确认验证
+        纭楠岃瘉
       </button>
     </div>
   </div>
 </div>
 
-<!-- 删除确认模态框 -->
+<!-- 鍒犻櫎纭妯℃€佹 -->
 <div
   id="deleteConfirmModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -1825,7 +1846,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 600;
         "
       >
-        确认删除
+        纭鍒犻櫎
       </h3>
       <button
         onclick="closeDeleteConfirmationModal()"
@@ -1843,19 +1864,19 @@ endblock %} {% block head_extra_styles %}
         class="px-3 py-1.5 text-xs font-medium bg-slate-600 hover:bg-slate-700 text-white rounded-lg transition-colors"
         style="color: #ffffff !important;"
       >
-        取消
+        鍙栨秷
       </button>
       <button
         id="confirmDeleteBtn"
         class="px-3 py-1.5 text-xs font-medium bg-red-700 hover:bg-red-800 text-white rounded-lg transition-colors"
       >
-        确认删除
+        纭鍒犻櫎
       </button>
     </div>
   </div>
 </div>
 
-<!-- 新增：单个密钥删除确认模态框 -->
+<!-- 鏂板锛氬崟涓瘑閽ュ垹闄ょ‘璁ゆā鎬佹 -->
 <div
   id="singleKeyDeleteConfirmModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -1877,7 +1898,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 600;
         "
       >
-        确认删除密钥
+        纭鍒犻櫎瀵嗛挜
       </h3>
       <button
         onclick="closeSingleKeyDeleteConfirmModal()"
@@ -1895,19 +1916,19 @@ endblock %} {% block head_extra_styles %}
         class="px-3 py-1.5 text-xs font-medium bg-slate-600 hover:bg-slate-700 text-white rounded-lg transition-colors"
         style="color: #ffffff !important;"
       >
-        取消
+        鍙栨秷
       </button>
       <button
         id="confirmSingleKeyDeleteBtn"
         class="px-3 py-1.5 text-xs font-medium bg-red-700 hover:bg-red-800 text-white rounded-lg transition-colors"
       >
-        确认删除
+        纭鍒犻櫎
       </button>
     </div>
   </div>
 </div>
 
-<!-- 批量操作进度模态框 -->
+<!-- 鎵归噺鎿嶄綔杩涘害妯℃€佹 -->
 <div
   id="progressModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -1926,7 +1947,7 @@ endblock %} {% block head_extra_styles %}
         id="progressModalTitle"
         style="color: #1f2937; font-weight: 600"
       >
-        批量操作进度
+        鎵归噺鎿嶄綔杩涘害
       </h3>
       <button
         onclick="closeProgressModal()"
@@ -1939,7 +1960,7 @@ endblock %} {% block head_extra_styles %}
     </div>
     <div class="mb-4">
       <p id="progressStatusText" class="text-sm text-gray-600 mb-2">
-        准备开始...
+        鍑嗗寮€濮?..
       </p>
       <div class="w-full bg-gray-200 rounded-full h-4 dark:bg-gray-700">
         <div
@@ -1973,13 +1994,13 @@ endblock %} {% block head_extra_styles %}
         class="px-4 py-1.5 text-sm font-medium bg-primary-700 hover:bg-primary-800 text-white rounded-lg transition-colors"
         disabled
       >
-        完成并刷新
+        瀹屾垚骞跺埛鏂?
       </button>
     </div>
   </div>
 </div>
 
-<!-- 操作结果模态框 -->
+<!-- 鎿嶄綔缁撴灉妯℃€佹 -->
 <div
   id="resultModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden"
@@ -1994,7 +2015,7 @@ endblock %} {% block head_extra_styles %}
         id="resultModalTitle"
         style="letter-spacing: 0.05em"
       >
-        操作结果
+        鎿嶄綔缁撴灉
       </h3>
       <button
         onclick="closeResultModal()"
@@ -2023,13 +2044,13 @@ endblock %} {% block head_extra_styles %}
         onclick="closeResultModal()"
         class="px-5 py-1.5 text-sm font-semibold bg-primary-700 hover:bg-primary-800 text-white rounded-lg shadow transition-colors"
       >
-        确定
+        纭畾
       </button>
     </div>
   </div>
 </div>
 
-<!-- API 调用详情模态框 -->
+<!-- API 璋冪敤璇︽儏妯℃€佹 -->
 <div
   id="apiCallDetailsModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -2043,7 +2064,7 @@ endblock %} {% block head_extra_styles %}
         class="text-xl font-semibold text-gray-800"
         id="apiCallDetailsModalTitle"
       >
-        API 调用详情
+        API 璋冪敤璇︽儏
       </h3>
       <button
         onclick="closeApiCallDetailsModal()"
@@ -2057,10 +2078,10 @@ endblock %} {% block head_extra_styles %}
       class="mb-6 max-h-[60vh] overflow-y-auto pr-2"
     >
       <!-- Increased max-height and added padding-right -->
-      <!-- 详细数据将加载到这里 -->
+      <!-- 璇︾粏鏁版嵁灏嗗姞杞藉埌杩欓噷 -->
       <div class="text-center py-10">
         <i class="fas fa-spinner fa-spin text-primary-600 text-3xl"></i>
-        <p class="text-gray-500 mt-2">加载中...</p>
+        <p class="text-gray-500 mt-2">鍔犺浇涓?..</p>
       </div>
     </div>
     <div class="flex justify-end pt-4 border-t">
@@ -2068,13 +2089,13 @@ endblock %} {% block head_extra_styles %}
         onclick="closeApiCallDetailsModal()"
         class="px-4 py-1.5 text-xs font-medium bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
       >
-        关闭
+        鍏抽棴
       </button>
     </div>
   </div>
 </div>
 
-<!-- 密钥使用详情模态框 -->
+<!-- 瀵嗛挜浣跨敤璇︽儏妯℃€佹 -->
 <div
   id="keyUsageDetailsModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
@@ -2088,7 +2109,7 @@ endblock %} {% block head_extra_styles %}
         class="text-xl font-semibold text-gray-800"
         id="keyUsageDetailsModalTitle"
       >
-        密钥请求详情
+        瀵嗛挜璇锋眰璇︽儏
       </h3>
       <button
         onclick="closeKeyUsageDetailsModal()"
@@ -2102,10 +2123,10 @@ endblock %} {% block head_extra_styles %}
       class="mb-6 max-h-[50vh] overflow-y-auto pr-2"
     >
       <!-- Adjusted max-height -->
-      <!-- 详细数据将加载到这里 -->
+      <!-- 璇︾粏鏁版嵁灏嗗姞杞藉埌杩欓噷 -->
       <div class="text-center py-10">
         <i class="fas fa-spinner fa-spin text-primary-600 text-3xl"></i>
-        <p class="text-gray-500 mt-2">加载中...</p>
+        <p class="text-gray-500 mt-2">鍔犺浇涓?..</p>
       </div>
     </div>
     <div class="flex justify-end pt-4 border-t">
@@ -2113,7 +2134,7 @@ endblock %} {% block head_extra_styles %}
         onclick="closeKeyUsageDetailsModal()"
         class="px-4 py-1.5 text-xs font-medium bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors"
       >
-        关闭
+        鍏抽棴
       </button>
     </div>
   </div>
@@ -2128,3 +2149,4 @@ endblock %} {% block head_extra_styles %}
   // No inline script needed here anymore.
 </script>
 {% endblock %}
+

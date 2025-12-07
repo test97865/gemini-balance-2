@@ -21,6 +21,7 @@ from app.router import (
     stats_routes,
     version_routes,
     vertex_express_routes,
+    scanner_routes,
 )
 from app.service.key.key_manager import get_key_manager_instance
 from app.service.stats.stats_service import StatsService
@@ -52,6 +53,7 @@ def setup_routers(app: FastAPI) -> None:
     app.include_router(vertex_express_routes.router)
     app.include_router(files_routes.router)
     app.include_router(key_routes.router)
+    app.include_router(scanner_routes.router)
 
     setup_page_routes(app)
 
@@ -169,6 +171,53 @@ def setup_page_routes(app: FastAPI) -> None:
             )
         except Exception as e:
             logger.error(f"Error accessing config page: {str(e)}")
+            raise
+
+    @app.get("/gemini-assets", response_class=HTMLResponse)
+    async def gemini_assets_page(request: Request):
+        """Gemini Key 接收面板"""
+        try:
+            auth_token = request.cookies.get("auth_token")
+            if not auth_token or not verify_auth_token(auth_token):
+                logger.warning("Unauthorized access attempt to gemini assets page")
+                return RedirectResponse(url="/", status_code=302)
+
+            logger.info("Gemini assets page accessed successfully")
+            return templates.TemplateResponse("gemini_assets.html", {"request": request})
+        except Exception as e:
+            logger.error(f"Error accessing gemini assets page: {str(e)}")
+            raise
+
+    @app.get("/gemini-delete", response_class=HTMLResponse)
+    async def gemini_delete_page(request: Request):
+        """删除无效 Gemini Key 页面"""
+        try:
+            auth_token = request.cookies.get("auth_token")
+            if not auth_token or not verify_auth_token(auth_token):
+                logger.warning("Unauthorized access attempt to gemini delete page")
+                return RedirectResponse(url="/", status_code=302)
+
+            logger.info("Gemini delete page accessed successfully")
+            return templates.TemplateResponse("gemini_delete.html", {"request": request})
+        except Exception as e:
+            logger.error(f"Error accessing gemini delete page: {str(e)}")
+            raise
+
+    @app.get("/scanner-automation", response_class=HTMLResponse)
+    async def scanner_automation_page(request: Request):
+        """Scanner 定时任务配置面板"""
+        try:
+            auth_token = request.cookies.get("auth_token")
+            if not auth_token or not verify_auth_token(auth_token):
+                logger.warning("Unauthorized access attempt to scanner automation page")
+                return RedirectResponse(url="/", status_code=302)
+
+            logger.info("Scanner automation page accessed successfully")
+            return templates.TemplateResponse(
+                "scanner_schedule.html", {"request": request}
+            )
+        except Exception as e:
+            logger.error(f"Error accessing scanner automation page: {str(e)}")
             raise
 
     @app.get("/logs", response_class=HTMLResponse)
