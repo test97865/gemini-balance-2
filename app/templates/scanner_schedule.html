@@ -1,5 +1,5 @@
-﻿{% extends "base.html" %}
-{% block title %}鑷姩浠诲姟 - Gemini Balance{% endblock %}
+{% extends "base.html" %}
+{% block title %}自动任务 - Gemini Balance{% endblock %}
 
 {% block head_extra_styles %}
 <style>
@@ -55,29 +55,27 @@
   <div class="glass-card rounded-2xl shadow-xl p-6 md:p-8">
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
-        <p class="text-sm text-gray-500 font-semibold tracking-wide uppercase">鑷姩鍖?/p>
-        <h1 class="text-3xl font-extrabold text-gray-800">姣忔棩鍚屾 & 澶嶉獙閰嶇疆</h1>
+        <p class="text-sm text-gray-500 font-semibold tracking-wide uppercase">自动化</p>
+        <h1 class="text-3xl font-extrabold text-gray-800">每日同步 & 复验配置</h1>
         <p class="text-gray-600 mt-2">
-          閰嶇疆瀹氭椂浠诲姟锛氳皟鐢?scanner 澶嶉獙鎺ュ彛鍒锋柊 <code>last_verified_at</code>锛屽苟鎸夐渶鎷夊彇鏈€鏂版湁鏁?Key銆?        </p>
+          配置定时任务：调用 scanner 复验接口刷新 <code>last_verified_at</code>，并按需拉取最新有效 Key。
+        </p>
       </div>
       <div class="nav-buttons-container flex flex-wrap justify-center gap-2">
         <a href="/config" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
+          <i class="fas fa-cog"></i> 配置编辑
         </a>
         <a href="/keys" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+          <i class="fas fa-tachometer-alt"></i> 监控面板
         </a>
         <a href="/gemini-assets" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
           <i class="fas fa-key"></i> Gemini Key Assets
         </a>
-        <a href="/gemini-assets#delete-anchor" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
-        </a>
         <a href="/scanner-automation" class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-semibold rounded-lg shadow-md transition-all duration-200" style="background-color: #3b82f6 !important; color: #ffffff !important;">
-          <i class="fas fa-clock"></i> 鑷姩浠诲姟
+          <i class="fas fa-clock"></i> 自动任务
         </a>
         <a href="/logs" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
+          <i class="fas fa-exclamation-triangle"></i> 错误日志
         </a>
       </div>
     </div>
@@ -86,36 +84,36 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">姣忔棩澶嶉獙</p>
-            <h2 class="text-xl font-bold text-gray-800">璋冪敤 /api/gemini/reverify</h2>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">每日复验</p>
+            <h2 class="text-xl font-bold text-gray-800">调用 /api/gemini/reverify</h2>
           </div>
           <label class="toggle cursor-pointer flex items-center gap-2">
             <input type="checkbox" id="reverify-enabled" />
             <div class="toggle-track w-12 h-6 rounded-full bg-gray-200">
               <div class="toggle-handle"></div>
             </div>
-            <span class="text-sm text-gray-700">鍚敤</span>
+            <span class="text-sm text-gray-700">启用</span>
           </label>
         </div>
         <div class="space-y-3">
           <div class="space-y-1">
-            <label class="input-label" for="reverify-time">姣忔棩鏃堕棿 (HH:MM)</label>
+            <label class="input-label" for="reverify-time">每日时间 (HH:MM)</label>
             <input id="reverify-time" type="text" class="input-box w-full" placeholder="02:30" />
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="input-label" for="reverify-count">姣忔澶嶉獙鏁伴噺</label>
+              <label class="input-label" for="reverify-count">每次复验数量</label>
               <input id="reverify-count" type="number" min="1" max="1000" class="input-box w-full" />
             </div>
             <div class="space-y-1">
-              <label class="input-label" for="reverify-statuses">杩囨护鐘舵€?(閫楀彿鍒嗛殧锛屽彲绌?</label>
+              <label class="input-label" for="reverify-statuses">过滤状态（逗号分隔，可空）</label>
               <input id="reverify-statuses" type="text" class="input-box w-full" placeholder="pending,rate_limited" />
             </div>
           </div>
         </div>
         <div class="flex items-center justify-end gap-3">
           <button id="trigger-reverify" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors">
-            <i class="fas fa-play mr-1"></i> 绔嬪嵆澶嶉獙
+            <i class="fas fa-play mr-1"></i> 立即复验
           </button>
         </div>
       </div>
@@ -123,39 +121,39 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">姣忔棩鍚屾</p>
-            <h2 class="text-xl font-bold text-gray-800">鎷夊彇鏈€鏂版湁鏁?Key 骞跺啓鍏ラ厤缃?/h2>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">每日同步</p>
+            <h2 class="text-xl font-bold text-gray-800">拉取最新有效 Key 并写入配置</h2>
           </div>
           <label class="toggle cursor-pointer flex items-center gap-2">
             <input type="checkbox" id="sync-enabled" />
             <div class="toggle-track w-12 h-6 rounded-full bg-gray-200">
               <div class="toggle-handle"></div>
             </div>
-            <span class="text-sm text-gray-700">鍚敤</span>
+            <span class="text-sm text-gray-700">启用</span>
           </label>
         </div>
         <div class="space-y-3">
           <div class="space-y-1">
-            <label class="input-label" for="sync-time">姣忔棩鏃堕棿 (HH:MM)</label>
+            <label class="input-label" for="sync-time">每日时间 (HH:MM)</label>
             <input id="sync-time" type="text" class="input-box w-full" placeholder="03:00" />
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label class="input-label" for="sync-limit">鎷夊彇鏁伴噺</label>
+              <label class="input-label" for="sync-limit">拉取数量</label>
               <input id="sync-limit" type="number" min="1" max="1000" class="input-box w-full" />
             </div>
             <div class="space-y-1">
-              <label class="input-label" for="sync-type">绫诲瀷</label>
+              <label class="input-label" for="sync-type">类型</label>
               <select id="sync-type" class="input-box w-full">
-                <option value="valid">valid锛圗ffective + Billable锛?/option>
-                <option value="paid">paid锛堜粎浠樿垂 Key锛?/option>
+                <option value="valid">valid（Effective + Billable）</option>
+                <option value="paid">paid（仅付费 Key）</option>
               </select>
             </div>
           </div>
         </div>
         <div class="flex items-center justify-end gap-3">
           <button id="trigger-sync" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors">
-            <i class="fas fa-play mr-1"></i> 绔嬪嵆鍚屾
+            <i class="fas fa-play mr-1"></i> 立即同步
           </button>
         </div>
       </div>
@@ -163,30 +161,30 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">姣忔棩娓呯悊</p>
-            <h2 class="text-xl font-bold text-gray-800">鍒犻櫎 recheck_status=invalid</h2>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">每日清理</p>
+            <h2 class="text-xl font-bold text-gray-800">删除 recheck_status=invalid</h2>
           </div>
           <label class="toggle cursor-pointer flex items-center gap-2">
             <input type="checkbox" id="delete-enabled" />
             <div class="toggle-track w-12 h-6 rounded-full bg-gray-200">
               <div class="toggle-handle"></div>
             </div>
-            <span class="text-sm text-gray-700">鍚敤</span>
+            <span class="text-sm text-gray-700">启用</span>
           </label>
         </div>
         <div class="space-y-3">
           <div class="space-y-1">
-            <label class="input-label" for="delete-time">姣忔棩鏃堕棿 (HH:MM)</label>
+            <label class="input-label" for="delete-time">每日时间 (HH:MM)</label>
             <input id="delete-time" type="text" class="input-box w-full" placeholder="04:00" />
           </div>
           <div class="space-y-1">
-            <label class="input-label" for="delete-limit">鍒犻櫎鏁伴噺</label>
+            <label class="input-label" for="delete-limit">删除数量</label>
             <input id="delete-limit" type="number" min="1" max="1000" class="input-box w-full" />
           </div>
         </div>
         <div class="flex items-center justify-end gap-3">
           <button id="trigger-delete" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors">
-            <i class="fas fa-trash-alt mr-1"></i> 绔嬪嵆鍒犻櫎
+            <i class="fas fa-trash-alt mr-1"></i> 立即删除
           </button>
         </div>
       </div>
@@ -194,7 +192,7 @@
 
     <div class="flex justify-end mt-6">
       <button id="save-schedule" class="px-5 py-2.5 rounded-lg bg-primary-700 hover:bg-primary-800 text-white font-semibold transition-colors">
-        <i class="fas fa-save mr-1"></i> 淇濆瓨瀹氭椂閰嶇疆
+        <i class="fas fa-save mr-1"></i> 保存定时配置
       </button>
     </div>
   </div>
@@ -202,4 +200,3 @@
 
 <div id="notification" class="notification"></div>
 {% endblock %}
-

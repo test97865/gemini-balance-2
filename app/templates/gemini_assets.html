@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% block title %}Gemini Key Assets - Gemini Balance{% endblock %}
 
 {% block head_extra_styles %}
@@ -55,28 +55,26 @@
         <p class="text-sm text-gray-500 font-semibold tracking-wide uppercase">
           Gemini Key Assets
         </p>
-        <h1 class="text-3xl font-extrabold text-gray-800">浠?scanner 鑾峰彇鏈€鏂版湁鏁?Key</h1>
+        <h1 class="text-3xl font-extrabold text-gray-800">从 scanner 获取最新有效 Key</h1>
         <p class="text-gray-600 mt-2">
-          鎷夊彇 scanner 涓簩娆℃牎楠屼负 <span class="font-semibold text-primary-600">Effective / Billable</span> 鐨?Key锛屾寜 <code>last_verified_at</code> 鐢辨柊鍒版棫鎺掑簭銆?        </p>
+          拉取 scanner 中二次校验为 <span class="font-semibold text-primary-600">Effective / Billable</span> 的 Key，按 <code>last_verified_at</code> 由新到旧排序。
+        </p>
       </div>
       <div class="nav-buttons-container flex flex-wrap justify-center gap-2">
         <a href="/config" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
+          <i class="fas fa-cog"></i> 配置编辑
         </a>
         <a href="/keys" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+          <i class="fas fa-tachometer-alt"></i> 监控面板
         </a>
         <a href="/gemini-assets" class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-semibold rounded-lg shadow-md transition-all duration-200" style="background-color: #3b82f6 !important; color: #ffffff !important;">
           <i class="fas fa-key"></i> Gemini Key Assets
         </a>
-        <a href="/gemini-assets#delete-anchor" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
-        </a>
         <a href="/scanner-automation" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-clock"></i> 鑷姩浠诲姟
+          <i class="fas fa-clock"></i> 自动任务
         </a>
         <a href="/logs" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
+          <i class="fas fa-exclamation-triangle"></i> 错误日志
         </a>
       </div>
     </div>
@@ -85,14 +83,14 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">杩炴帴閰嶇疆</p>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">连接配置</p>
             <h2 class="text-xl font-bold text-gray-800">Scanner API</h2>
           </div>
           <span id="config-status" class="pill bg-gray-100 text-gray-700 hidden"></span>
         </div>
         <div class="space-y-3">
           <div class="space-y-1">
-            <label for="scanner-base-url" class="input-label">Scanner 鍩虹 URL</label>
+            <label for="scanner-base-url" class="input-label">Scanner 基础 URL</label>
             <input id="scanner-base-url" type="text" class="input-box w-full" placeholder="http://localhost:8000" />
           </div>
           <div class="space-y-1">
@@ -101,21 +99,21 @@
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div class="space-y-1">
-              <label for="scanner-timeout" class="input-label">瓒呮椂鏃堕棿 (绉?</label>
+              <label for="scanner-timeout" class="input-label">超时时间（秒）</label>
               <input id="scanner-timeout" type="number" min="1" max="120" class="input-box w-full" value="15" />
             </div>
             <div class="space-y-1">
-              <label for="scanner-default-limit" class="input-label">榛樿鎷夊彇鏁伴噺</label>
+              <label for="scanner-default-limit" class="input-label">默认拉取数量</label>
               <input id="scanner-default-limit" type="number" min="1" max="1000" class="input-box w-full" value="50" />
             </div>
           </div>
         </div>
         <div class="flex justify-end gap-3">
           <button id="test-scanner" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors">
-            <i class="fas fa-stethoscope mr-1"></i> 娴嬭瘯杩炴帴
+            <i class="fas fa-stethoscope mr-1"></i> 测试连接
           </button>
           <button id="save-scanner-config" class="px-4 py-2 rounded-lg bg-primary-700 hover:bg-primary-800 text-white font-semibold transition-colors">
-            <i class="fas fa-save mr-1"></i> 淇濆瓨閰嶇疆
+            <i class="fas fa-save mr-1"></i> 保存配置
           </button>
         </div>
       </div>
@@ -123,27 +121,27 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">鎵嬪姩鎷夊彇</p>
-            <h2 class="text-xl font-bold text-gray-800">鑾峰彇 Gemini Key</h2>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">手动拉取</p>
+            <h2 class="text-xl font-bold text-gray-800">获取 Gemini Key</h2>
           </div>
           <span id="fetch-status" class="pill bg-blue-50 text-blue-700 hidden"></span>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div class="space-y-1">
-            <label for="fetch-limit" class="input-label">鏁伴噺</label>
+            <label for="fetch-limit" class="input-label">数量</label>
             <input id="fetch-limit" type="number" min="1" max="1000" class="input-box w-full" />
           </div>
           <div class="space-y-1">
-            <label for="fetch-type" class="input-label">绫诲瀷锛坴alid 涓嶅惈 paid锛?/label>
+            <label for="fetch-type" class="input-label">类型（valid 不含 paid）</label>
             <select id="fetch-type" class="input-box w-full">
-              <option value="valid">valid锛圗ffective + Billable锛?/option>
-              <option value="paid">paid锛堜粎浠樿垂 Key锛?/option>
+              <option value="valid">valid（Effective + Billable）</option>
+              <option value="paid">paid（仅付费 Key）</option>
             </select>
           </div>
         </div>
         <div class="flex items-center justify-end gap-3">
           <button id="fetch-keys" class="px-4 py-2 rounded-lg bg-primary-700 hover:bg-primary-800 text-white font-semibold transition-colors">
-            <i class="fas fa-download mr-1"></i> 鑾峰彇 Key
+            <i class="fas fa-download mr-1"></i> 获取 Key
           </button>
         </div>
       </div>
@@ -153,22 +151,23 @@
       <div class="card p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">娓呴櫎鏃犳晥 Key</p>
-            <h2 class="text-xl font-bold text-gray-800">璋冪敤 /api/scanner/delete-invalid</h2>
+            <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">清除无效 Key</p>
+            <h2 class="text-xl font-bold text-gray-800">调用 /api/scanner/delete-invalid</h2>
           </div>
           <span id="delete-status" class="pill bg-gray-100 text-gray-700 hidden"></span>
         </div>
         <div class="space-y-3">
           <div class="space-y-1">
-            <label for="delete-limit" class="input-label">鍒犻櫎鏁伴噺</label>
+            <label for="delete-limit" class="input-label">删除数量</label>
             <input id="delete-limit" type="number" min="1" max="1000" class="input-box w-full" value="50" />
           </div>
           <p class="text-sm text-gray-500">
-            浠呮墦 /api/scanner/delete-invalid 鍒犻櫎 <code>recheck_status=invalid</code> 锛屽鏈暟鎹洰鍓嶆病鏈夊叾浠栬嚜鍔ㄥ彉鏀瑰彲鐩存帴鍙栨秷鍚庣敵璇鋒姏鑹?          </p>
+            仅删除 <code>recheck_status=invalid</code> 的记录，对本地数据库目前没有其他自动变更，可直接取消后重新申请抛弃。
+          </p>
         </div>
         <div class="flex items-center justify-end gap-3">
           <button id="delete-test" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors">
-            <i class="fas fa-stethoscope mr-1"></i> 娴嬭瘯杩炴帴
+            <i class="fas fa-stethoscope mr-1"></i> 测试连接
           </button>
           <button id="delete-now" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors">
             <i class="fas fa-trash-alt mr-1"></i> 立刻删除
@@ -180,13 +179,13 @@
     <div class="card mt-8 overflow-hidden">
       <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
         <div>
-          <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">杩斿洖缁撴灉</p>
-          <h3 class="text-lg font-bold text-gray-800">鎸?last_verified_at 闄嶅簭灞曠ず</h3>
+          <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">返回结果</p>
+          <h3 class="text-lg font-bold text-gray-800">按 last_verified_at 降序展示</h3>
         </div>
         <div class="flex items-center gap-3">
-          <span id="result-count" class="text-sm text-gray-600">0 鏉?/span>
+          <span id="result-count" class="text-sm text-gray-600">0 条</span>
           <button id="copy-keys" class="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-sm">
-            <i class="fas fa-copy mr-1"></i> 澶嶅埗鍏ㄩ儴 Key
+            <i class="fas fa-copy mr-1"></i> 复制全部 Key
           </button>
         </div>
       </div>
@@ -195,16 +194,17 @@
           <thead class="table-header">
             <tr>
               <th class="px-4 py-3 text-left text-sm">Key</th>
-              <th class="px-4 py-3 text-left text-sm">绫诲瀷</th>
-              <th class="px-4 py-3 text-left text-sm">鐘舵€?/th>
+              <th class="px-4 py-3 text-left text-sm">类型</th>
+              <th class="px-4 py-3 text-left text-sm">状态</th>
               <th class="px-4 py-3 text-left text-sm">last_verified_at</th>
-              <th class="px-4 py-3 text-left text-sm">鏉ユ簮</th>
+              <th class="px-4 py-3 text-left text-sm">来源</th>
             </tr>
           </thead>
           <tbody id="result-body" class="divide-y divide-gray-100">
             <tr id="empty-row">
               <td colspan="5" class="px-4 py-6 text-center text-gray-500">
-                <i class="fas fa-inbox mr-2"></i> 鏆傛棤鏁版嵁锛岀偣鍑烩€滆幏鍙?Key鈥濆紑濮嬫媺鍙栥€?              </td>
+                <i class="fas fa-inbox mr-2"></i> 暂无数据，点击"获取 Key"开始拉取。
+              </td>
             </tr>
           </tbody>
         </table>
@@ -215,4 +215,3 @@
 
 <div id="notification" class="notification"></div>
 {% endblock %}
-

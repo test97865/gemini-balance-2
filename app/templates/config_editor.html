@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %} {% block title %}閰嶇疆缂栬緫鍣?- Gemini Balance{%
+{% extends "base.html" %} {% block title %}配置编辑器 - Gemini Balance{%
 endblock %} {% block head_extra_styles %}
 <style>
   /* config_editor.html specific styles */
@@ -59,69 +59,69 @@ endblock %} {% block head_extra_styles %}
     /* theming: style for unchecked state */
     background-color: rgba(156, 163, 175, 0.3); /* gray-400 */
   }
-  /* 缁熶竴閫氱煡鏍峰紡涓洪粦鑹插崐閫忔槑锛岀‘淇濅笌 keys_status 涓€鑷?*/
+  /* 统一通知样式为黑色半透明，确保与 keys_status 一致 */
   .notification {
     background: rgba(0, 0, 0, 0.8) !important;
     color: #fff !important;
   }
 
-  /* Theming for input fields - 淇杈规閲嶅奖闂 */
+  /* Theming for input fields - 修复边框重影问题 */
   .form-input-themed {
     background-color: rgba(255, 255, 255, 0.95) !important;
-    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 涓虹嫭绔嬭緭鍏ユ鎻愪緵杈规 */
+    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 为独立输入框提供边框 */
     color: #374151 !important; /* gray-700 */
-    outline: none !important; /* 绉婚櫎榛樿outline */
-    box-shadow: none !important; /* 绉婚櫎榛樿box-shadow */
+    outline: none !important; /* 移除默认outline */
+    box-shadow: none !important; /* 移除默认box-shadow */
     transition: border-color 0.15s ease-in-out !important;
   }
   .form-input-themed::placeholder {
     color: #9ca3af !important; /* gray-400 */
   }
   .form-input-themed:focus {
-    border-color: #3b82f6 !important; /* focus鏃舵敼鍙樿竟妗嗛鑹?*/
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖锛屽彧淇濈暀杈规鍙樺寲 */
-    outline: none !important; /* 纭繚娌℃湁outline */
+    border-color: #3b82f6 !important; /* focus时改变边框颜色 */
+    box-shadow: none !important; /* 移除focus阴影，只保留边框变化 */
+    outline: none !important; /* 确保没有outline */
   }
 
-  /* 瀵逛簬鍦ㄦ暟缁勫鍣ㄥ唴鐨勮緭鍏ユ锛岀Щ闄よ竟妗?*/
+  /* 对于在数组容器内的输入框，移除边框 */
   .array-container .form-input-themed {
-    border: none !important; /* 鍦ㄦ暟缁勫鍣ㄥ唴鐨勮緭鍏ユ绉婚櫎杈规 */
+    border: none !important; /* 在数组容器内的输入框移除边框 */
   }
 
   .array-container .form-input-themed:focus {
-    border: none !important; /* 纭繚focus鏃朵篃娌℃湁杈规 */
+    border: none !important; /* 确保focus时也没有边框 */
   }
 
-  /* 涓虹嫭绔嬬殑妯″瀷閫夋嫨杈撳叆妗嗕繚鐣欒竟妗?*/
+  /* 为独立的模型选择输入框保留边框 */
   .flex.items-center .form-input-themed {
-    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 淇濈暀杈规 */
+    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 保留边框 */
   }
 
   .flex.items-center .form-input-themed:focus {
-    border-color: #3b82f6 !important; /* focus鏃舵敼鍙樿竟妗嗛鑹?*/
+    border-color: #3b82f6 !important; /* focus时改变边框颜色 */
   }
 
-  /* Theming for select fields - 鏀硅繘涓嬫媺妗嗘牱寮?*/
+  /* Theming for select fields - 改进下拉框样式 */
   .form-select-themed {
-    background-color: rgba(255, 255, 255, 0.95) !important; /* 鐧借壊鑳屾櫙 */
-    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 鐏拌壊杈规 */
-    color: #374151 !important; /* gray-700 鏂囧瓧棰滆壊 */
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important; /* 鐏拌壊绠ご */
+    background-color: rgba(255, 255, 255, 0.95) !important; /* 白色背景 */
+    border: 1px solid rgba(0, 0, 0, 0.12) !important; /* 灰色边框 */
+    color: #374151 !important; /* gray-700 文字颜色 */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important; /* 灰色箭头 */
     appearance: none !important;
-    padding: 0.6rem 2.5rem 0.6rem 0.8rem !important; /* 璋冩暣鍐呰竟璺?*/
+    padding: 0.6rem 2.5rem 0.6rem 0.8rem !important; /* 调整内边距 */
     background-repeat: no-repeat !important;
     background-position: right 0.6rem center !important;
     background-size: 1.5em 1.5em !important;
-    border-radius: 0.5rem !important; /* 鍦嗚 */
-    font-weight: 500 !important; /* 鍗婄矖浣?*/
-    height: auto !important; /* 鑷姩楂樺害 */
-    box-shadow: none !important; /* 绉婚櫎闃村奖 */
+    border-radius: 0.5rem !important; /* 圆角 */
+    font-weight: 500 !important; /* 半粗体 */
+    height: auto !important; /* 自动高度 */
+    box-shadow: none !important; /* 移除阴影 */
     cursor: pointer !important;
   }
 
   .form-select-themed:focus {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
     outline: none !important;
   }
 
@@ -136,15 +136,15 @@ endblock %} {% block head_extra_styles %}
     padding: 8px !important;
   }
 
-  /* 鏃ュ織绾у埆鏍峰紡 - 娴呰壊涓婚缁熶竴璁捐 */
+  /* 日志级别样式 - 浅色主题统一设计 */
   #LOG_LEVEL {
     font-weight: 600 !important;
   }
 
-  /* 缁熶竴鐨勬棩蹇楃骇鍒€夐」鏍峰紡 - 浣跨敤娴呰壊涓婚 */
+  /* 统一的日志级别选项样式 - 使用浅色主题 */
   #LOG_LEVEL option[value="DEBUG"] {
-    background-color: rgba(255, 255, 255, 0.98) !important; /* 鐧借壊鑳屾櫙 */
-    color: #374151 !important; /* gray-700 娣辩伆鑹叉枃瀛?*/
+    background-color: rgba(255, 255, 255, 0.98) !important; /* 白色背景 */
+    color: #374151 !important; /* gray-700 深灰色文字 */
   }
 
   #LOG_LEVEL option[value="INFO"] {
@@ -153,8 +153,8 @@ endblock %} {% block head_extra_styles %}
       250,
       251,
       0.98
-    ) !important; /* gray-50 娴呯伆鑳屾櫙 */
-    color: #374151 !important; /* gray-700 娣辩伆鑹叉枃瀛?*/
+    ) !important; /* gray-50 浅灰背景 */
+    color: #374151 !important; /* gray-700 深灰色文字 */
   }
 
   #LOG_LEVEL option[value="WARNING"] {
@@ -163,8 +163,8 @@ endblock %} {% block head_extra_styles %}
       244,
       246,
       0.98
-    ) !important; /* gray-100 绋嶆繁鐏拌儗鏅?*/
-    color: #374151 !important; /* gray-700 娣辩伆鑹叉枃瀛?*/
+    ) !important; /* gray-100 稍深灰背景 */
+    color: #374151 !important; /* gray-700 深灰色文字 */
   }
 
   #LOG_LEVEL option[value="ERROR"] {
@@ -173,8 +173,8 @@ endblock %} {% block head_extra_styles %}
       231,
       235,
       0.98
-    ) !important; /* gray-200 涓伆鑳屾櫙 */
-    color: #374151 !important; /* gray-700 娣辩伆鑹叉枃瀛?*/
+    ) !important; /* gray-200 中灰背景 */
+    color: #374151 !important; /* gray-700 深灰色文字 */
   }
 
   #LOG_LEVEL option[value="CRITICAL"] {
@@ -183,11 +183,11 @@ endblock %} {% block head_extra_styles %}
       213,
       219,
       0.98
-    ) !important; /* gray-300 娣辩伆鑳屾櫙 */
-    color: #374151 !important; /* gray-700 娣辩伆鑹叉枃瀛?*/
+    ) !important; /* gray-300 深灰背景 */
+    color: #374151 !important; /* gray-700 深灰色文字 */
   }
 
-  /* 鎬濊€冩ā鍨嬮绠楁槧灏勬牱寮?*/
+  /* 思考模型预算映射样式 */
   .map-item {
     background-color: rgba(60, 40, 130, 0.2) !important;
     border-radius: 0.5rem !important;
@@ -222,11 +222,11 @@ endblock %} {% block head_extra_styles %}
   .map-value-input:focus {
     background-color: rgba(255, 255, 255, 1) !important;
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
     outline: none !important;
   }
 
-  /* 璀﹀憡鏂囧瓧鏍峰紡 */
+  /* 警告文字样式 */
   .warning-text {
     color: #f87171 !important; /* red-400 */
     font-weight: 600 !important;
@@ -245,7 +245,7 @@ endblock %} {% block head_extra_styles %}
     color: #ef4444 !important; /* red-500 */
   }
 
-  /* 浠ょ墝鐢熸垚鎸夐挳鏍峰紡 */
+  /* 令牌生成按钮样式 */
   .generate-btn {
     background-color: rgba(59, 130, 246, 0.1) !important; /* blue-500 light */
     color: #3b82f6 !important; /* blue-500 */
@@ -270,58 +270,58 @@ endblock %} {% block head_extra_styles %}
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
   }
 
-  /* 瀵艰埅閾炬帴鎮仠鏍峰紡 - 浼樺寲浠ラ伩鍏嶉伄鎸″唴瀹?*/
+  /* 导航链接悬停样式 - 优化以避免遮挡内容 */
   .nav-link {
     transition: all 0.2s ease-in-out;
     position: relative;
-    z-index: 1; /* 纭繚涓嶄細閬尅閲嶈鍐呭 */
+    z-index: 1; /* 确保不会遮挡重要内容 */
   }
 
   .nav-link:hover {
     background-color: rgba(59, 130, 246, 0.1) !important; /* blue-500 light */
-    transform: scale(1.02); /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 澧炲己闃村奖鏁堟灉 */
+    transform: scale(1.02); /* 使用缩放代替向上移动 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
   }
 
-  /* 瀵艰埅鎸夐挳瀹瑰櫒鏍峰紡 - 涓烘偓鍋滄晥鏋滈鐣欑┖闂?*/
+  /* 导航按钮容器样式 - 为悬停效果预留空间 */
   .nav-buttons-container {
-    padding-top: 0.5rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笂鏂圭┖闂?*/
-    padding-bottom: 0.75rem; /* 涓烘偓鍋滄晥鏋滈鐣欎笅鏂圭┖闂?*/
+    padding-top: 0.5rem; /* 为悬停效果预留上方空间 */
+    padding-bottom: 0.75rem; /* 为悬停效果预留下方空间 */
   }
 
-  /* 涓诲鑸寜閽殑浼樺寲鎮仠鏁堟灉 */
+  /* 主导航按钮的优化悬停效果 */
   .main-nav-btn:hover {
-    transform: scale(1.02) !important; /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
-    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 钃濊壊闃村奖 */
+    transform: scale(1.02) !important; /* 使用缩放代替向上移动 */
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3) !important; /* 蓝色阴影 */
   }
 
-  /* 鎿嶄綔鎸夐挳鐨勪紭鍖栨偓鍋滄晥鏋?*/
+  /* 操作按钮的优化悬停效果 */
   .action-btn {
     position: relative;
     z-index: 1;
   }
 
   .action-btn:hover {
-    transform: scale(1.02) !important; /* 浣跨敤缂╂斁浠ｆ浛鍚戜笂绉诲姩 */
+    transform: scale(1.02) !important; /* 使用缩放代替向上移动 */
   }
 
   .action-btn:hover#saveBtn {
-    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4) !important; /* 钃濊壊闃村奖 */
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4) !important; /* 蓝色阴影 */
   }
 
   .action-btn:hover#resetBtn {
-    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.4) !important; /* 鐏拌壊闃村奖 */
+    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.4) !important; /* 灰色阴影 */
   }
 
-  /* 鍒锋柊鎸夐挳鏍峰紡 - 涓庣洃鎺ч潰鏉块〉闈繚鎸佷竴鑷?*/
+  /* 刷新按钮样式 - 与监控面板页面保持一致 */
   .bg-white.bg-opacity-20 {
     background-color: rgba(255, 255, 255, 0.9) !important;
-    color: #3b82f6 !important; /* blue-500 - 涓庣洃鎺ч潰鏉夸竴鑷?*/
+    color: #3b82f6 !important; /* blue-500 - 与监控面板一致 */
   }
 
   .bg-white.bg-opacity-20:hover {
     background-color: rgba(255, 255, 255, 1) !important;
-    color: #2563eb !important; /* blue-600 - 鎮仠鏃剁◢娣?*/
+    color: #2563eb !important; /* blue-600 - 悬停时稍深 */
   }
 
   /* General label and small text theming for light theme */
@@ -388,46 +388,46 @@ endblock %} {% block head_extra_styles %}
     color: #3b82f6 !important; /* blue-500 */
   }
 
-  /* Update tab button active state - 澧炲己閫変腑鎬佹牱寮忥紝鎻愰珮浼樺厛绾?*/
+  /* Update tab button active state - 增强选中态样式，提高优先级 */
   button.tab-btn.active {
     background-color: #3b82f6 !important; /* blue-500 */
-    color: #ffffff !important; /* 纭繚鐧借壊鏂囧瓧 */
+    color: #ffffff !important; /* 确保白色文字 */
     box-shadow: 0 4px 12px -2px rgba(59, 130, 246, 0.4),
-      0 2px 6px -1px rgba(59, 130, 246, 0.2) !important; /* 钃濊壊闃村奖 */
-    transform: translateY(-2px) !important; /* 鏇存槑鏄剧殑涓婄Щ鏁堟灉 */
-    border: 2px solid #2563eb !important; /* blue-600 杈规 */
-    font-weight: 600 !important; /* 鍔犵矖瀛椾綋 */
+      0 2px 6px -1px rgba(59, 130, 246, 0.2) !important; /* 蓝色阴影 */
+    transform: translateY(-2px) !important; /* 更明显的上移效果 */
+    border: 2px solid #2563eb !important; /* blue-600 边框 */
+    font-weight: 600 !important; /* 加粗字体 */
   }
 
-  /* Ensure inactive tabs have proper styling - 澧炲己鏈€変腑鎬佹牱寮忥紝鎻愰珮浼樺厛绾?*/
+  /* Ensure inactive tabs have proper styling - 增强未选中态样式，提高优先级 */
   button.tab-btn:not(.active) {
-    background-color: #f8fafc !important; /* slate-50 鏇存祬鐨勮儗鏅?*/
-    color: #64748b !important; /* slate-500 鏇存槑鏄剧殑鐏拌壊鏂囧瓧 */
-    border: 2px solid #e2e8f0 !important; /* slate-200 杈规 */
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important; /* 杞诲井闃村奖 */
-    font-weight: 500 !important; /* 涓瓑瀛椾綋绮楃粏 */
+    background-color: #f8fafc !important; /* slate-50 更浅的背景 */
+    color: #64748b !important; /* slate-500 更明显的灰色文字 */
+    border: 2px solid #e2e8f0 !important; /* slate-200 边框 */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important; /* 轻微阴影 */
+    font-weight: 500 !important; /* 中等字体粗细 */
   }
 
   button.tab-btn:not(.active):hover {
     background-color: #f1f5f9 !important; /* slate-100 */
-    color: #475569 !important; /* slate-600 鏇存繁鐨勬枃瀛楅鑹?*/
+    color: #475569 !important; /* slate-600 更深的文字颜色 */
     transform: translateY(-1px) !important;
     border-color: #cbd5e1 !important; /* slate-300 */
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
   }
 
-  /* Add transition for smooth state changes - 鎻愰珮浼樺厛绾?*/
+  /* Add transition for smooth state changes - 提高优先级 */
   button.tab-btn {
     transition: all 0.2s ease-in-out !important;
     cursor: pointer !important;
-    /* 纭繚鍩虹鏍峰紡涓嶈Tailwind瑕嗙洊 */
+    /* 确保基础样式不被Tailwind覆盖 */
     padding: 0.5rem 1.25rem !important; /* px-5 py-2 */
     border-radius: 9999px !important; /* rounded-full */
     font-size: 0.875rem !important; /* text-sm */
     font-weight: 500 !important; /* font-medium */
   }
 
-  /* 棰濆鐨勯珮浼樺厛绾ц鍒欑‘淇濇牱寮忕敓鏁?*/
+  /* 额外的高优先级规则确保样式生效 */
   .flex.justify-center.mb-6.flex-wrap.gap-2 button.tab-btn.active {
     background-color: #3b82f6 !important;
     color: #ffffff !important;
@@ -703,7 +703,7 @@ endblock %} {% block head_extra_styles %}
   .focus-within\\:border-violet-400:focus-within,
   .focus-within\\:ring-violet-400:focus-within {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
   }
 
   /* Fix focus-within border color for auth token wrapper */
@@ -751,7 +751,7 @@ endblock %} {% block head_extra_styles %}
 
   .form-select-themed:focus {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
     outline: none !important;
   }
 
@@ -775,7 +775,7 @@ endblock %} {% block head_extra_styles %}
   .focus-within\\:border-violet-400:focus-within,
   .focus-within\\:ring-violet-400:focus-within {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
   }
 
   /* Ensure all array input wrappers use blue theme */
@@ -785,7 +785,7 @@ endblock %} {% block head_extra_styles %}
 
   .array-container .flex.items-center.flex-grow.rounded-md:focus-within {
     border-color: #3b82f6 !important; /* blue-500 */
-    box-shadow: none !important; /* 绉婚櫎focus闃村奖 */
+    box-shadow: none !important; /* 移除focus阴影 */
   }
 </style>
 {% endblock %} {% block content %}
@@ -802,7 +802,7 @@ endblock %} {% block head_extra_styles %}
     <button
       class="absolute top-6 right-6 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full w-8 h-8 flex items-center justify-center text-primary-600 transition-all duration-300"
       onclick="refreshPage(this)"
-      title="鎵嬪姩鍒锋柊"
+      title="手动刷新"
     >
       <i class="fas fa-sync-alt"></i>
     </button>
@@ -813,7 +813,7 @@ endblock %} {% block head_extra_styles %}
         alt="Gemini Balance Logo"
         class="h-9 inline-block align-middle mr-2"
       />
-      Gemini Balance - 閰嶇疆缂栬緫
+      Gemini Balance - 配置编辑
     </h1>
 
     <!-- Navigation Tabs -->
@@ -825,14 +825,14 @@ endblock %} {% block head_extra_styles %}
         class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
         style="background-color: #3b82f6 !important; color: #ffffff !important"
       >
-        <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
+        <i class="fas fa-cog"></i> 配置编辑
       </a>
       <a
         href="/keys"
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+        <i class="fas fa-tachometer-alt"></i> 监控面板
       </a>
       <a
         href="/gemini-assets"
@@ -842,25 +842,18 @@ endblock %} {% block head_extra_styles %}
         <i class="fas fa-key"></i> Gemini Key Assets
       </a>
       <a
-        href="/gemini-assets#delete-anchor"
-        class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
-        style="background-color: rgba(229, 231, 235, 0.8)"
-      >
-        <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
-      </a>
-      <a
         href="/scanner-automation"
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-clock"></i> 鑷姩浠诲姟
+        <i class="fas fa-clock"></i> 自动任务
       </a>
       <a
         href="/logs"
         class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200"
         style="background-color: rgba(229, 231, 235, 0.8)"
       >
-        <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
+        <i class="fas fa-exclamation-triangle"></i> 错误日志
       </a>
     </div>
 
@@ -879,7 +872,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 600 !important;
         "
       >
-        API閰嶇疆
+        API配置
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -892,7 +885,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        妯″瀷閰嶇疆
+        模型配置
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -905,7 +898,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        TTS 閰嶇疆
+        TTS 配置
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -918,7 +911,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        鍥惧儚鐢熸垚
+        图像生成
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -931,7 +924,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        娴佸紡杈撳嚭
+        流式输出
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -944,7 +937,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        瀹氭椂浠诲姟
+        定时任务
       </button>
       <button
         class="tab-btn px-5 py-2 rounded-full font-medium text-sm transition-all duration-200"
@@ -957,7 +950,7 @@ endblock %} {% block head_extra_styles %}
           font-weight: 500 !important;
         "
       >
-        鏃ュ織閰嶇疆
+        日志配置
       </button>
     </div>
 
@@ -965,32 +958,32 @@ endblock %} {% block head_extra_styles %}
 
     <!-- Configuration Form -->
     <form id="configForm" class="mt-6">
-      <!-- API 鐩稿叧閰嶇疆 -->
+      <!-- API 相关配置 -->
       <div class="config-section active" id="api-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-gray-300"
         >
-          <i class="fas fa-key text-blue-500"></i> API鐩稿叧閰嶇疆
+          <i class="fas fa-key text-blue-500"></i> API相关配置
         </h2>
 
-        <!-- API瀵嗛挜鍒楄〃 -->
+        <!-- API密钥列表 -->
         <div class="mb-6">
           <label for="API_KEYS" class="block font-semibold mb-2 text-gray-800"
-            >API瀵嗛挜鍒楄〃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Gemini API瀵嗛挜鍒楄〃锛屾瘡琛屼竴涓?></i>
+            >API密钥列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Gemini API密钥列表，每行一个"></i>
           </label>
           <div class="mb-2">
             <input
               type="search"
               id="apiKeySearchInput"
-              placeholder="鎼滅储瀵嗛挜..."
+              placeholder="搜索密钥..."
               class="w-full px-4 py-2 rounded-lg form-input-themed"
             />
           </div>
           <div class="array-container" id="API_KEYS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
-          <!-- API瀵嗛挜鍒嗛〉鎺т欢 -->
+          <!-- API密钥分页控件 -->
           <div id="apiKeyPagination" class="flex items-center justify-between mt-2 mb-2" style="display: none;">
             <div class="flex items-center gap-2">
               <button
@@ -998,19 +991,19 @@ endblock %} {% block head_extra_styles %}
                 id="apiKeyPrevBtn"
                 class="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
               >
-                <i class="fas fa-chevron-left"></i> 涓婁竴椤?
+                <i class="fas fa-chevron-left"></i> 上一页
               </button>
-              <span id="apiKeyPageInfo" class="text-sm text-gray-600">绗?1 椤碉紝鍏?1 椤?/span>
+              <span id="apiKeyPageInfo" class="text-sm text-gray-600">第 1 页，共 1 页</span>
               <button
                 type="button"
                 id="apiKeyNextBtn"
                 class="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
               >
-                涓嬩竴椤?<i class="fas fa-chevron-right"></i>
+                下一页 <i class="fas fa-chevron-right"></i>
               </button>
             </div>
             <div class="text-xs text-gray-500">
-              姣忛〉鏄剧ず 20 涓瘑閽?
+              每页显示 20 个密钥
             </div>
           </div>
           <div class="flex justify-end gap-2">
@@ -1019,28 +1012,28 @@ endblock %} {% block head_extra_styles %}
               class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="bulkDeleteApiKeyBtn"
             >
-              <i class="fas fa-trash-alt"></i> 鍒犻櫎瀵嗛挜
+              <i class="fas fa-trash-alt"></i> 删除密钥
             </button>
             <button
               type="button"
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="addApiKeyBtn"
             >
-              <i class="fas fa-plus"></i> 娣诲姞瀵嗛挜
+              <i class="fas fa-plus"></i> 添加密钥
             </button>
           </div>
         </div>
 
-        <!-- 鍏佽鐨勪护鐗屽垪琛?-->
+        <!-- 允许的令牌列表 -->
         <div class="mb-6">
           <label
             for="ALLOWED_TOKENS"
             class="block font-semibold mb-2 text-gray-800"
-            >鍏佽鐨勪护鐗屽垪琛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鍏佽璁块棶API鐨勪护鐗屽垪琛?></i>
+            >允许的令牌列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="允许访问API的令牌列表"></i>
           </label>
           <div class="array-container" id="ALLOWED_TOKENS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end">
             <button
@@ -1048,16 +1041,16 @@ endblock %} {% block head_extra_styles %}
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('ALLOWED_TOKENS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞浠ょ墝
+              <i class="fas fa-plus"></i> 添加令牌
             </button>
           </div>
         </div>
 
-        <!-- 璁よ瘉浠ょ墝 -->
+        <!-- 认证令牌 -->
         <div class="mb-6">
           <label for="AUTH_TOKEN" class="block font-semibold mb-2 text-gray-800"
-            >璁よ瘉浠ょ墝
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬API璁よ瘉鐨勪护鐗?></i>
+            >认证令牌
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于API认证的令牌"></i>
           </label>
           <div class="flex items-center">
             <div
@@ -1068,14 +1061,14 @@ endblock %} {% block head_extra_styles %}
                 type="text"
                 id="AUTH_TOKEN"
                 name="AUTH_TOKEN"
-                placeholder="榛樿浣跨敤ALLOWED_TOKENS涓殑绗竴涓?
+                placeholder="默认使用ALLOWED_TOKENS中的第一个"
                 class="array-input flex-grow px-3 py-2 rounded-l-md sensitive-input form-input-themed"
               />
               <button
                 type="button"
                 id="generateAuthTokenBtn"
                 class="generate-btn px-2 py-2 text-gray-400 hover:text-blue-500 focus:outline-none rounded-r-md hover:bg-gray-600 transition-colors"
-                title="鐢熸垚闅忔満浠ょ墝"
+                title="生成随机令牌"
                 style="background-color: rgba(59, 130, 246, 0.1)"
               >
                 <i class="fas fa-dice"></i>
@@ -1084,11 +1077,11 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- API鍩虹URL -->
+        <!-- API基础URL -->
         <div class="mb-6">
           <label for="BASE_URL" class="block font-semibold mb-2 text-gray-700"
-            >API鍩虹URL
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Gemini API鐨勫熀纭€URL"></i>
+            >API基础URL
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Gemini API的基础URL"></i>
           </label>
           <input
             type="text"
@@ -1099,13 +1092,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鑷畾涔塇eaders -->
+        <!-- 自定义Headers -->
         <div class="mb-6">
           <label
             for="CUSTOM_HEADERS"
             class="block font-semibold mb-2 text-gray-700"
-            >鑷畾涔塇eaders
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鍦ㄨ繖閲屾坊鍔犵殑閿€煎灏嗚娣诲姞鍒版墍鏈夊嚭绔橝PI璇锋眰鐨凥eader涓?></i>
+            >自定义Headers
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="在这里添加的键值对将被添加到所有出站API请求的Header中"></i>
           </label>
           <div
             class="bg-white rounded-lg border border-gray-200 p-4 mb-2 space-y-3"
@@ -1116,9 +1109,9 @@ endblock %} {% block head_extra_styles %}
               color: #374151;
             "
           >
-            <!-- 閿€煎灏嗗湪杩欓噷鍔ㄦ€佹坊鍔?-->
+            <!-- 键值对将在这里动态添加 -->
             <div class="text-gray-500 text-sm italic">
-              娣诲姞鑷畾涔夎姹傚ご锛屼緥濡?X-Api-Key: your-key
+              添加自定义请求头，例如 X-Api-Key: your-key
             </div>
           </div>
           <div class="flex justify-end">
@@ -1127,21 +1120,21 @@ endblock %} {% block head_extra_styles %}
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="addCustomHeaderBtn"
             >
-              <i class="fas fa-plus"></i> 娣诲姞Header
+              <i class="fas fa-plus"></i> 添加Header
             </button>
           </div>
         </div>
 
-        <!-- Vertex Express API瀵嗛挜鍒楄〃 -->
+        <!-- Vertex Express API密钥列表 -->
         <div class="mb-6">
           <label
             for="VERTEX_API_KEYS"
             class="block font-semibold mb-2 text-gray-700"
-            >Vertex Express API瀵嗛挜鍒楄〃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Vertex AI Platform API瀵嗛挜鍒楄〃銆傜偣鍑绘寜閽彲鎵归噺娣诲姞鎴栧垹闄?></i>
+            >Vertex Express API密钥列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Vertex AI Platform API密钥列表。点击按钮可批量添加或删除"></i>
           </label>
           <div class="array-container" id="VERTEX_API_KEYS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2">
             <button
@@ -1149,25 +1142,25 @@ endblock %} {% block head_extra_styles %}
               class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="bulkDeleteVertexApiKeyBtn"
             >
-              <i class="fas fa-trash-alt"></i> 鍒犻櫎Vertex瀵嗛挜
+              <i class="fas fa-trash-alt"></i> 删除Vertex密钥
             </button>
             <button
               type="button"
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="addVertexApiKeyBtn"
             >
-              <i class="fas fa-plus"></i> 娣诲姞Vertex瀵嗛挜
+              <i class="fas fa-plus"></i> 添加Vertex密钥
             </button>
           </div>
         </div>
 
-        <!-- Vertex Express API鍩虹URL -->
+        <!-- Vertex Express API基础URL -->
         <div class="mb-6">
           <label
             for="VERTEX_EXPRESS_BASE_URL"
             class="block font-semibold mb-2 text-gray-700"
-            >Vertex Express API鍩虹URL
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Vertex Express API鐨勫熀纭€URL"></i>
+            >Vertex Express API基础URL
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Vertex Express API的基础URL"></i>
           </label>
           <input
             type="text"
@@ -1177,14 +1170,14 @@ endblock %} {% block head_extra_styles %}
             class="w-full px-4 py-3 rounded-lg form-input-themed"
           />
         </div>
-        <!-- 鏅鸿兘璺敱閰嶇疆 -->
+        <!-- 智能路由配置 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="URL_NORMALIZATION_ENABLED"
               class="font-semibold text-gray-700"
-              >鍚敤鏅鸿兘璺敱鏄犲皠
-              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鑷姩瀹㈡埛绔姹傜殑url鎷兼帴涓烘纭牸寮忥紙浠呬繚璇佹甯歌亰澶╋紝鍑虹幇闂璇峰叧闂級"></i>
+              >启用智能路由映射
+              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="自动客户端请求的url拼接为正确格式（仅保证正常聊天，出现问题请关闭）"></i>
             </label>
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1202,13 +1195,13 @@ endblock %} {% block head_extra_styles %}
             </div>
           </div>
         </div>
-        <!-- 鏈€澶уけ璐ユ鏁?-->
+        <!-- 最大失败次数 -->
         <div class="mb-6">
           <label
             for="MAX_FAILURES"
             class="block font-semibold mb-2 text-gray-700"
-            >鏈€澶уけ璐ユ鏁?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API瀵嗛挜澶辫触鍚庢爣璁颁负鏃犳晥鐨勬鏁?></i>
+            >最大失败次数
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API密钥失败后标记为无效的次数"></i>
           </label>
           <input
             type="number"
@@ -1220,11 +1213,11 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 璇锋眰瓒呮椂鏃堕棿 -->
+        <!-- 请求超时时间 -->
         <div class="mb-6">
           <label for="TIME_OUT" class="block font-semibold mb-2 text-gray-700"
-            >璇锋眰瓒呮椂鏃堕棿锛堢锛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API璇锋眰鐨勮秴鏃舵椂闂?></i>
+            >请求超时时间（秒）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API请求的超时时间"></i>
           </label>
           <input
             type="number"
@@ -1236,13 +1229,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鏈€澶ч噸璇曟鏁?-->
+        <!-- 最大重试次数 -->
         <div class="mb-6">
           <label
             for="MAX_RETRIES"
             class="block font-semibold mb-2 text-gray-700"
-            >鏈€澶ч噸璇曟鏁?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API璇锋眰澶辫触鍚庣殑鏈€澶ч噸璇曟鏁?></i>
+            >最大重试次数
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="API请求失败后的最大重试次数"></i>
           </label>
           <input
             type="number"
@@ -1253,14 +1246,14 @@ endblock %} {% block head_extra_styles %}
             class="w-full px-4 py-3 rounded-lg form-input-themed"
           />
         </div>
-        <!-- 浠ｇ悊鏈嶅姟鍣ㄥ垪琛?-->
+        <!-- 代理服务器列表 -->
         <div class="mb-6">
           <label for="PROXIES" class="block font-semibold mb-2 text-gray-700"
-            >浠ｇ悊鏈嶅姟鍣ㄥ垪琛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="浠ｇ悊鏈嶅姟鍣ㄥ垪琛紝鏀寔 http 鍜?socks5 鏍煎紡锛屼緥濡? http://user:pass@host:port 鎴?socks5://host:port銆傜偣鍑绘寜閽彲鎵归噺娣诲姞鎴栧垹闄?></i>
+            >代理服务器列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="代理服务器列表，支持 http 和 socks5 格式，例如: http://user:pass@host:port 或 socks5://host:port。点击按钮可批量添加或删除"></i>
           </label>
           <div class="array-container" id="PROXIES_container">
-            <!-- 浠ｇ悊椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 代理项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2">
             <button
@@ -1268,32 +1261,32 @@ endblock %} {% block head_extra_styles %}
               class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="bulkDeleteProxyBtn"
             >
-              <i class="fas fa-trash-alt"></i> 鍒犻櫎浠ｇ悊
+              <i class="fas fa-trash-alt"></i> 删除代理
             </button>
             <button
               type="button"
               class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="checkAllProxiesBtn"
             >
-              <i class="fas fa-globe"></i> 妫€娴嬫墍鏈変唬鐞?
+              <i class="fas fa-globe"></i> 检测所有代理
             </button>
             <button
               type="button"
               class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="addProxyBtn"
             >
-              <i class="fas fa-plus"></i> 娣诲姞浠ｇ悊
+              <i class="fas fa-plus"></i> 添加代理
             </button>
           </div>
         </div>
-        <!-- 浠ｇ悊浣跨敤绛栫暐 -->
+        <!-- 代理使用策略 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="PROXIES_USE_CONSISTENCY_HASH_BY_API_KEY"
               class="font-semibold text-gray-700"
-              >鏄惁寮€鍚浐瀹氫唬鐞嗙瓥鐣?
-              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="寮€鍚悗锛屽浜庢瘡涓€涓狝PI_KEY灏嗘牴鎹畻娉曚粠浠ｇ悊鍒楄〃涓€夊彇鍚屼竴涓唬鐞咺P锛岄槻姝竴涓狝PI_KEY鍚屾椂琚涓狪P璁块棶锛屼篃鍚屾椂闃叉浜嗕竴涓狪P璁块棶浜嗚繃澶氱殑API_KEY"></i>
+              >是否开启固定代理策略
+              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="开启后，对于每一个API_KEY将根据算法从代理列表中选取同一个代理IP，防止一个API_KEY同时被多个IP访问，也同时防止了一个IP访问了过多的API_KEY"></i>
             </label>
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1313,19 +1306,19 @@ endblock %} {% block head_extra_styles %}
         </div>
       </div>
 
-      <!-- 妯″瀷鐩稿叧閰嶇疆 -->
+      <!-- 模型相关配置 -->
       <div class="config-section" id="model-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-robot text-violet-400"></i> 妯″瀷鐩稿叧閰嶇疆
+          <i class="fas fa-robot text-violet-400"></i> 模型相关配置
         </h2>
 
-        <!-- 娴嬭瘯妯″瀷 -->
+        <!-- 测试模型 -->
         <div class="mb-6">
           <label for="TEST_MODEL" class="block font-semibold mb-2 text-gray-700"
-            >娴嬭瘯妯″瀷
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬娴嬭瘯API瀵嗛挜鐨勬ā鍨?></i>
+            >测试模型
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于测试API密钥的模型"></i>
           </label>
           <div class="flex items-center gap-2">
             <input
@@ -1337,7 +1330,7 @@ endblock %} {% block head_extra_styles %}
             />
             <button
               type="button"
-              title="閫夋嫨妯″瀷"
+              title="选择模型"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-input-id="TEST_MODEL"
             >
@@ -1346,21 +1339,21 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鍥惧儚妯″瀷鍒楄〃 -->
+        <!-- 图像模型列表 -->
         <div class="mb-6">
           <label
             for="IMAGE_MODELS"
             class="block font-semibold mb-2 text-gray-700"
-            >鍥惧儚妯″瀷鍒楄〃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鏀寔鍥惧儚澶勭悊鐨勬ā鍨嬪垪琛?></i>
+            >图像模型列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="支持图像处理的模型列表"></i>
           </label>
           <div class="array-container" id="IMAGE_MODELS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2 mt-2">
             <button
               type="button"
-              title="浠庡垪琛ㄩ€夋嫨妯″瀷娣诲姞鍒颁笅鏂?
+              title="从列表选择模型添加到下方"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-array-key="IMAGE_MODELS"
             >
@@ -1371,26 +1364,26 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('IMAGE_MODELS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞妯″瀷
+              <i class="fas fa-plus"></i> 添加模型
             </button>
           </div>
         </div>
 
-        <!-- 鎼滅储妯″瀷鍒楄〃 -->
+        <!-- 搜索模型列表 -->
         <div class="mb-6">
           <label
             for="SEARCH_MODELS"
             class="block font-semibold mb-2 text-gray-700"
-            >鎼滅储妯″瀷鍒楄〃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鏀寔鎼滅储鍔熻兘鐨勬ā鍨嬪垪琛?></i>
+            >搜索模型列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="支持搜索功能的模型列表"></i>
           </label>
           <div class="array-container" id="SEARCH_MODELS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2 mt-2">
             <button
               type="button"
-              title="浠庡垪琛ㄩ€夋嫨妯″瀷娣诲姞鍒颁笅鏂?
+              title="从列表选择模型添加到下方"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-array-key="SEARCH_MODELS"
             >
@@ -1401,26 +1394,26 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('SEARCH_MODELS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞妯″瀷
+              <i class="fas fa-plus"></i> 添加模型
             </button>
           </div>
         </div>
 
-        <!-- 杩囨护妯″瀷鍒楄〃 -->
+        <!-- 过滤模型列表 -->
         <div class="mb-6">
           <label
             for="FILTERED_MODELS"
             class="block font-semibold mb-2 text-gray-700"
-            >杩囨护妯″瀷鍒楄〃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闇€瑕佽繃婊ょ殑妯″瀷鍒楄〃"></i>
+            >过滤模型列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="需要过滤的模型列表"></i>
           </label>
           <div class="array-container" id="FILTERED_MODELS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2 mt-2">
             <button
               type="button"
-              title="浠庡垪琛ㄩ€夋嫨妯″瀷娣诲姞鍒颁笅鏂?
+              title="从列表选择模型添加到下方"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-array-key="FILTERED_MODELS"
             >
@@ -1431,18 +1424,18 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('FILTERED_MODELS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞妯″瀷
+              <i class="fas fa-plus"></i> 添加模型
             </button>
           </div>
         </div>
 
-        <!-- 鍚敤浠ｇ爜鎵ц宸ュ叿 -->
+        <!-- 启用代码执行工具 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="TOOLS_CODE_EXECUTION_ENABLED"
               class="font-semibold text-gray-700"
-              >鍚敤浠ｇ爜鎵ц宸ュ叿</label
+              >启用代码执行工具</label
             >
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1461,14 +1454,14 @@ endblock %} {% block head_extra_styles %}
           </div>
           <div class="warning-text">
             <i class="fas fa-exclamation-triangle"></i>
-            <span>鍚敤浠ｇ爜鎵ц宸ュ叿涓庡ぇ澶氭暟宸ュ叿璋冪敤鍐茬獊锛屼笉寤鸿寮€鍚?/span>
+            <span>启用代码执行工具与大多数工具调用冲突，不建议开启</span>
           </div>
         </div>
 
-        <!-- 鍚敤缃戝潃涓婁笅鏂?-->
+        <!-- 启用网址上下文 -->
         <div class="mb-6 flex items-center justify-between">
           <label for="URL_CONTEXT_ENABLED" class="font-semibold text-gray-700"
-            >鍚敤缃戝潃涓婁笅鏂?/label
+            >启用网址上下文</label
           >
           <div
             class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1486,21 +1479,21 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 缃戝潃涓婁笅鏂囨ā鍨嬪垪琛?-->
+        <!-- 网址上下文模型列表 -->
         <div class="mb-6">
           <label
             for="URL_CONTEXT_MODELS"
             class="block font-semibold mb-2 text-gray-700"
-            >缃戝潃涓婁笅鏂囨ā鍨嬪垪琛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鏀寔缃戝潃涓婁笅鏂囧姛鑳界殑妯″瀷鍒楄〃"></i>
+            >网址上下文模型列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="支持网址上下文功能的模型列表"></i>
           </label>
           <div class="array-container" id="URL_CONTEXT_MODELS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2 mt-2">
             <button
               type="button"
-              title="浠庡垪琛ㄩ€夋嫨妯″瀷娣诲姞鍒颁笅鏂?
+              title="从列表选择模型添加到下方"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-array-key="URL_CONTEXT_MODELS"
             >
@@ -1511,15 +1504,15 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('URL_CONTEXT_MODELS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞妯″瀷
+              <i class="fas fa-plus"></i> 添加模型
             </button>
           </div>
         </div>
 
-        <!-- 鏄剧ず鎼滅储閾炬帴 -->
+        <!-- 显示搜索链接 -->
         <div class="mb-6 flex items-center justify-between">
           <label for="SHOW_SEARCH_LINK" class="font-semibold text-gray-700"
-            >鏄剧ず鎼滅储閾炬帴</label
+            >显示搜索链接</label
           >
           <div
             class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1537,10 +1530,10 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鏄剧ず鎬濊€冭繃绋?-->
+        <!-- 显示思考过程 -->
         <div class="mb-6 flex items-center justify-between">
           <label for="SHOW_THINKING_PROCESS" class="font-semibold text-gray-700"
-            >鏄剧ず鎬濊€冭繃绋?/label
+            >显示思考过程</label
           >
           <div
             class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -1558,21 +1551,21 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鎬濊€冩ā鍨嬪垪琛?-->
+        <!-- 思考模型列表 -->
         <div class="mb-6">
           <label
             for="THINKING_MODELS"
             class="block font-semibold mb-2 text-gray-700"
-            >鎬濊€冩ā鍨嬪垪琛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬鎬濊€冭繃绋嬬殑妯″瀷鍒楄〃"></i>
+            >思考模型列表
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于思考过程的模型列表"></i>
           </label>
           <div class="array-container" id="THINKING_MODELS_container">
-            <!-- 鏁扮粍椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 数组项将在这里动态添加 -->
           </div>
           <div class="flex justify-end gap-2 mt-2">
             <button
               type="button"
-              title="浠庡垪琛ㄩ€夋嫨妯″瀷娣诲姞鍒颁笅鏂?
+              title="从列表选择模型添加到下方"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-array-key="THINKING_MODELS"
             >
@@ -1583,18 +1576,18 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               onclick="addArrayItem('THINKING_MODELS')"
             >
-              <i class="fas fa-plus"></i> 娣诲姞妯″瀷
+              <i class="fas fa-plus"></i> 添加模型
             </button>
           </div>
         </div>
 
-        <!-- 鎬濊€冩ā鍨嬮绠楁槧灏?-->
+        <!-- 思考模型预算映射 -->
         <div class="mb-6">
           <label
             for="THINKING_BUDGET_MAP"
             class="block font-semibold mb-2 text-gray-700"
-            >鎬濊€冩ā鍨嬮绠楁槧灏?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="涓烘瘡涓€濊€冩ā鍨嬭缃绠楋紙-1涓篴uto锛屾渶澶у€?2767锛夛紝姝ら」涓庝笂鏂规ā鍨嬪垪琛ㄨ嚜鍔ㄥ叧鑱?></i>
+            >思考模型预算映射
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="为每个思考模型设置预算（-1为auto，最大值32767），此项与上方模型列表自动关联"></i>
           </label>
           <div
             class="bg-white rounded-lg border border-gray-200 p-4 mb-2 space-y-3"
@@ -1605,25 +1598,25 @@ endblock %} {% block head_extra_styles %}
               color: #374151;
             "
           >
-            <!-- 閿€煎灏嗗湪杩欓噷鍔ㄦ€佹坊鍔?-->
+            <!-- 键值对将在这里动态添加 -->
             <div class="text-gray-500 text-sm italic">
-              璇峰厛鍦ㄤ笂鏂规坊鍔犳€濊€冩ā鍨嬶紝鐒跺悗鍦ㄦ澶勯厤缃绠椼€?
+              请先在上方添加思考模型，然后在此处配置预算。
             </div>
           </div>
-          <!-- 绉婚櫎娣诲姞棰勭畻鏄犲皠鎸夐挳 -->
+          <!-- 移除添加预算映射按钮 -->
           <!-- <div class="flex justify-end">
                             <button type="button" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2" id="addBudgetMapItemBtn">
-                                <i class="fas fa-plus"></i> 娣诲姞棰勭畻鏄犲皠
+                                <i class="fas fa-plus"></i> 添加预算映射
                             </button>
                         </div> -->
         </div>
-        <!-- 瀹夊叏璁剧疆 -->
+        <!-- 安全设置 -->
         <div class="mb-6">
           <label
             for="SAFETY_SETTINGS"
             class="block font-semibold mb-2 text-gray-700"
-            >瀹夊叏璁剧疆 (Safety Settings)
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="閰嶇疆妯″瀷鐨勫畨鍏ㄨ繃婊ょ骇鍒紝渚嬪 HARM_CATEGORY_HARASSMENT: BLOCK_NONE"></i>
+            >安全设置 (Safety Settings)
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="配置模型的安全过滤级别，例如 HARM_CATEGORY_HARASSMENT: BLOCK_NONE"></i>
           </label>
           <div
             class="bg-white rounded-lg border border-gray-200 p-4 mb-2 space-y-3"
@@ -1634,9 +1627,9 @@ endblock %} {% block head_extra_styles %}
               color: #374151;
             "
           >
-            <!-- 瀹夊叏璁剧疆椤瑰皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+            <!-- 安全设置项将在这里动态添加 -->
             <div class="text-gray-500 text-sm italic">
-              瀹氫箟妯″瀷鐨勫畨鍏ㄨ繃婊ら槇鍊笺€?
+              定义模型的安全过滤阈值。
             </div>
           </div>
           <div class="flex justify-end">
@@ -1645,31 +1638,31 @@ endblock %} {% block head_extra_styles %}
               class="bg-violet-600 hover:bg-violet-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
               id="addSafetySettingBtn"
             >
-              <i class="fas fa-plus"></i> 娣诲姞瀹夊叏璁剧疆
+              <i class="fas fa-plus"></i> 添加安全设置
             </button>
           </div>
           <div class="warning-text">
             <i class="fas fa-exclamation-triangle"></i>
             <span
-              >寤鸿璁剧疆鎴怬FF锛屽叾浠栧€间細褰卞搷杈撳嚭閫熷害锛岄潪蹇呰涓嶈闅忎究鏀瑰姩銆?/span
+              >建议设置成OFF，其他值会影响输出速度，非必要不要随便改动。</span
             >
           </div>
         </div>
       </div>
 
-      <!-- TTS閰嶇疆 -->
+      <!-- TTS配置 -->
       <div class="config-section" id="tts-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-volume-up text-violet-400"></i> TTS 鐩稿叧閰嶇疆
+          <i class="fas fa-volume-up text-violet-400"></i> TTS 相关配置
         </h2>
 
-        <!-- TTS 妯″瀷 -->
+        <!-- TTS 模型 -->
         <div class="mb-6">
           <label for="TTS_MODEL" class="block font-semibold mb-2 text-gray-700"
-            >TTS 妯″瀷
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬TTS鐨勬ā鍨?></i>
+            >TTS 模型
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于TTS的模型"></i>
           </label>
           <select
             id="TTS_MODEL"
@@ -1685,83 +1678,83 @@ endblock %} {% block head_extra_styles %}
           </select>
         </div>
 
-        <!-- TTS 璇煶鍚嶇О -->
+        <!-- TTS 语音名称 -->
         <div class="mb-6">
           <label
             for="TTS_VOICE_NAME"
             class="block font-semibold mb-2 text-gray-700"
-            >TTS 璇煶鍚嶇О
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="TTS 鐨勮闊冲悕绉帮紝鎺у埗椋庢牸銆佽璋冦€佸彛闊冲拰鑺傚"></i>
+            >TTS 语音名称
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="TTS 的语音名称，控制风格、语调、口音和节奏"></i>
           </label>
           <select
             id="TTS_VOICE_NAME"
             name="TTS_VOICE_NAME"
             class="w-full px-4 py-3 rounded-lg form-select-themed"
           >
-            <option value="Zephyr">Zephyr (鏄庝寒)</option>
-            <option value="Puck">Puck (娆㈠揩)</option>
-            <option value="Charon">Charon (淇℃伅涓板瘜)</option>
-            <option value="Kore">Kore (鍧氬畾)</option>
-            <option value="Fenrir">Fenrir (鏄撴縺鍔?</option>
-            <option value="Leda">Leda (骞磋交)</option>
-            <option value="Orus">Orus (鍧氬畾)</option>
-            <option value="Aoede">Aoede (杞绘澗)</option>
-            <option value="Callirrhoe">Callirrhoe (闅忓拰)</option>
-            <option value="Autonoe">Autonoe (鏄庝寒)</option>
-            <option value="Enceladus">Enceladus (鍛煎惛鎰?</option>
-            <option value="Iapetus">Iapetus (娓呮櫚)</option>
-            <option value="Umbriel">Umbriel (闅忓拰)</option>
-            <option value="Algieba">Algieba (骞虫粦)</option>
-            <option value="Despina">Despina (骞虫粦)</option>
-            <option value="Erinome">Erinome (娓呮櫚)</option>
-            <option value="Algenib">Algenib (娌欏搼)</option>
-            <option value="Rasalgethi">Rasalgethi (淇℃伅涓板瘜)</option>
-            <option value="Laomedeia">Laomedeia (娆㈠揩)</option>
-            <option value="Achernar">Achernar (杞绘煍)</option>
-            <option value="Alnilam">Alnilam (鍧氬畾)</option>
-            <option value="Schedar">Schedar (骞崇ǔ)</option>
-            <option value="Gacrux">Gacrux (鎴愮啛)</option>
-            <option value="Pulcherrima">Pulcherrima (鍚戝墠)</option>
-            <option value="Achird">Achird (鍙嬪ソ)</option>
-            <option value="Zubenelgenubi">Zubenelgenubi (浼戦棽)</option>
-            <option value="Vindemiatrix">Vindemiatrix (娓╂煍)</option>
-            <option value="Sadachbia">Sadachbia (娲绘臣)</option>
-            <option value="Sadaltager">Sadaltager (鍗氬)</option>
-            <option value="Sulafat">Sulafat (娓╂殩)</option>
+            <option value="Zephyr">Zephyr (明亮)</option>
+            <option value="Puck">Puck (欢快)</option>
+            <option value="Charon">Charon (信息丰富)</option>
+            <option value="Kore">Kore (坚定)</option>
+            <option value="Fenrir">Fenrir (易激动)</option>
+            <option value="Leda">Leda (年轻)</option>
+            <option value="Orus">Orus (坚定)</option>
+            <option value="Aoede">Aoede (轻松)</option>
+            <option value="Callirrhoe">Callirrhoe (随和)</option>
+            <option value="Autonoe">Autonoe (明亮)</option>
+            <option value="Enceladus">Enceladus (呼吸感)</option>
+            <option value="Iapetus">Iapetus (清晰)</option>
+            <option value="Umbriel">Umbriel (随和)</option>
+            <option value="Algieba">Algieba (平滑)</option>
+            <option value="Despina">Despina (平滑)</option>
+            <option value="Erinome">Erinome (清晰)</option>
+            <option value="Algenib">Algenib (沙哑)</option>
+            <option value="Rasalgethi">Rasalgethi (信息丰富)</option>
+            <option value="Laomedeia">Laomedeia (欢快)</option>
+            <option value="Achernar">Achernar (轻柔)</option>
+            <option value="Alnilam">Alnilam (坚定)</option>
+            <option value="Schedar">Schedar (平稳)</option>
+            <option value="Gacrux">Gacrux (成熟)</option>
+            <option value="Pulcherrima">Pulcherrima (向前)</option>
+            <option value="Achird">Achird (友好)</option>
+            <option value="Zubenelgenubi">Zubenelgenubi (休闲)</option>
+            <option value="Vindemiatrix">Vindemiatrix (温柔)</option>
+            <option value="Sadachbia">Sadachbia (活泼)</option>
+            <option value="Sadaltager">Sadaltager (博学)</option>
+            <option value="Sulafat">Sulafat (温暖)</option>
           </select>
         </div>
 
-        <!-- TTS 璇€?-->
+        <!-- TTS 语速 -->
         <div class="mb-6">
           <label for="TTS_SPEED" class="block font-semibold mb-2 text-gray-700"
-            >TTS 璇€?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="閫夋嫨 TTS 鐨勮閫?></i>
+            >TTS 语速
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="选择 TTS 的语速"></i>
           </label>
           <select
             id="TTS_SPEED"
             name="TTS_SPEED"
             class="w-full px-4 py-3 rounded-lg form-select-themed"
           >
-            <option value="slow">鎱?/option>
-            <option value="normal">姝ｅ父</option>
-            <option value="fast">蹇?/option>
+            <option value="slow">慢</option>
+            <option value="normal">正常</option>
+            <option value="fast">快</option>
           </select>
         </div>
       </div>
 
-      <!-- 鍥惧儚鐢熸垚鐩稿叧閰嶇疆 -->
+      <!-- 图像生成相关配置 -->
       <div class="config-section" id="image-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-image text-violet-400"></i> 鍥惧儚鐢熸垚閰嶇疆
+          <i class="fas fa-image text-violet-400"></i> 图像生成配置
         </h2>
 
-        <!-- 浠樿垂API瀵嗛挜 -->
+        <!-- 付费API密钥 -->
         <div class="mb-6">
           <label for="PAID_KEY" class="block font-semibold mb-2 text-gray-700"
-            >浠樿垂API瀵嗛挜
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬鍥惧儚鐢熸垚鐨勪粯璐笰PI瀵嗛挜"></i>
+            >付费API密钥
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于图像生成的付费API密钥"></i>
           </label>
           <input
             type="text"
@@ -1772,13 +1765,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鍥惧儚鐢熸垚妯″瀷 -->
+        <!-- 图像生成模型 -->
         <div class="mb-6">
           <label
             for="CREATE_IMAGE_MODEL"
             class="block font-semibold mb-2 text-gray-700"
-            >鍥惧儚鐢熸垚妯″瀷
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐢ㄤ簬鍥惧儚鐢熸垚鐨勬ā鍨?></i>
+            >图像生成模型
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="用于图像生成的模型"></i>
           </label>
           <div class="flex items-center gap-2">
             <input
@@ -1790,7 +1783,7 @@ endblock %} {% block head_extra_styles %}
             />
             <button
               type="button"
-              title="閫夋嫨妯″瀷"
+              title="选择模型"
               class="model-helper-trigger-btn p-2 rounded-md text-violet-300 hover:bg-violet-700 transition-colors"
               data-target-input-id="CREATE_IMAGE_MODEL"
             >
@@ -1799,13 +1792,13 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 涓婁紶鎻愪緵鍟?-->
+        <!-- 上传提供商 -->
         <div class="mb-6">
           <label
             for="UPLOAD_PROVIDER"
             class="block font-semibold mb-2 text-gray-700"
-            >涓婁紶鎻愪緵鍟?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鍥剧墖涓婁紶鏈嶅姟鎻愪緵鍟?></i>
+            >上传提供商
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="图片上传服务提供商"></i>
           </label>
           <select
             id="UPLOAD_PROVIDER"
@@ -1815,17 +1808,17 @@ endblock %} {% block head_extra_styles %}
             <option value="smms" selected>SM.MS</option>
             <option value="picgo">PicGo</option>
             <option value="cloudflare_imgbed">Cloudflare</option>
-            <option value="aliyun_oss">闃块噷浜慜SS</option>
+            <option value="aliyun_oss">阿里云OSS</option>
           </select>
         </div>
 
-        <!-- SM.MS瀵嗛挜 -->
+        <!-- SM.MS密钥 -->
         <div class="mb-6 provider-config active" data-provider="smms">
           <label
             for="SMMS_SECRET_TOKEN"
             class="block font-semibold mb-2 text-gray-700"
-            >SM.MS瀵嗛挜
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="SM.MS鍥惧簥鐨勫瘑閽?></i>
+            >SM.MS密钥
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="SM.MS图床的密钥"></i>
           </label>
           <input
             type="text"
@@ -1841,8 +1834,8 @@ endblock %} {% block head_extra_styles %}
           <label
             for="PICGO_API_URL"
             class="block font-semibold mb-2 text-gray-700"
-            >PicGo API鍦板潃
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="PicGo鏈嶅姟鍣ㄧ殑API鍦板潃锛岄粯璁や负 https://www.picgo.net/api/1/upload"></i>
+            >PicGo API地址
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="PicGo服务器的API地址，默认为 https://www.picgo.net/api/1/upload"></i>
           </label>
           <input
             type="text"
@@ -1853,13 +1846,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- PicGo API瀵嗛挜 -->
+        <!-- PicGo API密钥 -->
         <div class="mb-6 provider-config" data-provider="picgo">
           <label
             for="PICGO_API_KEY"
             class="block font-semibold mb-2 text-gray-700"
-            >PicGo API瀵嗛挜
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="PicGo鐨凙PI瀵嗛挜"></i>
+            >PicGo API密钥
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="PicGo的API密钥"></i>
           </label>
           <input
             type="text"
@@ -1870,13 +1863,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- Cloudflare鍥惧簥URL -->
+        <!-- Cloudflare图床URL -->
         <div class="mb-6 provider-config" data-provider="cloudflare_imgbed">
           <label
             for="CLOUDFLARE_IMGBED_URL"
             class="block font-semibold mb-2 text-gray-700"
-            >Cloudflare鍥惧簥URL
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare鍥惧簥鐨刄RL"></i>
+            >Cloudflare图床URL
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare图床的URL"></i>
           </label>
           <input
             type="text"
@@ -1887,13 +1880,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- Cloudflare璁よ瘉鐮?-->
+        <!-- Cloudflare认证码 -->
         <div class="mb-6 provider-config" data-provider="cloudflare_imgbed">
           <label
             for="CLOUDFLARE_IMGBED_AUTH_CODE"
             class="block font-semibold mb-2 text-gray-700"
-            >Cloudflare璁よ瘉鐮?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare鍥惧簥鐨勮璇佺爜"></i>
+            >Cloudflare认证码
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare图床的认证码"></i>
           </label>
           <input
             type="text"
@@ -1904,13 +1897,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- Cloudflare涓婁紶鏂囦欢澶?-->
+        <!-- Cloudflare上传文件夹 -->
         <div class="mb-6 provider-config" data-provider="cloudflare_imgbed">
           <label
             for="CLOUDFLARE_IMGBED_UPLOAD_FOLDER"
             class="block font-semibold mb-2 text-gray-700"
-            >Cloudflare涓婁紶鏂囦欢澶?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare鍥惧簥鐨勪笂浼犳枃浠跺す璺緞锛堝彲閫夛級"></i>
+            >Cloudflare上传文件夹
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="Cloudflare图床的上传文件夹路径（可选）"></i>
           </label>
           <input
             type="text"
@@ -1921,14 +1914,14 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 闃块噷浜慜SS閰嶇疆 -->
+        <!-- 阿里云OSS配置 -->
         <!-- OSS Endpoint -->
         <div class="mb-6 provider-config" data-provider="aliyun_oss">
           <label
             for="OSS_ENDPOINT"
             class="block font-semibold mb-2 text-gray-700"
             >OSS Endpoint
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨凟ndpoint鍦板潃"></i>
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的Endpoint地址"></i>
           </label>
           <input
             type="text"
@@ -1945,7 +1938,7 @@ endblock %} {% block head_extra_styles %}
             for="OSS_ACCESS_KEY"
             class="block font-semibold mb-2 text-gray-700"
             >OSS Access Key
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨凙ccess Key ID"></i>
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的Access Key ID"></i>
           </label>
           <input
             type="text"
@@ -1962,7 +1955,7 @@ endblock %} {% block head_extra_styles %}
             for="OSS_ACCESS_KEY_SECRET"
             class="block font-semibold mb-2 text-gray-700"
             >OSS Access Key Secret
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨凙ccess Key Secret"></i>
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的Access Key Secret"></i>
           </label>
           <input
             type="password"
@@ -1978,8 +1971,8 @@ endblock %} {% block head_extra_styles %}
           <label
             for="OSS_BUCKET_NAME"
             class="block font-semibold mb-2 text-gray-700"
-            >OSS Bucket鍚嶇О
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨凚ucket鍚嶇О"></i>
+            >OSS Bucket名称
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的Bucket名称"></i>
           </label>
           <input
             type="text"
@@ -1996,7 +1989,7 @@ endblock %} {% block head_extra_styles %}
             for="OSS_REGION"
             class="block font-semibold mb-2 text-gray-700"
             >OSS Region
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨凴egion鍖哄煙"></i>
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的Region区域"></i>
           </label>
           <input
             type="text"
@@ -2007,13 +2000,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- OSS Internal Endpoint (鍙€? -->
+        <!-- OSS Internal Endpoint (可选) -->
         <div class="mb-6 provider-config" data-provider="aliyun_oss">
           <label
             for="OSS_ENDPOINT_INNER"
             class="block font-semibold mb-2 text-gray-700"
-            >OSS鍐呯綉Endpoint锛堝彲閫夛級
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闃块噷浜慜SS鐨勫唴缃慐ndpoint鍦板潃锛堝彲閫夛級"></i>
+            >OSS内网Endpoint（可选）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="阿里云OSS的内网Endpoint地址（可选）"></i>
           </label>
           <input
             type="text"
@@ -2025,21 +2018,21 @@ endblock %} {% block head_extra_styles %}
         </div>
       </div>
 
-      <!-- 娴佸紡杈撳嚭浼樺寲閰嶇疆 -->
+      <!-- 流式输出优化配置 -->
       <div class="config-section" id="stream-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-stream text-violet-400"></i> 娴佸紡杈撳嚭鐩稿叧閰嶇疆
+          <i class="fas fa-stream text-violet-400"></i> 流式输出相关配置
         </h2>
 
-        <!-- 鍚敤娴佸紡杈撳嚭浼樺寲 -->
+        <!-- 启用流式输出优化 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="STREAM_OPTIMIZER_ENABLED"
               class="font-semibold text-gray-700"
-              >鍚敤娴佸紡杈撳嚭浼樺寲</label
+              >启用流式输出优化</label
             >
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -2058,17 +2051,17 @@ endblock %} {% block head_extra_styles %}
           </div>
           <div class="warning-text">
             <i class="fas fa-exclamation-triangle"></i>
-            <span>寮€鍚祦寮忎紭鍖栦細鍦ㄤ竴瀹氱▼搴︿笂鍑忛€熻繑鍥烇紝涓嶅缓璁紑鍚?/span>
+            <span>开启流式优化会在一定程度上减速返回，不建议开启</span>
           </div>
         </div>
 
-        <!-- 鏈€灏忓欢杩?-->
+        <!-- 最小延迟 -->
         <div class="mb-6">
           <label
             for="STREAM_MIN_DELAY"
             class="block font-semibold mb-2 text-gray-700"
-            >鏈€灏忓欢杩燂紙绉掞級
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="娴佸紡杈撳嚭鐨勬渶灏忓欢杩熸椂闂?></i>
+            >最小延迟（秒）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="流式输出的最小延迟时间"></i>
           </label>
           <input
             type="number"
@@ -2081,13 +2074,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鏈€澶у欢杩?-->
+        <!-- 最大延迟 -->
         <div class="mb-6">
           <label
             for="STREAM_MAX_DELAY"
             class="block font-semibold mb-2 text-gray-700"
-            >鏈€澶у欢杩燂紙绉掞級
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="娴佸紡杈撳嚭鐨勬渶澶у欢杩熸椂闂?></i>
+            >最大延迟（秒）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="流式输出的最大延迟时间"></i>
           </label>
           <input
             type="number"
@@ -2100,13 +2093,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鐭枃鏈槇鍊?-->
+        <!-- 短文本阈值 -->
         <div class="mb-6">
           <label
             for="STREAM_SHORT_TEXT_THRESHOLD"
             class="block font-semibold mb-2 text-gray-700"
-            >鐭枃鏈槇鍊?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鐭枃鏈殑瀛楃闃堝€?></i>
+            >短文本阈值
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="短文本的字符阈值"></i>
           </label>
           <input
             type="number"
@@ -2118,13 +2111,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 闀挎枃鏈槇鍊?-->
+        <!-- 长文本阈值 -->
         <div class="mb-6">
           <label
             for="STREAM_LONG_TEXT_THRESHOLD"
             class="block font-semibold mb-2 text-gray-700"
-            >闀挎枃鏈槇鍊?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="闀挎枃鏈殑瀛楃闃堝€?></i>
+            >长文本阈值
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="长文本的字符阈值"></i>
           </label>
           <input
             type="number"
@@ -2136,13 +2129,13 @@ endblock %} {% block head_extra_styles %}
           />
         </div>
 
-        <!-- 鍒嗗潡澶у皬 -->
+        <!-- 分块大小 -->
         <div class="mb-6">
           <label
             for="STREAM_CHUNK_SIZE"
             class="block font-semibold mb-2 text-gray-700"
-            >鍒嗗潡澶у皬
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="娴佸紡杈撳嚭鐨勫垎鍧楀ぇ灏?></i>
+            >分块大小
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="流式输出的分块大小"></i>
           </label>
           <input
             type="number"
@@ -2158,15 +2151,15 @@ endblock %} {% block head_extra_styles %}
         <h3
           class="text-lg font-semibold mb-4 pt-4 border-t border-violet-300 border-opacity-20 text-gray-200"
         >
-          <i class="fas fa-ghost text-violet-400"></i> 鍋囨祦寮忛厤缃?(Fake
+          <i class="fas fa-ghost text-violet-400"></i> 假流式配置 (Fake
           Streaming)
         </h3>
 
-        <!-- 鍚敤鍋囨祦寮忚緭鍑?-->
+        <!-- 启用假流式输出 -->
         <div class="mb-6 flex items-center justify-between">
           <label for="FAKE_STREAM_ENABLED" class="font-semibold text-gray-700"
-            >鍚敤鍋囨祦寮忚緭鍑?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="褰撳惎鐢ㄦ椂锛屽皢璋冪敤闈炴祦寮忔帴鍙ｏ紝骞跺湪绛夊緟鍝嶅簲鏈熼棿鍙戦€佺┖鏁版嵁浠ョ淮鎸佽繛鎺?></i>
+            >启用假流式输出
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="当启用时，将调用非流式接口，并在等待响应期间发送空数据以维持连接"></i>
           </label>
           <div
             class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -2184,13 +2177,13 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鍋囨祦寮忓彂閫佺┖鏁版嵁鐨勯棿闅旀椂闂?-->
+        <!-- 假流式发送空数据的间隔时间 -->
         <div class="mb-6">
           <label
             for="FAKE_STREAM_EMPTY_DATA_INTERVAL_SECONDS"
             class="block font-semibold mb-2 text-gray-700"
-            >鍋囨祦寮忕┖鏁版嵁鍙戦€侀棿闅旓紙绉掞級
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鍦ㄥ惎鐢ㄥ亣娴佸紡杈撳嚭鏃讹紝鍚戝鎴风鍙戦€佺┖鏁版嵁浠ョ淮鎸佽繛鎺ョ姸鎬佺殑鏃堕棿闂撮殧锛堝缓璁?3-10 绉掞級"></i>
+            >假流式空数据发送间隔（秒）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="在启用假流式输出时，向客户端发送空数据以维持连接状态的时间间隔（建议 3-10 秒）"></i>
           </label>
           <input
             type="number"
@@ -2204,21 +2197,21 @@ endblock %} {% block head_extra_styles %}
         </div>
       </div>
 
-      <!-- 瀹氭椂浠诲姟閰嶇疆 -->
+      <!-- 定时任务配置 -->
       <div class="config-section" id="scheduler-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-clock text-violet-400"></i> 瀹氭椂浠诲姟閰嶇疆
+          <i class="fas fa-clock text-violet-400"></i> 定时任务配置
         </h2>
 
-        <!-- 妫€鏌ラ棿闅?-->
+        <!-- 检查间隔 -->
         <div class="mb-6">
           <label
             for="CHECK_INTERVAL_HOURS"
             class="block font-semibold mb-2 text-gray-700"
-            >妫€鏌ラ棿闅旓紙灏忔椂锛?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="瀹氭椂妫€鏌ュ瘑閽ョ姸鎬佺殑闂撮殧鏃堕棿锛堝崟浣嶏細灏忔椂锛夛紝璁剧疆涓?鏃朵笉杩涜瀹氭椂妫€鏌?></i>
+            >检查间隔（小时）
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="定时检查密钥状态的间隔时间（单位：小时），设置为0时不进行定时检查"></i>
           </label>
           <input
             type="number"
@@ -2232,19 +2225,19 @@ endblock %} {% block head_extra_styles %}
 
       </div>
 
-      <!-- 鏃ュ織閰嶇疆 -->
+      <!-- 日志配置 -->
       <div class="config-section" id="logging-section">
         <h2
           class="text-xl font-bold mb-6 pb-3 border-b flex items-center gap-2 text-gray-800 border-violet-300 border-opacity-30"
         >
-          <i class="fas fa-file-alt text-violet-400"></i> 鏃ュ織閰嶇疆
+          <i class="fas fa-file-alt text-violet-400"></i> 日志配置
         </h2>
 
-        <!-- 鏃ュ織绾у埆 -->
+        <!-- 日志级别 -->
         <div class="mb-6">
           <label for="LOG_LEVEL" class="block font-semibold mb-2 text-gray-700"
-            >鏃ュ織绾у埆
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="璁剧疆搴旂敤绋嬪簭鐨勬棩蹇楄褰曡缁嗙▼搴?></i>
+            >日志级别
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="设置应用程序的日志记录详细程度"></i>
           </label>
           <select
             id="LOG_LEVEL"
@@ -2259,14 +2252,14 @@ endblock %} {% block head_extra_styles %}
           </select>
         </div>
 
-        <!-- 閿欒鏃ュ織璁板綍璇锋眰浣?-->
+        <!-- 错误日志记录请求体 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="ERROR_LOG_RECORD_REQUEST_BODY"
               class="font-semibold text-gray-700"
-              >閿欒鏃ュ織璁板綍璇锋眰浣?
-              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="鍏抽棴鍙噺灏戝ぇ閲忕鐩樼┖闂村崰鐢紝榛樿鍏抽棴"></i>
+              >错误日志记录请求体
+              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="关闭可减少大量磁盘空间占用，默认关闭"></i>
             </label>
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -2285,14 +2278,14 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鑷姩鍒犻櫎閿欒鏃ュ織 -->
+        <!-- 自动删除错误日志 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="AUTO_DELETE_ERROR_LOGS_ENABLED"
               class="font-semibold text-gray-700"
-              >鏄惁寮€鍚嚜鍔ㄥ垹闄ら敊璇棩蹇?
-              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="寮€鍚悗锛屽皢鑷姩鍒犻櫎鎸囧畾澶╂暟鍓嶇殑閿欒鏃ュ織"></i>
+              >是否开启自动删除错误日志
+              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="开启后，将自动删除指定天数前的错误日志"></i>
             </label>
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -2311,33 +2304,33 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鑷姩鍒犻櫎鏃ュ織澶╂暟 -->
+        <!-- 自动删除日志天数 -->
         <div class="mb-6">
           <label
             for="AUTO_DELETE_ERROR_LOGS_DAYS"
             class="block font-semibold mb-2 text-gray-700"
-            >鑷姩鍒犻櫎澶氬皯澶╁墠鐨勯敊璇棩蹇?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="閫夋嫨鑷姩鍒犻櫎閿欒鏃ュ織鐨勫ぉ鏁?></i>
+            >自动删除多少天前的错误日志
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="选择自动删除错误日志的天数"></i>
           </label>
           <select
             id="AUTO_DELETE_ERROR_LOGS_DAYS"
             name="AUTO_DELETE_ERROR_LOGS_DAYS"
             class="w-full px-4 py-3 rounded-lg form-select-themed"
           >
-            <option value="1">1 澶?/option>
-            <option value="7">7 澶?/option>
-            <option value="30">30 澶?/option>
+            <option value="1">1 天</option>
+            <option value="7">7 天</option>
+            <option value="30">30 天</option>
           </select>
         </div>
 
-        <!-- 鑷姩鍒犻櫎璇锋眰鏃ュ織 -->
+        <!-- 自动删除请求日志 -->
         <div class="mb-6">
           <div class="flex items-center justify-between">
             <label
               for="AUTO_DELETE_REQUEST_LOGS_ENABLED"
               class="font-semibold text-gray-700"
-              >鏄惁寮€鍚嚜鍔ㄥ垹闄よ姹傛棩蹇?
-              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="寮€鍚悗锛屽皢鑷姩鍒犻櫎鎸囧畾澶╂暟鍓嶇殑璇锋眰鏃ュ織"></i>
+              >是否开启自动删除请求日志
+              <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="开启后，将自动删除指定天数前的请求日志"></i>
             </label>
             <div
               class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
@@ -2356,22 +2349,22 @@ endblock %} {% block head_extra_styles %}
           </div>
         </div>
 
-        <!-- 鑷姩鍒犻櫎璇锋眰鏃ュ織澶╂暟 -->
+        <!-- 自动删除请求日志天数 -->
         <div class="mb-6">
           <label
             for="AUTO_DELETE_REQUEST_LOGS_DAYS"
             class="block font-semibold mb-2 text-gray-700"
-            >鑷姩鍒犻櫎澶氬皯澶╁墠鐨勮姹傛棩蹇?
-            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="閫夋嫨鑷姩鍒犻櫎璇锋眰鏃ュ織鐨勫ぉ鏁?></i>
+            >自动删除多少天前的请求日志
+            <i class="fas fa-question-circle text-gray-400 ml-1 cursor-help" title="选择自动删除请求日志的天数"></i>
           </label>
           <select
             id="AUTO_DELETE_REQUEST_LOGS_DAYS"
             name="AUTO_DELETE_REQUEST_LOGS_DAYS"
             class="w-full px-4 py-3 rounded-lg form-select-themed"
           >
-            <option value="1">1 澶?/option>
-            <option value="7">7 澶?/option>
-            <option value="30">30 澶?/option>
+            <option value="1">1 天</option>
+            <option value="7">7 天</option>
+            <option value="30">30 天</option>
           </select>
         </div>
       </div>
@@ -2389,7 +2382,7 @@ endblock %} {% block head_extra_styles %}
             color: #ffffff !important;
           "
         >
-          <i class="fas fa-save"></i> 淇濆瓨閰嶇疆
+          <i class="fas fa-save"></i> 保存配置
         </button>
         <button
           type="button"
@@ -2400,7 +2393,7 @@ endblock %} {% block head_extra_styles %}
             color: #ffffff !important;
           "
         >
-          <i class="fas fa-undo"></i> 閲嶇疆閰嶇疆
+          <i class="fas fa-undo"></i> 重置配置
         </button>
       </div>
     </form>
@@ -2409,10 +2402,10 @@ endblock %} {% block head_extra_styles %}
 
 <!-- Scroll buttons are now in base.html -->
 <div class="scroll-buttons">
-  <button class="scroll-button" onclick="scrollToTop()" title="鍥炲埌椤堕儴">
+  <button class="scroll-button" onclick="scrollToTop()" title="回到顶部">
     <i class="fas fa-chevron-up"></i>
   </button>
-  <button class="scroll-button" onclick="scrollToBottom()" title="婊氬姩鍒板簳閮?>
+  <button class="scroll-button" onclick="scrollToBottom()" title="滚动到底部">
     <i class="fas fa-chevron-down"></i>
   </button>
 </div>
@@ -2433,7 +2426,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">鎵归噺娣诲姞 API 瀵嗛挜</h2>
+        <h2 class="text-xl font-bold text-gray-800">批量添加 API 密钥</h2>
         <button
           id="closeApiKeyModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2442,12 +2435,12 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜瀵嗛挜锛屽皢鑷姩鎻愬彇鏈夋晥瀵嗛挜骞跺幓閲嶃€?
+        每行粘贴一个或多个密钥，将自动提取有效密钥并去重。
       </p>
       <textarea
         id="apiKeyBulkInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐?API 瀵嗛挜..."
+        placeholder="在此处粘贴 API 密钥..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2456,14 +2449,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmAddApiKeyBtn"
           class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭娣诲姞
+          确认添加
         </button>
         <button
           type="button"
           id="cancelAddApiKeyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2482,7 +2475,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">鎵归噺鍒犻櫎 API 瀵嗛挜</h2>
+        <h2 class="text-xl font-bold text-gray-800">批量删除 API 密钥</h2>
         <button
           id="closeBulkDeleteModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2491,12 +2484,12 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜瀵嗛挜锛屽皢鑷姩鎻愬彇鏈夋晥瀵嗛挜骞朵粠鍒楄〃涓垹闄ゃ€?
+        每行粘贴一个或多个密钥，将自动提取有效密钥并从列表中删除。
       </p>
       <textarea
         id="bulkDeleteApiKeyInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐磋鍒犻櫎鐨?API 瀵嗛挜..."
+        placeholder="在此处粘贴要删除的 API 密钥..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2505,14 +2498,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmBulkDeleteApiKeyBtn"
           class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭鍒犻櫎
+          确认删除
         </button>
         <button
           type="button"
           id="cancelBulkDeleteApiKeyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2531,7 +2524,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">鎵归噺娣诲姞浠ｇ悊鏈嶅姟鍣?/h2>
+        <h2 class="text-xl font-bold text-gray-800">批量添加代理服务器</h2>
         <button
           id="closeProxyModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2540,12 +2533,12 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜浠ｇ悊鍦板潃锛屽皢鑷姩鎻愬彇鏈夋晥鍦板潃骞跺幓閲嶃€?
+        每行粘贴一个或多个代理地址，将自动提取有效地址并去重。
       </p>
       <textarea
         id="proxyBulkInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐翠唬鐞嗗湴鍧€ (渚嬪 http://user:pass@host:port 鎴?socks5://host:port)..."
+        placeholder="在此处粘贴代理地址 (例如 http://user:pass@host:port 或 socks5://host:port)..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2554,14 +2547,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmAddProxyBtn"
           class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭娣诲姞
+          确认添加
         </button>
         <button
           type="button"
           id="cancelAddProxyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2580,7 +2573,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">鎵归噺鍒犻櫎浠ｇ悊鏈嶅姟鍣?/h2>
+        <h2 class="text-xl font-bold text-gray-800">批量删除代理服务器</h2>
         <button
           id="closeBulkDeleteProxyModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2589,12 +2582,12 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜浠ｇ悊鍦板潃锛屽皢鑷姩鎻愬彇鏈夋晥鍦板潃骞朵粠鍒楄〃涓垹闄ゃ€?
+        每行粘贴一个或多个代理地址，将自动提取有效地址并从列表中删除。
       </p>
       <textarea
         id="bulkDeleteProxyInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐磋鍒犻櫎鐨勪唬鐞嗗湴鍧€..."
+        placeholder="在此处粘贴要删除的代理地址..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2603,14 +2596,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmBulkDeleteProxyBtn"
           class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭鍒犻櫎
+          确认删除
         </button>
         <button
           type="button"
           id="cancelBulkDeleteProxyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2629,7 +2622,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">纭閲嶇疆閰嶇疆</h2>
+        <h2 class="text-xl font-bold text-gray-800">确认重置配置</h2>
         <button
           id="closeResetModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2638,7 +2631,7 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-6">
-        纭畾瑕侀噸缃墍鏈夐厤缃悧锛?br />杩欏皢鎭㈠鍒伴粯璁ゅ€硷紝姝ゆ搷浣滀笉鍙挙閿€銆?
+        确定要重置所有配置吗？<br />这将恢复到默认值，此操作不可撤销。
       </p>
       <div class="flex justify-end gap-3">
         <button
@@ -2646,14 +2639,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmResetBtn"
           class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭閲嶇疆
+          确认重置
         </button>
         <button
           type="button"
           id="cancelResetBtn"
           class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2673,7 +2666,7 @@ endblock %} {% block head_extra_styles %}
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">
-          鎵归噺娣诲姞 Vertex Express API 瀵嗛挜
+          批量添加 Vertex Express API 密钥
         </h2>
         <button
           id="closeVertexApiKeyModalBtn"
@@ -2683,13 +2676,13 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜瀵嗛挜锛屽皢鑷姩鎻愬彇鏈夋晥瀵嗛挜 (鏍煎紡: AQ.寮€澶达紝鍏?3浣?
-        骞跺幓閲嶃€?
+        每行粘贴一个或多个密钥，将自动提取有效密钥 (格式: AQ.开头，共53位)
+        并去重。
       </p>
       <textarea
         id="vertexApiKeyBulkInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐?Vertex Express API 瀵嗛挜..."
+        placeholder="在此处粘贴 Vertex Express API 密钥..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2698,14 +2691,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmAddVertexApiKeyBtn"
           class="bg-violet-600 hover:bg-violet-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭娣诲姞
+          确认添加
         </button>
         <button
           type="button"
           id="cancelAddVertexApiKeyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2725,7 +2718,7 @@ endblock %} {% block head_extra_styles %}
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">
-          鎵归噺鍒犻櫎 Vertex Express API 瀵嗛挜
+          批量删除 Vertex Express API 密钥
         </h2>
         <button
           id="closeBulkDeleteVertexModalBtn"
@@ -2735,12 +2728,12 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       <p class="text-gray-300 mb-4">
-        姣忚绮樿创涓€涓垨澶氫釜瀵嗛挜锛屽皢鑷姩鎻愬彇鏈夋晥瀵嗛挜骞朵粠鍒楄〃涓垹闄ゃ€?
+        每行粘贴一个或多个密钥，将自动提取有效密钥并从列表中删除。
       </p>
       <textarea
         id="bulkDeleteVertexApiKeyInput"
         rows="10"
-        placeholder="鍦ㄦ澶勭矘璐磋鍒犻櫎鐨?Vertex Express API 瀵嗛挜..."
+        placeholder="在此处粘贴要删除的 Vertex Express API 密钥..."
         class="w-full px-4 py-3 rounded-lg font-mono text-sm form-input-themed"
       ></textarea>
       <div class="flex justify-end gap-3 mt-6">
@@ -2749,14 +2742,14 @@ endblock %} {% block head_extra_styles %}
           id="confirmBulkDeleteVertexApiKeyBtn"
           class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-medium transition"
         >
-          纭鍒犻櫎
+          确认删除
         </button>
         <button
           type="button"
           id="cancelBulkDeleteVertexApiKeyBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍙栨秷
+          取消
         </button>
       </div>
     </div>
@@ -2775,7 +2768,7 @@ endblock %} {% block head_extra_styles %}
   >
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold text-gray-800">浠ｇ悊妫€娴嬬粨鏋?/h2>
+        <h2 class="text-xl font-bold text-gray-800">代理检测结果</h2>
         <button
           id="closeProxyCheckModalBtn"
           class="text-gray-300 hover:text-gray-800 text-xl"
@@ -2784,41 +2777,41 @@ endblock %} {% block head_extra_styles %}
         </button>
       </div>
       
-      <!-- 妫€娴嬬姸鎬佸拰杩涘害 -->
+      <!-- 检测状态和进度 -->
       <div id="proxyCheckProgress" class="mb-4 hidden">
         <div class="flex items-center gap-2 mb-2">
           <div class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <span class="text-sm text-gray-600">妫€娴嬩腑...</span>
+          <span class="text-sm text-gray-600">检测中...</span>
         </div>
         <div class="w-full bg-gray-200 rounded-full h-2">
           <div id="progressBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
         </div>
         <div class="text-xs text-gray-500 mt-1">
-          <span id="progressText">鍑嗗寮€濮嬫娴?..</span>
+          <span id="progressText">准备开始检测...</span>
         </div>
       </div>
       
-      <!-- 妫€娴嬬粨鏋滄瑙?-->
+      <!-- 检测结果概览 -->
       <div id="proxyCheckSummary" class="mb-4 hidden">
         <div class="grid grid-cols-3 gap-4 text-center">
           <div class="bg-green-50 border border-green-200 rounded-lg p-3">
             <div class="text-2xl font-bold text-green-600" id="availableCount">0</div>
-            <div class="text-sm text-green-700">鍙敤</div>
+            <div class="text-sm text-green-700">可用</div>
           </div>
           <div class="bg-red-50 border border-red-200 rounded-lg p-3">
             <div class="text-2xl font-bold text-red-600" id="unavailableCount">0</div>
-            <div class="text-sm text-red-700">涓嶅彲鐢?/div>
+            <div class="text-sm text-red-700">不可用</div>
           </div>
           <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
             <div class="text-2xl font-bold text-blue-600" id="totalCount">0</div>
-            <div class="text-sm text-blue-700">鎬绘暟</div>
+            <div class="text-sm text-blue-700">总数</div>
           </div>
         </div>
       </div>
       
-      <!-- 妫€娴嬬粨鏋滃垪琛?-->
+      <!-- 检测结果列表 -->
       <div id="proxyCheckResults" class="space-y-2" style="max-height: 400px; overflow-y: auto;">
-        <!-- 妫€娴嬬粨鏋滃皢鍦ㄨ繖閲屽姩鎬佹坊鍔?-->
+        <!-- 检测结果将在这里动态添加 -->
       </div>
       
       <div class="flex justify-end gap-3 mt-6">
@@ -2827,14 +2820,14 @@ endblock %} {% block head_extra_styles %}
           id="retryFailedProxiesBtn"
           class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-lg font-medium transition hidden"
         >
-          閲嶈瘯澶辫触鐨勪唬鐞?
+          重试失败的代理
         </button>
         <button
           type="button"
           id="closeProxyCheckBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍏抽棴
+          关闭
         </button>
       </div>
     </div>
@@ -2854,7 +2847,7 @@ endblock %} {% block head_extra_styles %}
     <div class="p-6">
       <div class="flex justify-between items-center mb-4">
         <h2 id="modelHelperTitle" class="text-xl font-bold text-gray-800">
-          閫夋嫨妯″瀷
+          选择模型
         </h2>
         <button
           id="closeModelHelperModalBtn"
@@ -2866,7 +2859,7 @@ endblock %} {% block head_extra_styles %}
       <input
         type="text"
         id="modelHelperSearchInput"
-        placeholder="鎼滅储妯″瀷..."
+        placeholder="搜索模型..."
         class="w-full px-4 py-3 mb-4 rounded-lg font-mono text-sm form-input-themed"
       />
       <div
@@ -2875,7 +2868,7 @@ endblock %} {% block head_extra_styles %}
         style="max-height: 300px; overflow-y: auto"
       >
         <!-- Model items will be populated here -->
-        <p class="text-gray-400 text-sm italic">姝ｅ湪鍔犺浇妯″瀷鍒楄〃...</p>
+        <p class="text-gray-400 text-sm italic">正在加载模型列表...</p>
       </div>
       <div class="flex justify-end gap-3 mt-6">
         <button
@@ -2883,7 +2876,7 @@ endblock %} {% block head_extra_styles %}
           id="cancelModelHelperBtn"
           class="bg-gray-500 bg-opacity-50 hover:bg-opacity-70 text-gray-200 px-6 py-2 rounded-lg font-medium transition"
         >
-          鍏抽棴
+          关闭
         </button>
       </div>
     </div>
@@ -2892,17 +2885,17 @@ endblock %} {% block head_extra_styles %}
 
 {% endblock %} {% block body_scripts %}
 <script src="{{ static_url('js/config_editor.js') }}"></script>
-<!-- 澧炲己涓嬫媺妗嗘牱寮忓拰浜や簰鎬?-->
+<!-- 增强下拉框样式和交互性 -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // 澧炲己鎵€鏈変笅鎷夋鐨勪氦浜掓€?
+    // 增强所有下拉框的交互性
     const selects = document.querySelectorAll(".form-select-themed");
 
     selects.forEach((select) => {
-      // 娣诲姞閫夋嫨浜嬩欢鏉ュ簲鐢ㄩ€変腑鏁堟灉
+      // 添加选择事件来应用选中效果
       select.addEventListener("change", function () {
         this.classList.add("selected");
-        // 璁剧疆寰皬鐨勫姩鐢绘晥鏋?
+        // 设置微小的动画效果
         this.style.transition = "all 0.2s ease";
         this.style.transform = "scale(1.02)";
         setTimeout(() => {
@@ -2910,61 +2903,61 @@ endblock %} {% block head_extra_styles %}
         }, 200);
       });
 
-      // 娣诲姞鐒︾偣浜嬩欢
+      // 添加焦点事件
       select.addEventListener("focus", function () {
         this.style.boxShadow = "0 0 0 3px rgba(216, 180, 254, 0.5)";
       });
 
-      // 鏍规嵁鏄惁鏈夐€変腑鍊兼坊鍔犻€変腑鏍峰紡
+      // 根据是否有选中值添加选中样式
       if (select.value && select.value !== "") {
         select.classList.add("selected");
       }
     });
 
-    // 缇庡寲鏃ュ織绾у埆閫夋嫨鐨勬樉绀?- 娴呰壊涓婚鐗堟湰
+    // 美化日志级别选择的显示 - 浅色主题版本
     const logLevelSelect = document.getElementById("LOG_LEVEL");
     if (logLevelSelect) {
-      // 缁欎笉鍚屾棩蹇楃骇鍒坊鍔犵粺涓€鐨勬祬鑹蹭富棰樻牱寮?
+      // 给不同日志级别添加统一的浅色主题样式
       const updateLogLevelStyle = () => {
         const value = logLevelSelect.value;
 
-        // 缁熶竴浣跨敤娴呰壊涓婚鏍峰紡锛岄€氳繃杞诲井鐨勮竟妗嗗彉鍖栨潵鍖哄垎绾у埆
+        // 统一使用浅色主题样式，通过轻微的边框变化来区分级别
         switch (value) {
           case "DEBUG":
-            logLevelSelect.style.borderColor = "#3b82f6"; // blue-500 涓婚鑹?
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "#3b82f6"; // blue-500 主题色
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
             break;
           case "INFO":
-            logLevelSelect.style.borderColor = "#3b82f6"; // blue-500 涓婚鑹?
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "#3b82f6"; // blue-500 主题色
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
             break;
           case "WARNING":
-            logLevelSelect.style.borderColor = "#6b7280"; // gray-500 涓€х伆
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "#6b7280"; // gray-500 中性灰
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
             break;
           case "ERROR":
-            logLevelSelect.style.borderColor = "#6b7280"; // gray-500 涓€х伆
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "#6b7280"; // gray-500 中性灰
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
             break;
           case "CRITICAL":
-            logLevelSelect.style.borderColor = "#4b5563"; // gray-600 绋嶆繁鐏?
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "#4b5563"; // gray-600 稍深灰
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
             break;
           default:
-            logLevelSelect.style.borderColor = "rgba(0, 0, 0, 0.12)"; // 榛樿杈规
-            logLevelSelect.style.color = "#374151"; // gray-700 娣辩伆鏂囧瓧
+            logLevelSelect.style.borderColor = "rgba(0, 0, 0, 0.12)"; // 默认边框
+            logLevelSelect.style.color = "#374151"; // gray-700 深灰文字
         }
       };
 
-      // 鍒濆鍖栧拰鍙樻洿鏃舵洿鏂版牱寮?
+      // 初始化和变更时更新样式
       updateLogLevelStyle();
       logLevelSelect.addEventListener("change", updateLogLevelStyle);
     }
 
-    // 澧炲己棰勭畻鏄犲皠椤逛氦浜?
+    // 增强预算映射项交互
     const budgetInputs = document.querySelectorAll(".map-value-input");
     budgetInputs.forEach((input) => {
-      // 娣诲姞鐒︾偣鍜屾偓鍋滄晥鏋?
+      // 添加焦点和悬停效果
       input.addEventListener("focus", function () {
         const parentItem = this.closest(".map-item");
         if (parentItem) {
@@ -2983,7 +2976,7 @@ endblock %} {% block head_extra_styles %}
         }
       });
 
-      // 杈撳叆闄愬埗涓烘鏁存暟涓斾笉瓒呰繃鏈€澶у€?
+      // 输入限制为正整数且不超过最大值
       input.addEventListener("input", function () {
         let val = this.value.replace(/[^0-9]/g, "");
         if (val !== "") {
@@ -2992,7 +2985,7 @@ endblock %} {% block head_extra_styles %}
         }
         this.value = val;
 
-        // 娣诲姞寰皬鍔ㄧ敾鍙嶉
+        // 添加微小动画反馈
         this.style.transform = "scale(1.05)";
         setTimeout(() => {
           this.style.transform = "scale(1)";
@@ -3002,4 +2995,3 @@ endblock %} {% block head_extra_styles %}
   });
 </script>
 {% endblock %}
-

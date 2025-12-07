@@ -27,23 +27,23 @@
       }
       const data = await res.json();
       if (!data.connectivity) {
-        const msg = data.message || "???? scanner";
+        const msg = data.message || "无法连接 scanner";
         setStatus(msg, "error");
         showNotification(msg, "error");
         return;
       }
       if (!data.auth) {
-        const msg = data.message || "API Key ??";
+        const msg = data.message || "API Key 无效";
         setStatus(msg, "error");
         showNotification(msg, "error");
         return;
       }
-      setStatus("???? / Key ??", "success");
-      showNotification("???? / Key ??");
+      setStatus("连接正常 / Key 有效", "success");
+      showNotification("连接正常 / Key 有效");
     } catch (error) {
       console.error("Ping scanner failed", error);
-      setStatus("??????", "error");
-      showNotification("??????", "error");
+      setStatus("连接测试失败", "error");
+      showNotification("连接测试失败", "error");
     }
   };
 

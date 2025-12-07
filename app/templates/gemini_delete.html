@@ -1,5 +1,5 @@
-﻿{% extends "base.html" %}
-{% block title %}鍒犻櫎鏃犳晥 Gemini Key - Gemini Balance{% endblock %}
+{% extends "base.html" %}
+{% block title %}删除无效 Gemini Key - Gemini Balance{% endblock %}
 
 {% block head_extra_styles %}
 <style>
@@ -28,28 +28,28 @@
   <div class="glass-card rounded-2xl shadow-xl p-6 md:p-8">
     <div class="flex items-center justify-between flex-wrap gap-4">
       <div>
-        <p class="text-sm text-gray-500 font-semibold tracking-wide uppercase">娓呯悊鏃犳晥 Key</p>
-        <h1 class="text-3xl font-extrabold text-gray-800">鍒犻櫎 recheck_status=invalid 鐨?Gemini API Key</h1>
-        <p class="text-gray-600 mt-2">鐩存帴璋冪敤 scanner 鍒犻櫎鏃犳晥 Key锛屽彲璁剧疆鏁伴噺闄愬埗銆?/p>
+        <p class="text-sm text-gray-500 font-semibold tracking-wide uppercase">清理无效 Key</p>
+        <h1 class="text-3xl font-extrabold text-gray-800">删除 recheck_status=invalid 的 Gemini API Key</h1>
+        <p class="text-gray-600 mt-2">直接调用 scanner 删除无效 Key，可设置数量限制。</p>
       </div>
       <div class="nav-buttons-container flex flex-wrap justify-center gap-2">
         <a href="/config" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-cog"></i> 閰嶇疆缂栬緫
+          <i class="fas fa-cog"></i> 配置编辑
         </a>
         <a href="/keys" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-tachometer-alt"></i> 鐩戞帶闈㈡澘
+          <i class="fas fa-tachometer-alt"></i> 监控面板
         </a>
         <a href="/gemini-assets" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
           <i class="fas fa-key"></i> Gemini Key Assets
         </a>
         <a href="/gemini-assets#delete-anchor" class="main-nav-btn whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-semibold rounded-lg shadow-md transition-all duration-200" style="background-color: #3b82f6 !important; color: #ffffff !important;">
-          <i class="fas fa-trash-alt"></i> 鍒犻櫎鏃犳晥 Key
+          <i class="fas fa-trash-alt"></i> 删除无效 Key
         </a>
         <a href="/scanner-automation" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-clock"></i> 鑷姩浠诲姟
+          <i class="fas fa-clock"></i> 自动任务
         </a>
         <a href="/logs" class="nav-link whitespace-nowrap flex items-center justify-center gap-2 px-5 py-2.5 font-medium rounded-lg text-gray-700 hover:text-gray-900 transition-all duration-200" style="background-color: rgba(229, 231, 235, 0.8)">
-          <i class="fas fa-exclamation-triangle"></i> 閿欒鏃ュ織
+          <i class="fas fa-exclamation-triangle"></i> 错误日志
         </a>
       </div>
     </div>
@@ -57,30 +57,29 @@
     <div class="card p-5 space-y-4 mt-6">
       <div class="flex items-center justify-between">
         <div>
-          <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">鍒犻櫎鎿嶄綔</p>
-          <h2 class="text-xl font-bold text-gray-800">璋冪敤 /api/scanner/delete-invalid</h2>
+          <p class="text-sm text-gray-500 font-semibold uppercase tracking-wide">删除操作</p>
+          <h2 class="text-xl font-bold text-gray-800">调用 /api/scanner/delete-invalid</h2>
         </div>
         <span id="delete-status" class="pill bg-gray-100 text-gray-700 hidden"></span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label class="input-label" for="delete-limit">鍒犻櫎鏁伴噺</label>
+          <label class="input-label" for="delete-limit">删除数量</label>
           <input id="delete-limit" type="number" min="1" max="1000" class="input-box w-full" value="50" />
         </div>
         <div class="flex items-end gap-3">
           <button id="test-connection" class="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold transition-colors">
-            <i class="fas fa-stethoscope mr-1"></i> 娴嬭瘯杩炴帴
+            <i class="fas fa-stethoscope mr-1"></i> 测试连接
           </button>
           <button id="delete-now" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors">
-            <i class="fas fa-trash-alt mr-1"></i> 绔嬪嵆鍒犻櫎
+            <i class="fas fa-trash-alt mr-1"></i> 立即删除
           </button>
         </div>
       </div>
-      <p class="text-sm text-gray-600">浠呭垹闄?recheck_status=invalid 鐨勮褰曪紱鎴愬姛鍚庝笉浼氬奖鍝嶆湁鏁堟垨浠樿垂 Key銆?/p>
+      <p class="text-sm text-gray-600">仅删除 recheck_status=invalid 的记录；成功后不会影响有效或付费 Key。</p>
     </div>
   </div>
 </div>
 
 <div id="notification" class="notification"></div>
 {% endblock %}
-
